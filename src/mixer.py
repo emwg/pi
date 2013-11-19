@@ -31,6 +31,6 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 while True:
     knob.update()
-    mod.SetFreq(knob.getValue() % 20)
-    print(knob.getValue() % 20)
+    mod.SetFreq(knob.getValue() / 50)
+    print(knob.getValue() / 50)
 thread.ProcOff()

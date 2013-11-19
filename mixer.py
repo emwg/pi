@@ -27,10 +27,11 @@ thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
-for i in range(20):
+for i in range(100):
     mod.SetFreq(i)
-    time.sleep(0.2)
-for i in range(20, 1, -1):
+    time.sleep(0.1)
+for i in range(100, 1, -1):
     mod.SetFreq(i)
-    time.sleep(0.2)
+    time.sleep(0.1)
+time.sleep(2)
 thread.ProcOff()

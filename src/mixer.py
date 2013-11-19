@@ -1,5 +1,6 @@
 import sndobj
 import time
+from sensor import *
 
 tab = sndobj.HarmTable()
 osc1 = sndobj.Oscili(tab, 1, 5000)

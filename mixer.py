@@ -2,9 +2,9 @@ import sndobj
 import time
 
 tab = sndobj.HarmTable()
-osc1 = sndobj.Oscili(tab, 1, 1000)
-osc2 = sndobj.Oscili(tab, 1, 1000)
-mod = sndobj.Oscili(tab, 44, 200)
+osc1 = sndobj.Oscili(tab, 1, 5000)
+osc2 = sndobj.Oscili(tab, 1, 5000)
+mod = sndobj.Oscili(tab, 44, 5000)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()

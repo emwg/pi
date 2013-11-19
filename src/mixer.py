@@ -33,4 +33,5 @@ while True:
     knob.update()
     mod.SetFreq(knob.getValue() / 50)
     print(knob.getValue() / 50)
+    time.sleep(0.1)
 thread.ProcOff()

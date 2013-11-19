@@ -2,6 +2,8 @@ import sndobj
 import time
 from sensor import *
 
+#floating point frequencies?
+
 tab = sndobj.HarmTable()
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)

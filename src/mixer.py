@@ -32,5 +32,5 @@ thread.ProcOn()
 while True:
     knob.update()
     mod.SetFreq(knob.getValue() % 20)
-    print(knob.getValue())
+    print(knob.getValue() % 20)
 thread.ProcOff()

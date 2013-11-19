@@ -21,3 +21,22 @@ mixer.AddObj(delay)
 out1.SetOutput(1, mixer)
 #out2.SetOutput(1, osc2)
 #out3.SetOutput(1, delay)
+
+thread = sndobj.SndThread()
+thread.AddObj(mod)
+thread.AddObj(osc1)
+thread.AddObj(osc2)
+thread.AddObj(delay)
+thread.AddObj(mixer)
+thread.AddObj(out1, sndobj.SNDIO_OUT)
+thread.AddObj(out2, sndobj.SNDIO_OUT)
+#thread.AddObj(out3, sndobj.SNDIO_OUT)
+
+thread.ProcOn()
+for i in range(50):
+    mod.SetFreq(i)
+    time.sleep(0.1)
+for i in range(50, 1, -1):
+    mod.SetFreq(i)
+    time.sleep(0.1)
+thread.ProcOff()

@@ -12,7 +12,7 @@ delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
 
 
-mod.SetFreq(5)
+mod.SetFreq(1)
 osc1.SetFreq(440, mod)
 osc2.SetFreq(540, mod)
 mixer.AddObj(osc1)
@@ -33,10 +33,10 @@ thread.AddObj(out2, sndobj.SNDIO_OUT)
 #thread.AddObj(out3, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
-for i in range(50):
+for i in range(30):
     mod.SetFreq(i)
     time.sleep(0.1)
-for i in range(50, 1, -1):
+for i in range(30, 1, -1):
     mod.SetFreq(i)
     time.sleep(0.1)
 thread.ProcOff()

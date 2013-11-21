@@ -8,8 +8,7 @@ from sensor import *
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
 #psensor = pressuresensor()
 #lsensor = lightsensor()
-tab = sndobj.HarmTable()
-tab.SetHarm(50, 3)
+tab = sndobj.HarmTable(100, 5)
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)
 osc3 = sndobj.Oscili(tab, 1, 5000)

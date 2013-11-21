@@ -5,8 +5,6 @@ from sensor import *
 #import lightsensor
 #import flexSensor
 
-#floating point frequencies?
-
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
 #psensor = pressuresensor()
 #lsensor = lightsensor()

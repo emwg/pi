@@ -3,11 +3,11 @@ import time
 from sensor import *
 import pressuresensor
 import lightsensor
-import flexsensor
+import flexSensor
 
 #floating point frequencies?
 
-fsensor = flexsensor()
+fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
 psensor = pressuresensor()
 lsensor = lightsensor()
 tab = sndobj.HarmTable()

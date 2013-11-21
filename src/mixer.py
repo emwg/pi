@@ -1,9 +1,15 @@
 import sndobj
 import time
 from sensor import *
+import pressuresensor
+import lightsensor
+import flexsensor
 
 #floating point frequencies?
 
+fsensor = flexsensor()
+psensor = pressuresensor()
+lsensor = lightsensor()
 tab = sndobj.HarmTable()
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)

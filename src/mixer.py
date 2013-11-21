@@ -27,7 +27,7 @@ mixer.AddObj(osc2)
 #mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 knob = sensor(0, 'knob')
-knob.setTolerance(5)
+knob.setTolerance(2)
 
 thread = sndobj.SndThread()
 thread.AddObj(mod)
@@ -40,9 +40,9 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 while True:
     knob.update()
-    value = knob.getValue() * 2
+    value = knob.getValue() / 2
     #mod.SetFreq(value)
-    mod.SetAmp(value)
+    osc1.SetFreq(value)
     print(value)
     time.sleep(0.1)
 thread.ProcOff()

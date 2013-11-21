@@ -7,9 +7,9 @@ import flexSensor
 
 #floating point frequencies?
 
-fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
-psensor = pressuresensor()
-lsensor = lightsensor()
+#fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
+#psensor = pressuresensor()
+#lsensor = lightsensor()
 tab = sndobj.HarmTable()
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)
@@ -27,6 +27,7 @@ mixer.AddObj(osc2)
 mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 knob = sensor(0, 'knob')
+knob.setTolerance(0.5)
 
 thread = sndobj.SndThread()
 thread.AddObj(mod)
@@ -39,7 +40,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 while True:
     knob.update()
-    mod.SetFreq(float(knob.getValue() / 50))
+    mod.SetFreq(knob.getValue() / 50.0)
     print(knob.getValue() / 50.0)
     time.sleep(0.1)
 thread.ProcOff()

@@ -19,7 +19,7 @@ delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
 
 
-mod.SetFreq(7)
+mod.SetFreq(10)
 osc1.SetFreq(440, mod)
 osc2.SetFreq(800, mod)
 mixer.AddObj(osc1)
@@ -40,7 +40,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 while True:
     knob.update()
-    value = knob.getValue() / 2
+    value = knob.getValue()
     #mod.SetFreq(value)
     mod.SetAmp(value)
     print(value)

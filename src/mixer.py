@@ -27,7 +27,6 @@ mixer.AddObj(osc2)
 
 for i in range(15):
     mixer.AddObj(sndobj.Oscili(tab, i * 20, 5000)
-
 #mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 knob = sensor(0, 'knob')

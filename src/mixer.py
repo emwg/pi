@@ -19,9 +19,9 @@ delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
 
 
-mod.SetFreq(10)
-osc1.SetFreq(440, mod)
-osc2.SetFreq(800, mod)
+mod.SetFreq(5)
+osc1.SetFreq(100, mod)
+osc2.SetFreq(400, mod)
 mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 #mixer.AddObj(delay)

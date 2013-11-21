@@ -1,7 +1,7 @@
 import sndobj
 import time
 from sensor import *
-import pressuresensor
+from pressuresensor import *
 import lightsensor
 import flexSensor
 

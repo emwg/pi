@@ -27,7 +27,7 @@ mixer.AddObj(osc2)
 mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 knob = sensor(0, 'knob')
-knob.setTolerance(0.5)
+knob.setTolerance(1)
 
 thread = sndobj.SndThread()
 thread.AddObj(mod)

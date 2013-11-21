@@ -49,7 +49,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 while True:
     knob.update()
-    value = knob.getValue() / 20
+    value = knob.getValue() / 50.0
     mod.SetFreq(value)
     print(value)
     time.sleep(0.1)

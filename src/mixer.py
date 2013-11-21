@@ -1,9 +1,9 @@
 import sndobj
 import time
 from sensor import *
-from pressuresensor import *
-import lightsensor
-import flexSensor
+#import pressuresensor
+#import lightsensor
+#import flexSensor
 
 #floating point frequencies?
 

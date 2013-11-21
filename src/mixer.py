@@ -22,11 +22,11 @@ mixer = sndobj.Mixer()
 mod.SetFreq(5)
 osc1.SetFreq(100, mod)
 osc2.SetFreq(400, mod)
-mixer.AddObj(osc1)
-mixer.AddObj(osc2)
+#mixer.AddObj(osc1)
+#mixer.AddObj(osc2)
 
-for i in range(15):
-    osc = sndobj.Oscili(tab, i * 20, 5000)
+for i in range(5):
+    osc = sndobj.Oscili(tab, i * 30, 5000)
     mixer.AddObj(osc)
 #mixer.AddObj(delay)
 out.SetOutput(1, mixer)

@@ -38,20 +38,19 @@ knob = sensor(0, 'knob')
 knob.setTolerance(2)
 
 thread.AddObj(mod)
-#thread.AddObj(osc1)
-#thread.AddObj(osc2)
-#thread.AddObj(osc3)
-#thread.AddObj(osc4)
-#thread.AddObj(delay)
+thread.AddObj(osc1)
+thread.AddObj(osc2)
+thread.AddObj(osc3)
+thread.AddObj(osc4)
+thread.AddObj(delay)
 thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
 while True:
     knob.update()
-    value = knob.getValue() / 2
-    #mod.SetFreq(value)
-    osc1.SetFreq(value)
+    value = knob.getValue() / 20
+    mod.SetFreq(value)
     print(value)
     time.sleep(0.1)
 thread.ProcOff()

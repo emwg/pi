@@ -9,7 +9,7 @@ from sensor import *
 #psensor = pressuresensor()
 #lsensor = lightsensor()
 tab = sndobj.HarmTable()
-tab.SetHarm(50, 1)
+tab.SetHarm(50, 2)
 tab.MakeTable()
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)

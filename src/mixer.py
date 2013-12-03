@@ -2,7 +2,7 @@ import sndobj
 import time
 from sensor import *
 #import pressuresensor
-import lightSensor
+from lightSensor import *
 #import flexSensor
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.

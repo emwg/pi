@@ -68,6 +68,7 @@ class sensor:
 		self.value = 0.0
 		self.tolerance = .005
 		self.lastread = 0
+		self.maxValue = 1024
 
 	def __str__(self):
 		return ("Channel: " + self.channel + " Value: " + self.value)

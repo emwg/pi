@@ -49,7 +49,7 @@ thread.ProcOn()
 while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
-    freqStep = 5
+    freqStep = 15
     if (osc1freq < light * 2):
         osc1freq += freqStep
         osc1.SetFreq(osc1freq)

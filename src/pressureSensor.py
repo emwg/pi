@@ -12,8 +12,7 @@ class pressureSensor:
 
 	def getPressureValue(self):
 		self.sensor.update()
-		if (self.sensor.getValue() > self.sensitivity)
-			return (self.sensor.get(Value() - sensitivity)
+		if (self.sensor.getValue() > self.sensitivity): return (self.sensor.getValue() - sensitivity)
 		return 0
 	
 	

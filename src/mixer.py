@@ -7,7 +7,7 @@ from sensor import *
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
 #psensor = pressuresensor()
-#lsensor = lightsensor()
+lsensor = lightsensor(1, 1)
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)
@@ -17,7 +17,6 @@ mod = sndobj.Oscili(tab, 1000, 200)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
-
 
 mod.SetFreq(5)
 osc1.SetFreq(440)
@@ -46,9 +45,11 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
 while True:
+    light = lsensor.getLightValue()
+    print("Light: " + str(light))
     knob.update()
     value = knob.getValue() / 10.0
     mod.SetFreq(value)
-    print(value)
+    print("Knob: " + str(value))
     time.sleep(0.1)
 thread.ProcOff()

@@ -1,13 +1,13 @@
 import sndobj
 import time
 from sensor import *
-#import pressuresensor
+from pressuresensor import *
 from lightSensor import *
 #import flexSensor
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
-#psensor = pressuresensor()
-lsensor = lightSensor(1, 1)
+psensor = pressuresensor(2, 1)
+lsensor = lightSensor(1, 10)
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 1, 5000)
 osc2 = sndobj.Oscili(tab, 1, 5000)
@@ -49,8 +49,14 @@ while True:
     print("Light: " + str(light))
     knob.update()
     osc1.SetFreq(light * 2)
+    
+    pressure = psensor.getPressureValue()
+    print("Pressure: " + str(pressure))
+    osc1.SetAmp(pressure * 5)
+    
     value = knob.getValue() / 10.0
     mod.SetFreq(value)
     print("Knob: " + str(value))
+    
     time.sleep(0.1)
 thread.ProcOff()

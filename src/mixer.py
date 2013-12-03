@@ -49,7 +49,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 freqStep = 15
-ampStep = 100
+ampStep = 250
 lightAdjust = 2
 pressureAdjust = 15
 knobAdjust = 0.1
@@ -58,25 +58,28 @@ while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
     if (osc1freq < light * lightAdjust):
-        osc1freq += freqStep
-        osc1.SetFreq(osc1freq)
+        if (osc1freq + freqStep < light * lightAdjust): osc1freq += freqStep
+        else: osc1freq = light * lightAdjust
     elif (osc1freq > light * lightAdjust):
-        osc1freq -= freqStep
-        osc1.SetFreq(osc1freq)
+        if (osc1freq - freqStep > light * lightAdjust): osc1freq -= freqStep
+        else: osc1freq = light * lightAdjust
     
     pressure = psensor.getPressureValue()
     print("Pressure: " + str(pressure))
     if (osc1amp < pressure * pressureAdjust):
-        osc1amp += ampStep
-        osc1.SetAmp(osc1amp)
+        if (osc1amp + ampStep < pressure * pressureAdjust): osc1amp += ampStep
+        else: osc1amp = pressure * pressureAdjust
     elif (osc1amp > pressure * pressureAdjust):
-        osc1amp -= ampStep
-        osc1.SetAmp(osc1amp)
+        if (osc1amp - ampStep < pressure * pressureAdjust): osc1amp -= ampStep
+        else: osc1amp = pressure * pressureAdjust
     
     knob.update()
     value = knob.getValue()
     mod.SetFreq(value * knobAdjust)
     print("Knob: " + str(value))
+    
+    osc1.SetFreq(osc1freq)
+    osc1.SetAmp(osc1amp)
     
     time.sleep(0.05)
 thread.ProcOff()

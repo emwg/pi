@@ -52,7 +52,7 @@ while True:
     
     pressure = psensor.getPressureValue()
     print("Pressure: " + str(pressure))
-    osc1.SetAmp(pressure * 5)
+    osc1.SetAmp(pressure * 15)
     
     value = knob.getValue() / 10.0
     mod.SetFreq(value)

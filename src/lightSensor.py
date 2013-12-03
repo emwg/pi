@@ -2,7 +2,7 @@ import sensor
 
 class lightSensor:
 	def __init__(self, channel, sensitivity):
-		self.sensor = sensor(self.channel,"light")
+		self.sensor = sensor(channel,"light")
 		self.sensitivity = sensitivity
 
 	def __str__(self):

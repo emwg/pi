@@ -10,4 +10,4 @@ class lightSensor:
 
 	def getLightValue(self):
 		self.sensor.update()
-		return (self.sensor.getValue() - sensitivity)
+		return (self.sensor.getValue() - self.sensitivity)

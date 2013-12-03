@@ -13,6 +13,7 @@ knob.setTolerance(2)
 
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 1, 5000)
+osc1amp = 5000
 #osc2 = sndobj.Oscili(tab, 1, 5000)
 #osc3 = sndobj.Oscili(tab, 1, 5000)
 #osc4 = sndobj.Oscili(tab, 1, 5000)
@@ -46,24 +47,35 @@ thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
+
+freqStep = 15
+ampStep = 100
+lightAdjust = 2
+pressureAdjust = 15
+knobAdjust = 0.1
+
 while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
-    freqStep = 15
-    if (osc1freq < light * 2):
+    if (osc1freq < light * lightAdjust):
         osc1freq += freqStep
         osc1.SetFreq(osc1freq)
-    elif (osc1freq > light * 2):
+    elif (osc1freq > light * lightAdjust):
         osc1freq -= freqStep
         osc1.SetFreq(osc1freq)
     
     pressure = psensor.getPressureValue()
     print("Pressure: " + str(pressure))
-    osc1.SetAmp(pressure * 15)
+    if (osc1amp < pressure * pressureAdjust):
+        osc1amp += ampStep
+        osc1.SetAmp(osc1amp)
+    elif (osc1amp > pressure * pressureAdjust):
+        osc1amp -= ampStep
+        osc1.SetAmp(osc1amp)
     
     knob.update()
-    value = knob.getValue() / 10.0
-    mod.SetFreq(value)
+    value = knob.getValue()
+    mod.SetFreq(value * knobAdjust)
     print("Knob: " + str(value))
     
     time.sleep(0.05)

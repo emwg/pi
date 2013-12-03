@@ -48,6 +48,7 @@ while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
     knob.update()
+    osc1.setFreq(light * 2)
     value = knob.getValue() / 10.0
     mod.SetFreq(value)
     print("Knob: " + str(value))

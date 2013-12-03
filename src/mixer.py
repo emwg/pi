@@ -1,12 +1,12 @@
 import sndobj
 import time
 from sensor import *
-from pressuresensor import *
+from pressureSensor import *
 from lightSensor import *
 #import flexSensor
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
-psensor = pressuresensor(2, 1)
+psensor = pressureSensor(2, 1)
 lsensor = lightSensor(1, 10)
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 1, 5000)

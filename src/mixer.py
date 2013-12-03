@@ -23,6 +23,7 @@ mixer = sndobj.Mixer()
 
 mod.SetFreq(5)
 osc1.SetFreq(440)
+osc1freq = 440
 osc2.SetFreq(400, mod)
 osc3.SetFreq(300, mod)
 osc4.SetFreq(500, mod)
@@ -49,8 +50,12 @@ while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
     freqStep = 3
-    if (osc1.freq < light * 2): osc1.SetFreq(osc1.fr + freqStep)
-    elif (osc1.fr > light * 2): osc1.SetFreq(osc1.fr - freqStep)
+    if (osc1freq < light * 2):
+        osc1freq += freqStep
+        osc1.SetFreq(osc1freq)
+    elif (osc1freq > light * 2):
+        osc1freq -= freqStep
+        osc1.SetFreq(osc1freq)
     
     pressure = psensor.getPressureValue()
     print("Pressure: " + str(pressure))

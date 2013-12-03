@@ -49,7 +49,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 freqStep = 10
-ampStep = 250
+ampStep = 200
 lightAdjust = 2
 pressureAdjust = 15
 knobAdjust = 0.1

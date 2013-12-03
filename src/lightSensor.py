@@ -1,4 +1,4 @@
-import sensor
+from sensor import *
 
 class lightSensor:
 	def __init__(self, channel, sensitivity):

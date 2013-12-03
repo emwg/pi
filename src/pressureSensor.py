@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sensor
+from sensor import *
 
 class pressureSensor:
 	

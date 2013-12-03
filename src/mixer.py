@@ -49,7 +49,7 @@ while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
     freqStep = 3
-    if (osc1.frequency < light * 2): osc1.SetFreq(osc1.fr + freqStep)
+    if (osc1.freq < light * 2): osc1.SetFreq(osc1.fr + freqStep)
     elif (osc1.fr > light * 2): osc1.SetFreq(osc1.fr - freqStep)
     
     pressure = psensor.getPressureValue()

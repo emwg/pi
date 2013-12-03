@@ -81,5 +81,5 @@ while True:
     osc1.SetFreq(osc1freq)
     osc1.SetAmp(osc1amp)
     
-    time.sleep(0.05)
+    time.sleep(0.01)
 thread.ProcOff()

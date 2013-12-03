@@ -66,5 +66,5 @@ while True:
     mod.SetFreq(value)
     print("Knob: " + str(value))
     
-    time.sleep(0.02)
+    time.sleep(0.01)
 thread.ProcOff()

@@ -12,8 +12,8 @@ knob = sensor(0, 'knob')
 knob.setTolerance(2)
 
 tab = sndobj.HarmTable(1000, 50, 1)
-osc1 = sndobj.Oscili(tab, 1, 5000)
-osc1amp = 5000
+osc1 = sndobj.Oscili(tab, 1, 0)
+osc1amp = 0
 #osc2 = sndobj.Oscili(tab, 1, 5000)
 #osc3 = sndobj.Oscili(tab, 1, 5000)
 #osc4 = sndobj.Oscili(tab, 1, 5000)
@@ -22,9 +22,9 @@ out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 #delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
 
-mod.SetFreq(5)
-osc1.SetFreq(440, mod)
-osc1freq = 440
+mod.SetFreq(0)
+osc1.SetFreq(0, mod)
+osc1freq = 0
 #osc2.SetFreq(400, mod)
 #osc3.SetFreq(300, mod)
 #osc4.SetFreq(500, mod)
@@ -37,7 +37,7 @@ thread = sndobj.SndThread()
 #mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 
-#thread.AddObj(mod)
+thread.AddObj(mod)
 thread.AddObj(osc1)
 #thread.AddObj(osc2)
 #thread.AddObj(osc3)
@@ -50,28 +50,28 @@ thread.ProcOn()
 
 freqStep = 10
 ampStep = 200
-lightAdjust = 2
-pressureAdjust = 15
+lightAdjust = 15
+pressureAdjust = 2
 knobAdjust = 0.1
 
 while True:
     light = lsensor.getLightValue()
     print("Light: " + str(light))
-    if (osc1freq < light * lightAdjust):
-        if (osc1freq + freqStep < light * lightAdjust): osc1freq += freqStep
-        else: osc1freq = light * lightAdjust
-    elif (osc1freq > light * lightAdjust):
-        if (osc1freq - freqStep > light * lightAdjust): osc1freq -= freqStep
-        else: osc1freq = light * lightAdjust
+    if (osc1amp < light * lightAdjust):
+        if (osc1amp + ampStep < light * lightAdjust): osc1amp += ampStep
+        else: osc1amp = light * lightAdjust
+    elif (osc1amp > light * lightAdjust):
+        if (osc1amp - ampStep > light * lightAdjust): osc1amp -= ampStep
+        else: osc1amp = light * lightAdjust
     
     pressure = psensor.getPressureValue()
     print("Pressure: " + str(pressure))
-    if (osc1amp < pressure * pressureAdjust):
-        if (osc1amp + ampStep < pressure * pressureAdjust): osc1amp += ampStep
-        else: osc1amp = pressure * pressureAdjust
-    elif (osc1amp > pressure * pressureAdjust):
-        if (osc1amp - ampStep < pressure * pressureAdjust): osc1amp -= ampStep
-        else: osc1amp = pressure * pressureAdjust
+    if (osc1freq < pressure * pressureAdjust):
+        if (osc1freq + freqStep < pressure * pressureAdjust): osc1freq += freqStep
+        else: osc1freq = pressure * pressureAdjust
+    elif (osc1freq > pressure * pressureAdjust):
+        if (osc1freq - freqStep < pressure * pressureAdjust): osc1freq -= freqStep
+        else: osc1freq = pressure * pressureAdjust
     
     knob.update()
     value = knob.getValue()

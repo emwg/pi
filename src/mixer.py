@@ -17,7 +17,7 @@ osc1amp = 0
 #osc2 = sndobj.Oscili(tab, 1, 5000)
 #osc3 = sndobj.Oscili(tab, 1, 5000)
 #osc4 = sndobj.Oscili(tab, 1, 5000)
-mod = sndobj.Oscili(tab, 1, 200)
+mod = sndobj.Oscili(tab, 1, 100)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 #delay = sndobj.DelayLine(1, osc2)
 mixer = sndobj.Mixer()
@@ -78,7 +78,7 @@ while True:
     mod.SetFreq(value * knobAdjust)
     print("Knob: " + str(value))
     
-    osc1.SetFreq(osc1freq)
+    osc1.SetFreq(osc1freq, mod)
     osc1.SetAmp(osc1amp)
     
     time.sleep(0.05)

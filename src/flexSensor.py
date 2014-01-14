@@ -17,8 +17,8 @@ class flexSensor:
 
 	def pluckVelocity(self):
 		self.sensor.update()
-		self.temp =self.lastValue
+		self.temp = self.lastValue
 		self.lastValue = self.sensor.getValue()
-		return abs(self.lastValue - temp)
+		return abs(self.lastValue - self.temp)
 
 		

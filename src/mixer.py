@@ -67,7 +67,7 @@ while True:
         else: osc1amp = light * lightAdjust
     
     #pressure = psensor.getPressureValue()
-    pressure = fsensor.pluckVelocity()
+    pressure = fsensor.getFlexValue()
     #print("Pressure: " + str(pressure))
     print("Flex: " + str(pressure))
     if (osc1freq < pressure * pressureAdjust):

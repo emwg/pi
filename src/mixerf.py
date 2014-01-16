@@ -77,7 +77,7 @@ while True:
     ###
     #get flex sensor value
     flex = fsensor.getFlexValue()
-    print("Flex: " + str(pressure))
+    print("Flex: " + str(flex))
     #make frequency slide smoothly to the new value
     if (osc1freq < flex * flexAdjust):
         #slide up

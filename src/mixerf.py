@@ -7,8 +7,8 @@ from flexSensor import *
 #import flexSensor
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
-psensor = pressureSensor(2, 1)
-#fsensor = flexSensor(2, 1)
+#psensor = pressureSensor(2, 1)
+fsensor = flexSensor(2, 1)
 lsensor = lightSensor(1, 10)
 knob = sensor(0, 'knob')
 knob.setTolerance(2)
@@ -50,33 +50,52 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
 
+#amounts the frequency and amplitude of the oscillators will change by during each loop iteration
 freqStep = 10
 ampStep = 200
+
+#values with which to multiply the raw sensor values
 lightAdjust = 15
-pressureAdjust = 2
+flexAdjust = 1
 knobAdjust = 0.1
 
 while True:
+    ###
+    # Light sensor
+    ###
+    #get light sensor value
     light = lsensor.getLightValue()
     print("Light: " + str(light))
+    #make amplitude slide smoothly to the new value
     if (osc1amp < light * lightAdjust):
+        #slide up
         if (osc1amp + ampStep < light * lightAdjust): osc1amp += ampStep
         else: osc1amp = light * lightAdjust
     elif (osc1amp > light * lightAdjust):
+        #slide down
         if (osc1amp - ampStep > light * lightAdjust): osc1amp -= ampStep
         else: osc1amp = light * lightAdjust
     
-    pressure = psensor.getPressureValue()
-    #pressure = fsensor.getFlexValue()
-    print("Pressure: " + str(pressure))
-    #print("Flex: " + str(pressure))
-    if (osc1freq < pressure * pressureAdjust):
-        if (osc1freq + freqStep < pressure * pressureAdjust): osc1freq += freqStep
-        else: osc1freq = pressure * pressureAdjust
-    elif (osc1freq > pressure * pressureAdjust):
-        if (osc1freq - freqStep < pressure * pressureAdjust): osc1freq -= freqStep
-        else: osc1freq = pressure * pressureAdjust
+    ###
+    # Flex sensor
+    ###
+    #get flex sensor value
+    flex = fsensor.getFlexValue()
+    print("Flex: " + str(pressure))
+    #make frequency slide smoothly to the new value
+    if (osc1freq < flex * flexAdjust):
+        #slide up
+        if (osc1freq + freqStep < flex * flexAdjust): osc1freq += freqStep
+        else: osc1freq = flex * flexAdjust
+    elif (osc1freq > flex * flexAdjust):
+        #slide down
+        if (osc1freq - freqStep < flex * flexAdjust): osc1freq -= freqStep
+        else: osc1freq = flex * flexAdjust
     
+    ###
+    # Knob
+    ###
+    #get knob value
     knob.update()
     value = knob.getValue()
     mod.SetFreq(value * knobAdjust)
@@ -85,5 +104,6 @@ while True:
     osc1.SetFreq(osc1freq, mod)
     osc1.SetAmp(osc1amp)
     
+    #wait before doing another iteration
     time.sleep(0.05)
 thread.ProcOff()

@@ -7,8 +7,8 @@ from flexSensor import *
 #import flexSensor
 
 #fsensor = flexSensor() #appropriate sensitivity values need to be placed in sensors.
-#psensor = pressureSensor(2, 1)
-fsensor = flexSensor(2, 1)
+psensor = pressureSensor(2, 1)
+#fsensor = flexSensor(2, 1)
 lsensor = lightSensor(1, 10)
 knob = sensor(0, 'knob')
 knob.setTolerance(2)
@@ -66,10 +66,10 @@ while True:
         if (osc1amp - ampStep > light * lightAdjust): osc1amp -= ampStep
         else: osc1amp = light * lightAdjust
     
-    #pressure = psensor.getPressureValue()
-    pressure = fsensor.getFlexValue()
-    #print("Pressure: " + str(pressure))
-    print("Flex: " + str(pressure))
+    pressure = psensor.getPressureValue()
+    #pressure = fsensor.getFlexValue()
+    print("Pressure: " + str(pressure))
+    #print("Flex: " + str(pressure))
     if (osc1freq < pressure * pressureAdjust):
         if (osc1freq + freqStep < pressure * pressureAdjust): osc1freq += freqStep
         else: osc1freq = pressure * pressureAdjust

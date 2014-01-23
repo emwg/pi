@@ -1,13 +1,8 @@
 import sndobj
 import time
-from sensor import *
 from lightSensor import *
-from flexSensor import *
 
-fsensor = flexSensor(2, 1)
-lsensor = lightSensor(1, 10)
-knob = sensor(0, 'knob')
-knob.setTolerance(2)
+lsensor = lightSensor(0, 10)
 
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 1, 0)
@@ -71,33 +66,8 @@ while True:
         #slide down
         if (osc1amp - ampStep > light * lightAdjust): osc1amp -= ampStep
         else: osc1amp = light * lightAdjust
-    
-    ###
-    # Flex sensor
-    ###
-    #get flex sensor value
-    flex = fsensor.getFlexValue()
-    print("Flex: " + str(flex))
-    #make frequency slide smoothly to the new value
-    if (osc1freq < flex * flexAdjust):
-        #slide up
-        if (osc1freq + freqStep < flex * flexAdjust): osc1freq += freqStep
-        else: osc1freq = flex * flexAdjust
-    elif (osc1freq > flex * flexAdjust):
-        #slide down
-        if (osc1freq - freqStep < flex * flexAdjust): osc1freq -= freqStep
-        else: osc1freq = flex * flexAdjust
-    
-    ###
-    # Knob
-    ###
-    #get knob value
-    knob.update()
-    value = knob.getValue()
-    mod.SetFreq(value * knobAdjust)
-    print("Knob: " + str(value))
-    
-    osc1.SetFreq(osc1freq, mod)
+        
+    #osc1.SetFreq(osc1freq, mod)
     osc1.SetAmp(osc1amp)
     
     #wait before doing another iteration

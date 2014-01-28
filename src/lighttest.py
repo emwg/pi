@@ -26,15 +26,13 @@ mixer.AddObj(osc3)
 mixer.AddObj(osc4)
 
 thread = sndobj.SndThread()
-#mixer.AddObj(delay)
 out.SetOutput(1, mixer)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)
-#thread.AddObj(osc2)
-#thread.AddObj(osc3)
-#thread.AddObj(osc4)
-#thread.AddObj(delay)
+thread.AddObj(osc2)
+thread.AddObj(osc3)
+thread.AddObj(osc4)
 thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 

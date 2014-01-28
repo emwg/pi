@@ -13,11 +13,11 @@ osc1amp = 0
 osc2amp = 0
 osc3amp = 0
 osc4amp = 0
-osc1freq = 100
-osc2freq = 200
+osc1freq = 200
+osc2freq = 250
 osc3freq = 300
-osc4freq = 400
-mod = sndobj.Oscili(tab, 1, 100)
+osc4freq = 350
+mod = sndobj.Oscili(tab, 0, 100)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
@@ -50,7 +50,7 @@ flexAdjust = 1
 knobAdjust = 0.1
 
 lightValue = 0
-subtractMult = 1000
+subtractMult = 800
 osc1subtract = 1
 osc2subtract = osc1subtract * subtractMult
 osc3subtract = osc2subtract * subtractMult

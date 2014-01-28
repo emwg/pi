@@ -43,7 +43,7 @@ freqStep = 10
 lightStep = 200
 
 #values with which to multiply the raw sensor values
-lightAdjust = 15
+lightAdjust = 10
 flexAdjust = 1
 knobAdjust = 0.1
 

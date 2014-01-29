@@ -102,8 +102,8 @@ while True:
     #set frequencies
     osc1.SetFreq(osc1freq, mod)
     osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
+    osc3.SetFreq(0, mod)
+    osc4.SetFreq(0, mod)
     
     #wait before doing another iteration
     time.sleep(0.05)

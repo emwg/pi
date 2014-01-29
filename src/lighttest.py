@@ -5,10 +5,10 @@ from lightSensor import *
 lsensor = lightSensor(0, 10)
 
 tab = sndobj.HarmTable(1000, 50, 1)
-osc1 = sndobj.Oscili(tab, 1, 0)
-osc2 = sndobj.Oscili(tab, 1, 0)
-osc3 = sndobj.Oscili(tab, 1, 0)
-osc4 = sndobj.Oscili(tab, 1, 0)
+osc1 = sndobj.Oscili(tab, 0, 0)
+osc2 = sndobj.Oscili(tab, 0, 0)
+osc3 = sndobj.Oscili(tab, 0, 0)
+osc4 = sndobj.Oscili(tab, 0, 0)
 osc1amp = 0
 osc2amp = 0
 osc3amp = 0
@@ -48,7 +48,7 @@ flexAdjust = 1
 knobAdjust = 0.1
 
 lightValue = 0
-subtractMult = 3000
+subtractMult = 5000
 osc1subtract = 1
 osc2subtract = osc1subtract * subtractMult
 osc3subtract = osc2subtract * subtractMult
@@ -77,10 +77,15 @@ while True:
     osc4amp = lightValue - osc4subtract
         
     #set amplitudes
-    osc1.SetAmp(osc1amp)
-    osc2.SetAmp(osc2amp)
-    osc3.SetAmp(osc3amp)
-    osc4.SetAmp(osc4amp)
+   # osc1.SetAmp(osc1amp)
+    #osc2.SetAmp(osc2amp)
+    #osc3.SetAmp(osc3amp)
+    #osc4.SetAmp(osc4amp)
+    amp = 30
+    osc1.SetAmp(amp)
+    osc2.SetAmp(amp)
+    osc3.SetAmp(amp)
+    osc4.SetAmp(amp)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

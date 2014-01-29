@@ -86,6 +86,12 @@ while True:
     #osc4.SetAmp(osc4amp)
     
     if(rhythmCount < 0):
+        osc1.SetAmp(0)
+        osc2.SetAmp(0)
+        osc3.SetAmp(0)
+        osc4.SetAmp(0)
+        rhythmCount = 500
+    else:
         if(lightValue != 0):
             amp = lightValue * 10
         else:
@@ -111,17 +117,15 @@ while True:
         osc3.SetFreq(osc3freq, mod)
         osc4.SetFreq(osc4freq, mod)
         
+        rhythmCount -= 5
+        
+        '''
         if(amp != 0):
-            rhythmCount = 1000 - amp
+            rhythmCount = 5000 - amp
         else:
             rhythmCount = 1000
         print(rhythmCount)
-    else:
-        osc1.SetAmp(0)
-        osc2.SetAmp(0)
-        osc3.SetAmp(0)
-        osc4.SetAmp(0)
-        rhythmCount -= 5
+        '''
     #wait before doing another iteration
     time.sleep(0.05)
 thread.ProcOff()

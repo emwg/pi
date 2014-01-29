@@ -110,10 +110,10 @@ while True:
         
         rhythmCount = amp
     else:
-        osc1.SetAmp(3000)
-        osc2.SetAmp(amp)
-        osc3.SetAmp(amp)
-        osc4.SetAmp(amp)
+        osc1.SetAmp(0)
+        osc2.SetAmp(0)
+        osc3.SetAmp(0)
+        osc4.SetAmp(0)
         rhythmCount -= 5
     #wait before doing another iteration
     time.sleep(0.05)

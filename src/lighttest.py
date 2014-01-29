@@ -61,7 +61,7 @@ while True:
     ###
     #get light sensor value
     light = lsensor.getLightValue() * lightAdjust
-    #print("Light: " + str(light))
+    print("Light: " + str(light))
     #make lightValue slide smoothly to the new value
     if (lightValue < light):
         #slide up

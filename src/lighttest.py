@@ -87,13 +87,13 @@ while True:
     
     amp = lightValue * 10
     #print(amp)
-    osc1.SetAmp(amp)
+    osc1.SetAmp(3000)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
     # root
-    osc1freq = amp / 4
+    osc1freq = 2500
     # fifth
     osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
     # third

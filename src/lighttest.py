@@ -85,7 +85,7 @@ while True:
     #osc4.SetAmp(osc4amp)
     amp = lightValue * 10
     #print(amp)
-    osc1.SetAmp(amp)
+    osc1.SetAmp(amp * 2)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)

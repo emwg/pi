@@ -61,7 +61,7 @@ while True:
     ###
     #get light sensor value
     light = lsensor.getLightValue() * lightAdjust
-    print("Light: " + str(light))
+    #print("Light: " + str(light))
     #make lightValue slide smoothly to the new value
     if (lightValue < light):
         #slide up
@@ -86,7 +86,10 @@ while True:
     #osc4.SetAmp(osc4amp)
     
     if(rhythmCount < 0):
-        amp = lightValue * 10
+        if(lightValue != 0):
+            amp = lightValue * 10
+        else:
+            amp = 1
         #print(amp)
         osc1.SetAmp(3000)
         osc2.SetAmp(amp)

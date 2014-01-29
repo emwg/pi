@@ -112,6 +112,7 @@ while True:
             rhythmCount = 1000 / amp
         else:
             rhythmCount = 1000
+        print(rhythmCount)
     else:
         osc1.SetAmp(0)
         osc2.SetAmp(0)

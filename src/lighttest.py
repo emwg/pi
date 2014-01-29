@@ -84,7 +84,7 @@ while True:
     #osc3.SetAmp(osc3amp)
     #osc4.SetAmp(osc4amp)
     amp = lightValue * 10
-    print(amp)
+    #print(amp)
     osc1.SetAmp(amp)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
@@ -93,7 +93,10 @@ while True:
     osc1freq = amp / 4
     osc2freq = (osc1freq * 3) / (osc1freq * 2) 
     osc3freq = (osc2freq * 3) / (osc2freq * 2) 
-    osc4freq = (osc3freq * 3) / (osc3freq * 2) 
+    osc4freq = (osc3freq * 3) / (osc3freq * 2)
+    
+    print(osc1freq)
+    print(osc2freq)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

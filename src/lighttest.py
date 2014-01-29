@@ -92,7 +92,7 @@ while True:
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
+    osc2.SetFreq(amp, mod)
     osc3.SetFreq(osc3freq, mod)
     osc4.SetFreq(osc4freq, mod)
     

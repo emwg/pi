@@ -85,28 +85,36 @@ while True:
     #osc3.SetAmp(osc3amp)
     #osc4.SetAmp(osc4amp)
     
-    amp = lightValue * 10
-    #print(amp)
-    osc1.SetAmp(3000)
-    osc2.SetAmp(amp)
-    osc3.SetAmp(amp)
-    osc4.SetAmp(amp)
+    if(rhythmCount < 0):
+        amp = lightValue * 10
+        #print(amp)
+        osc1.SetAmp(3000)
+        osc2.SetAmp(amp)
+        osc3.SetAmp(amp)
+        osc4.SetAmp(amp)
     
     # root
-    osc1freq = amp / 4
+        osc1freq = amp / 4
     # fifth
-    osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
+        osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
     # third
-    osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4) 
-    # ninth
-    osc4freq = 800
+        osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
+    # constant pitch
+        osc4freq = 600
     
     #set frequencies
-    osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
-    
+        osc1.SetFreq(osc1freq, mod)
+        osc2.SetFreq(osc2freq, mod)
+        osc3.SetFreq(osc3freq, mod)
+        osc4.SetFreq(osc4freq, mod)
+        
+        rhythmCount = amp
+    else:
+        osc1.SetAmp(3000)
+        osc2.SetAmp(amp)
+        osc3.SetAmp(amp)
+        osc4.SetAmp(amp)
+        rhythmCount -= 5
     #wait before doing another iteration
     time.sleep(0.05)
 thread.ProcOff()

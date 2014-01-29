@@ -91,9 +91,9 @@ while True:
     osc4.SetAmp(amp)
     
     osc1freq = amp / 4
-    osc2freq = amp / 3
-    osc3freq = amp / 2
-    osc4freq = amp
+    osc2freq = (osc1freq * 3) / (osc1freq * 2) 
+    osc3freq = (osc2freq * 3) / (osc2freq * 2) 
+    osc4freq = (osc3freq * 3) / (osc3freq * 2) 
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

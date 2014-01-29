@@ -112,7 +112,7 @@ while True:
         osc4.SetFreq(osc4freq, mod)
         
         if(amp != 0):
-            rhythmCount = amp
+            rhythmCount = 1000 - amp
         else:
             rhythmCount = 1000
         print(rhythmCount)

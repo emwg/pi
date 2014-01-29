@@ -93,13 +93,13 @@ while True:
     osc4.SetAmp(amp)
     
     # root
-    osc1freq = 1200
+    osc1freq = amp / 4
     # fifth
     osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
     # third
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4) 
     # ninth
-    osc4freq = osc2freq * (osc2freq * 3) / (osc2freq * 2)
+    osc4freq = 800
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

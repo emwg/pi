@@ -48,6 +48,7 @@ flexAdjust = 1
 knobAdjust = 0.1
 
 lightValue = 0
+rhythmCount = 0
 subtractMult = 5000
 osc1subtract = 1
 osc2subtract = osc1subtract * subtractMult
@@ -83,6 +84,7 @@ while True:
     #osc2.SetAmp(osc2amp)
     #osc3.SetAmp(osc3amp)
     #osc4.SetAmp(osc4amp)
+    
     amp = lightValue * 10
     #print(amp)
     osc1.SetAmp(amp)
@@ -90,20 +92,20 @@ while True:
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
+    # root
     osc1freq = amp / 4
+    # fifth
     osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
+    # third
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4) 
-    osc4freq = osc3freq * (osc3freq * 3) / (osc3freq * 2)
-    
-    print(osc1freq)
-    print(osc1freq * 3)
-    print(osc1freq * 2)
+    # ninth
+    osc4freq = osc2freq * (osc2freq * 3) / (osc2freq * 2)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)
     osc2.SetFreq(osc2freq, mod)
     osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(0, mod)
+    osc4.SetFreq(osc4freq, mod)
     
     #wait before doing another iteration
     time.sleep(0.05)

@@ -108,7 +108,10 @@ while True:
         osc3.SetFreq(osc3freq, mod)
         osc4.SetFreq(osc4freq, mod)
         
-        rhythmCount = amp
+        if(amp != 0):
+            rhythmCount = 1000 / amp
+        else:
+            rhythmCount = 1000
     else:
         osc1.SetAmp(0)
         osc2.SetAmp(0)

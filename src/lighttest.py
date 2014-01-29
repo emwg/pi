@@ -97,7 +97,7 @@ while True:
     
     print(osc1freq)
     print(osc1freq * 3)
-    print(osc1freq * 3)
+    print(osc1freq * 2)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

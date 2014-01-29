@@ -77,7 +77,7 @@ while True:
     osc4amp = lightValue - osc4subtract
         
         
-    print("osc1amp: " + str(osc1amp))    
+    print("osc1amp: " + str(osc4amp))    
     #set amplitudes
    # osc1.SetAmp(osc1amp)
     #osc2.SetAmp(osc2amp)

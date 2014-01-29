@@ -96,7 +96,8 @@ while True:
     osc4freq = (osc3freq * 3) / (osc3freq * 2)
     
     print(osc1freq)
-    print(osc2freq)
+    print(osc2freq * 3)
+    print(osc2freq * 3)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

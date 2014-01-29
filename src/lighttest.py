@@ -83,7 +83,7 @@ while True:
     #osc2.SetAmp(osc2amp)
     #osc3.SetAmp(osc3amp)
     #osc4.SetAmp(osc4amp)
-    amp = 3000
+    amp = -124999999923
     osc1.SetAmp(amp)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)

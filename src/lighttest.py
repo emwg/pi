@@ -103,7 +103,7 @@ while True:
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
-    pluckWait = float(800 / amp)
+    pluckWait = 800.0 / amp
     print(str(pluckWait))
     
     if ((time.time() - pluckTime) > pluckWait):

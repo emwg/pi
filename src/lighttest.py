@@ -13,20 +13,19 @@ osc1amp = 0
 osc2amp = 0
 osc3amp = 0
 osc4amp = 0
+pluck1amp = 0
 osc1freq = 100
 osc2freq = 200
 osc3freq = 300
 osc4freq = 400
+pluck1freq = 0
 mod = sndobj.Oscili(tab, 0, 100)
-phasor = sndobj.Phase(10, osc1)
-phasor.SetPhase(900)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 mixer.AddObj(osc3)
 mixer.AddObj(osc4)
-mixer.AddObj(phasor)
 
 thread = sndobj.SndThread()
 out.SetOutput(1, mixer)
@@ -98,6 +97,7 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
+    pluck1amp = amp
     
     # root
     osc1freq = amp / 4
@@ -107,12 +107,17 @@ while True:
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
     # constant pitch
     osc4freq = 600
+    pluck1freq = 400
     
     #set frequencies
-    osc1.SetFreq(osc1freq, phasor)
-    osc2.SetFreq(osc2freq, phasor)
-    osc3.SetFreq(osc3freq, phasor)
-    osc4.SetFreq(osc4freq, phasor)
+    osc1.SetFreq(osc1freq, mod)
+    osc2.SetFreq(osc2freq, mod)
+    osc3.SetFreq(osc3freq, mod)
+    osc4.SetFreq(osc4freq, mod)
+    
+    pluck1 = sndobj.Pluck(pluck1freq, pluck1amp)
+    mixer.AddObj(pluck1)
+    thread.AddObj(pluck1)
 
     #wait before doing another iteration
     time.sleep(0.05)

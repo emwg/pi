@@ -26,6 +26,7 @@ mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 mixer.AddObj(osc3)
 mixer.AddObj(osc4)
+mixer.AddObj(phasor)
 
 thread = sndobj.SndThread()
 out.SetOutput(1, mixer)

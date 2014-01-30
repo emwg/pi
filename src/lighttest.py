@@ -114,9 +114,13 @@ while True:
     osc3.SetFreq(osc3freq, mod)
     osc4.SetFreq(osc4freq, mod)
     
+    print("about to make de pluck")
     pluck1 = sndobj.Pluck(pluck1freq, pluck1amp)
+    print("ok now we put it in the mixer")
     mixer.AddObj(pluck1)
+    print("and add it to the thread")
     thread.AddObj(pluck1)
+    print("and now we are done with all that")
 
     #wait before doing another iteration
     time.sleep(0.5)

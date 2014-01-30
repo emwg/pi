@@ -31,7 +31,6 @@ thread = sndobj.SndThread()
 out.SetOutput(1, mixer)
 
 thread.AddObj(mod)
-thread.AddObj(phasor)
 thread.AddObj(osc1)
 thread.AddObj(osc2)
 thread.AddObj(osc3)

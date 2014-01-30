@@ -103,11 +103,11 @@ while True:
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
-    print(time.clock())
+    print(time.time())
     
-    if ((time.clock() - pluckTime) > pluckWait):
+    if ((time.time() - pluckTime) > pluckWait):
         pluck1.SetAmp(amp)
-        pluckTime = time.clock()
+        pluckTime = time.time()
         print(str(pluckTime))
     
     # root
@@ -127,5 +127,5 @@ while True:
     osc4.SetFreq(osc4freq, mod)
 
     #wait before doing another iteration
-    #time.sleep(0.05)
+    time.sleep(0.05)
 thread.ProcOff()

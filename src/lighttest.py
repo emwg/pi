@@ -45,7 +45,7 @@ thread.ProcOn()
 
 #amounts the frequency and amplitude of the oscillators will change by during each loop iteration
 freqStep = 10
-lightStep = 5
+lightStep = 40
 
 #values with which to multiply the raw sensor values
 lightAdjust = 1

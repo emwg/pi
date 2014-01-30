@@ -121,7 +121,15 @@ while True:
     print("and add it to the thread")
     thread.AddObj(pluck1)
     print("and now we are done with all that")
+    
+    print("about to make de pluck")
+    pluck2 = sndobj.Pluck(pluck1freq, pluck1amp)
+    print("ok now we put it in the mixer")
+    mixer.AddObj(pluck2)
+    print("and add it to the thread")
+    thread.AddObj(pluck2)
+    print("and now we are done with all that")
 
     #wait before doing another iteration
-    time.sleep(0.5)
+    time.sleep(0.05)
 thread.ProcOff()

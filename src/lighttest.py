@@ -127,5 +127,5 @@ while True:
     osc4.SetFreq(osc4freq, mod)
 
     #wait before doing another iteration
-    time.sleep(0.05)
+    #time.sleep(0.05)
 thread.ProcOff()

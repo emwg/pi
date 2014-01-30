@@ -19,7 +19,7 @@ osc3freq = 300
 osc4freq = 400
 mod = sndobj.Oscili(tab, 0, 100)
 phasor = sndobj.Phase(3)
-phasor.SetPhase(900)
+phasor.SetPhase(2)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)

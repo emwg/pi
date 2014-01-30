@@ -104,6 +104,7 @@ while True:
     osc4.SetAmp(amp)
     
     pluckWait = 800 / amp
+    print(str(pluckWait))
     
     if ((time.time() - pluckTime) > pluckWait):
         pluck1.SetAmp(amp)

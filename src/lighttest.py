@@ -9,6 +9,7 @@ osc1 = sndobj.Oscili(tab, 0, 0)
 osc2 = sndobj.Oscili(tab, 0, 0)
 osc3 = sndobj.Oscili(tab, 0, 0)
 osc4 = sndobj.Oscili(tab, 0, 0)
+pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
 osc2amp = 0
 osc3amp = 0
@@ -26,6 +27,7 @@ mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 mixer.AddObj(osc3)
 mixer.AddObj(osc4)
+mixer.AddObj(pluck1)
 
 thread = sndobj.SndThread()
 out.SetOutput(1, mixer)
@@ -35,6 +37,7 @@ thread.AddObj(osc1)
 thread.AddObj(osc2)
 thread.AddObj(osc3)
 thread.AddObj(osc4)
+thread.AddObj(pluck1)
 thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
@@ -96,7 +99,7 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
-    pluck1amp = amp
+    pluck1.SetAmp(amp)
     
     # root
     osc1freq = amp / 4
@@ -113,22 +116,6 @@ while True:
     osc2.SetFreq(osc2freq, mod)
     osc3.SetFreq(osc3freq, mod)
     osc4.SetFreq(osc4freq, mod)
-    
-    print("about to make de pluck")
-    pluck1 = sndobj.Pluck(pluck1freq, pluck1amp)
-    print("ok now we put it in the mixer")
-    mixer.AddObj(pluck1)
-    print("and add it to the thread")
-    thread.AddObj(pluck1)
-    print("and now we are done with all that")
-    
-    print("about to make de pluck")
-    pluck2 = sndobj.Pluck(pluck1freq, pluck1amp)
-    print("ok now we put it in the mixer")
-    mixer.AddObj(pluck2)
-    print("and add it to the thread")
-    thread.AddObj(pluck2)
-    print("and now we are done with all that")
 
     #wait before doing another iteration
     time.sleep(0.05)

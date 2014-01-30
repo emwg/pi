@@ -103,6 +103,8 @@ while True:
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
+    pluckWait = 4000 / amp
+    
     if ((time.time() - pluckTime) > pluckWait):
         pluck1.SetAmp(amp)
         pluckTime = time.time()

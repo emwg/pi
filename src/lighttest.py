@@ -119,5 +119,5 @@ while True:
     thread.AddObj(pluck1)
 
     #wait before doing another iteration
-    time.sleep(0.05)
+    time.sleep(0.5)
 thread.ProcOff()

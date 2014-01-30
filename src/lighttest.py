@@ -18,6 +18,7 @@ osc2freq = 200
 osc3freq = 300
 osc4freq = 400
 mod = sndobj.Oscili(tab, 0, 100)
+phasor = sndobj.Phase(3)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
@@ -29,6 +30,7 @@ thread = sndobj.SndThread()
 out.SetOutput(1, mixer)
 
 thread.AddObj(mod)
+thread.AddObj(phasor)
 thread.AddObj(osc1)
 thread.AddObj(osc2)
 thread.AddObj(osc3)
@@ -62,7 +64,7 @@ while True:
     #get light sensor value
     light = lsensor.getLightValue() * lightAdjust
     print("Light: " + str(light))
-    #make lightValue slide smoothly to the new value
+    #interpolate lightValue
     if (lightValue < light):
         #slide up
         if (lightValue + lightStep < light): lightValue += lightStep
@@ -90,7 +92,7 @@ while True:
     else:
         amp = 1
     #print(amp)
-    osc1.SetAmp(3000)
+    osc1.SetAmp(amp)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
@@ -105,10 +107,10 @@ while True:
     osc4freq = 600
     
     #set frequencies
-    osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
+    osc1.SetFreq(osc1freq, phasor)
+    osc2.SetFreq(osc2freq, phasor)
+    osc3.SetFreq(osc3freq, phasor)
+    osc4.SetFreq(osc4freq, phasor)
 
     #wait before doing another iteration
     time.sleep(0.05)

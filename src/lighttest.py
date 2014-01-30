@@ -19,6 +19,7 @@ osc3freq = 300
 osc4freq = 400
 mod = sndobj.Oscili(tab, 0, 100)
 phasor = sndobj.Phase(3)
+phasor.SetPhase(9)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
@@ -90,7 +91,7 @@ while True:
     if(lightValue != 0):
         amp = lightValue * 10
     else:
-        amp = 1
+        amp = 4
     #print(amp)
     osc1.SetAmp(amp)
     osc2.SetAmp(amp)

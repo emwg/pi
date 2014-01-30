@@ -52,6 +52,9 @@ lightAdjust = 1
 flexAdjust = 1
 knobAdjust = 0.1
 
+pluckWait = 0.25
+pluckTime = 0
+
 lightValue = 0
 rhythmCount = 0
 subtractMult = 5000
@@ -99,7 +102,10 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
-    pluck1.SetAmp(amp)
+    
+    if (time.clock() - pluckTime > pluckWait):
+        pluck1.SetAmp(amp)
+        pluckTime = time.clock()
     
     # root
     osc1freq = amp / 4
@@ -118,5 +124,5 @@ while True:
     osc4.SetFreq(osc4freq, mod)
 
     #wait before doing another iteration
-    time.sleep(0.25)
+    time.sleep(0.05)
 thread.ProcOff()

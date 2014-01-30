@@ -103,9 +103,10 @@ while True:
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
     
-    if (time.clock() - pluckTime > pluckWait):
+    if ((time.clock() - pluckTime) > pluckWait):
         pluck1.SetAmp(amp)
         pluckTime = time.clock()
+        print(str(pluckTime))
     
     # root
     osc1freq = amp / 4

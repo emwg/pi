@@ -2,6 +2,8 @@ import sndobj
 import time
 from lightSensor import *
 
+#psutil - http://code.google.com/p/psutil/
+
 lsensor = lightSensor(0, 10)
 
 tab = sndobj.HarmTable(1000, 50, 1)

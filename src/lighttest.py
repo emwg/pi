@@ -3,6 +3,7 @@ import time
 from lightSensor import *
 
 #psutil - http://code.google.com/p/psutil/
+#stereo?
 
 lsensor = lightSensor(0, 10)
 

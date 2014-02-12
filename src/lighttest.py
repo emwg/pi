@@ -71,7 +71,7 @@ while True:
     
     #print system info
     print("CPU usage: " + str(psutil.cpu_percent(interval=0)) + "%")
-    print("RAM usage: " + str(psutil.virtual_memory().percent) + "%")
+    print("RAM usage: " + str(psutil.virtual_memory()) + "%")
     
     ###
     # Light sensor

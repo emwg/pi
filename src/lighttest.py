@@ -83,15 +83,15 @@ while True:
         if (lightValue - lightStep > light): lightValue -= lightStep
         else: lightValue = light
         
-    osc1amp = lightValue - osc1subtract
-    osc2amp = lightValue - osc2subtract
-    osc3amp = lightValue - osc3subtract
-    osc4amp = lightValue - osc4subtract
+    #osc1amp = lightValue - osc1subtract
+    #osc2amp = lightValue - osc2subtract
+    #osc3amp = lightValue - osc3subtract
+    #osc4amp = lightValue - osc4subtract
         
         
     #print("osc1amp: " + str(osc4amp))    
     #set amplitudes
-   # osc1.SetAmp(osc1amp)
+    #osc1.SetAmp(osc1amp)
     #osc2.SetAmp(osc2amp)
     #osc3.SetAmp(osc3amp)
     #osc4.SetAmp(osc4amp)
@@ -121,7 +121,7 @@ while True:
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
     # constant pitch
     osc4freq = 600
-    pluck1freq = 400
+    pluck1freq = 300
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

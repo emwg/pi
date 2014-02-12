@@ -134,6 +134,8 @@ while True:
     osc2.SetFreq(osc2freq, mod)
     osc3.SetFreq(osc3freq, mod)
     osc4.SetFreq(osc4freq, mod)
+    
+    print("")
 
     #wait before doing another iteration
     time.sleep(0.05)

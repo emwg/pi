@@ -1,5 +1,6 @@
 import sndobj
 import time
+import psutil
 from lightSensor import *
 
 #psutil - http://code.google.com/p/psutil/
@@ -67,6 +68,10 @@ osc3subtract = osc2subtract * subtractMult
 osc4subtract = osc3subtract * subtractMult
 
 while True:
+    
+    #print system info
+    print(psutil.cpu_percent(interval=0.1))
+    
     ###
     # Light sensor
     ###

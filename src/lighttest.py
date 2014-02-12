@@ -70,7 +70,8 @@ osc4subtract = osc3subtract * subtractMult
 while True:
     
     #print system info
-    print("RAM usage: " + str(psutil.swap_memory()) + "%")
+    print(psutil.__version__())
+    print("RAM usage: " + str(psutil.virtual_memory()) + "%")
     print("CPU usage: " + str(psutil.cpu_percent(interval=0)) + "%")
     
     ###

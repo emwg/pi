@@ -121,7 +121,7 @@ while True:
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
     # constant pitch
     osc4freq = 600
-    pluck1freq = 300
+    pluck1freq = 700
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

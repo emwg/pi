@@ -70,7 +70,8 @@ osc4subtract = osc3subtract * subtractMult
 while True:
     
     #print system info
-    print(psutil.cpu_percent(interval=0))
+    print("CPU usage: " + str(psutil.cpu_percent(interval=0)) + "%")
+    print("RAM usage: " + str(psutil.virtual_memory().percent) + "%")
     
     ###
     # Light sensor

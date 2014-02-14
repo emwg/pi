@@ -12,11 +12,11 @@ osc1.SetAmp(3000)
 osc1.SetFreq(1600)
 
 mixer = sndobj.Mixer()
-mixer.addObj(osc1)
+mixer.AddObj(osc1)
 
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 thread = sndobj.SndThread()
-out.setOutput(1, mixer)
+out.SetOutput(1, mixer)
 
 thread.AddObj(osc1)
 thread.AddObj(mixer)

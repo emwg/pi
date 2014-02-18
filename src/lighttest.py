@@ -7,6 +7,7 @@ from lightSensor import *
 #stereo?
 
 lsensor = lightSensor(0, 10)
+knob = sensor(1,"knob")
 
 tab = sndobj.HarmTable(1000, 50, 1)
 osc1 = sndobj.Oscili(tab, 0, 0)
@@ -88,6 +89,14 @@ while True:
         #slide down
         if (lightValue - lightStep > light): lightValue -= lightStep
         else: lightValue = light
+        
+    ###
+    # Knob
+    ###
+    #get knob value
+    knob.update()
+    knobbiness = knob.getValue()
+    print("Knobbiness: " + str(knobbiness))
         
     #osc1amp = lightValue - osc1subtract
     #osc2amp = lightValue - osc2subtract

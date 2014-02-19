@@ -37,8 +37,8 @@ mixer.AddObj(buzz)
 pan = sndobj.Pan(-1, mixer)
 
 thread = sndobj.SndThread()
-out.SetOutput(0, pan.left)
-out.SetOutput(1, pan.right)
+out.SetOutput(1, pan.left)
+out.SetOutput(2, pan.right)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)

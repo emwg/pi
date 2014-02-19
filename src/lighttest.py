@@ -12,7 +12,7 @@ osc1 = sndobj.Oscili(tab, 0, 0)
 osc2 = sndobj.Oscili(tab, 0, 0)
 osc3 = sndobj.Oscili(tab, 0, 0)
 osc4 = sndobj.Oscili(tab, 0, 0)
-buzz = sndobj.Buzz(500, 2000, 50)
+buzz = sndobj.Buzz(0, 0, 0)
 pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
 osc2amp = 0
@@ -113,6 +113,7 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
+    buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
     print(str(pluckWait))
@@ -130,6 +131,9 @@ while True:
     # constant pitch
     osc4freq = 900
     pluck1freq = 700 #this does nothing
+    
+    buzz.SetFreq(amp / 2)
+    buzz.SetHarm(amp / 20)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

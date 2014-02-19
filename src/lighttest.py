@@ -34,7 +34,7 @@ mixer.AddObj(osc4)
 mixer.AddObj(pluck1)
 mixer.AddObj(buzz)
 
-pan = sndobj.Pan(-1, mixer)
+pan = sndobj.Pan(1, mixer)
 
 thread = sndobj.SndThread()
 out.SetOutput(0, pan.left)

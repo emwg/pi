@@ -146,7 +146,7 @@ while True:
     osc4.SetFreq(osc4freq, mod)
     
     #panning
-    pan.SetPan((lightValue / 512.0) - 1)
+    pan.SetPan(0, (lightValue / 512.0) - 1)
     
     print("")
 

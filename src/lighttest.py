@@ -25,7 +25,7 @@ osc3freq = 300
 osc4freq = 400
 pluck1freq = 0
 mod = sndobj.Oscili(tab, 0, 100)
-out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
+out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
 mixer.AddObj(osc2)
@@ -37,8 +37,8 @@ mixer.AddObj(buzz)
 pan = sndobj.Pan(-1, mixer)
 
 thread = sndobj.SndThread()
-out.SetOutput(1, pan.left)
-out.SetOutput(2, pan.right)
+out.SetOutput(0, pan.left)
+out.SetOutput(1, pan.right)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)

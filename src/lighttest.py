@@ -37,8 +37,8 @@ mixer.AddObj(buzz)
 pan = sndobj.Pan(0, mixer)
 
 thread = sndobj.SndThread()
-out.SetOutput(0, pan.left)
-out.SetOutput(1, pan.right)
+out.SetOutput(1, pan.left)
+out.SetOutput(2, pan.right)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)
@@ -146,7 +146,7 @@ while True:
     osc4.SetFreq(osc4freq, mod)
     
     #panning
-    pan.SetPan(0, (lightValue / 512.0) - 1)
+    pan.SetPan((lightValue / 512.0) - 1)
     
     print("")
 

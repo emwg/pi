@@ -48,6 +48,7 @@ thread.AddObj(osc4)
 thread.AddObj(pluck1)
 thread.AddObj(buzz)
 thread.AddObj(mixer)
+thread.AddObj(pan)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()

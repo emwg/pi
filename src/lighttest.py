@@ -12,6 +12,7 @@ osc1 = sndobj.Oscili(tab, 0, 0)
 osc2 = sndobj.Oscili(tab, 0, 0)
 osc3 = sndobj.Oscili(tab, 0, 0)
 osc4 = sndobj.Oscili(tab, 0, 0)
+buzz = sndobj.Buzz(800, 2000, 10)
 pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
 osc2amp = 0
@@ -31,6 +32,7 @@ mixer.AddObj(osc2)
 mixer.AddObj(osc3)
 mixer.AddObj(osc4)
 mixer.AddObj(pluck1)
+mixer.AddObj(buzz)
 
 thread = sndobj.SndThread()
 out.SetOutput(1, mixer)
@@ -41,6 +43,7 @@ thread.AddObj(osc2)
 thread.AddObj(osc3)
 thread.AddObj(osc4)
 thread.AddObj(pluck1)
+thread.AddObj(buzz)
 thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 

@@ -3,8 +3,6 @@ import time
 import psutil
 from lightSensor import *
 
-#stereo?
-
 lsensor = lightSensor(0, 10)
 
 tab = sndobj.HarmTable(1000, 50, 1)

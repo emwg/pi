@@ -41,6 +41,7 @@ while True:
 	accelYValue = accelY.getAccelValue()
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
+	print(str(toneLib.toneToFreq(currentTone)))
 	
 	if(time.time() > deltaT):
 		deltaT = time.time()

@@ -18,7 +18,7 @@ print(toneLib.upSteps(2, currentTone))
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
-osc1.SetAmp(9000)
+osc1.SetAmp(6000)
 osc1.SetFreq(600)
 
 # Create a mixer

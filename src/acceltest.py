@@ -9,6 +9,7 @@ accelY = accelSensor(0, 10)
 
 # Create toneLibrary object
 toneLib = toneLibrary()
+currentTone = 'C2'
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
@@ -33,11 +34,18 @@ thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
+deltaT = time.time()
+
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
 	accelYValue = accelY.getAccelValue()
 	print("AccelY:" + str(accelYValue))
-	newAmp = (accelYValue - 400)
-	if(newAmp < 0): newAmp = 0
-	osc1.SetAmp(newAmp * 20)
+	
+	if(time.time() > deltaT):
+		deltaT = time.time()
+		currentTone = toneLib.upSteps(2, currentTone)
+		osc1.SetFreq(toneLib.toneToFreq(currentTone))
+	#newAmp = (accelYValue - 400)
+	#if(newAmp < 0): newAmp = 0
+	#osc1.SetAmp(newAmp * 20)
 	

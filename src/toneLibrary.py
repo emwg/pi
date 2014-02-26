@@ -30,7 +30,7 @@ class toneLibrary:
             return self.indexToTone[index]
         elif index > 72:
             return 'B7'
-        else:
+        elif index < 1:
             return 'C2'
     
     def downSteps(self, numSteps, startingTone):
@@ -38,9 +38,9 @@ class toneLibrary:
         index -= numSteps
         if index <= 72 and index >= 0:
             return self.indexToTone[index]
-        elif index >72:
+        elif index > 72:
             return 'B7'
-        else:
+        elif index < 1:
             return 'C2'
     
     def getToneToFreq(self, tone):

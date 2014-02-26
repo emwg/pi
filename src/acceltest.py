@@ -44,7 +44,7 @@ while True:
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
 	
-	if(time.time() > deltaT + 0.3):
+	if(time.time() > deltaT + 0.1):
 		deltaT = time.time()
 		if(toneLib.getToneToIndex(currentTone) == 72):
 			scaleDirection = 'down'

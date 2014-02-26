@@ -12,5 +12,4 @@ class lightSensor:
 		self.sensor.update()
 		value = self.sensor.maxValue - self.sensor.getValue()
 		if (value > self.sensitivity): return (value - self.sensitivity)
-		"a"
 		return 0

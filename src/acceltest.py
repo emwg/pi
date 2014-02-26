@@ -12,9 +12,9 @@ toneLib = toneLibrary()
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
-coeffs = [4.0, 2.0];
-harmTable = sndobj.PlnTable(100, 2, coeffs)
-#harmTable.SetHarm(100, sndobj.SINE)
+#coeffs = [4.0, 2.0];
+harmTable = sndobj.HarmTable()
+harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
 osc1.SetAmp(9000)
 osc1.SetFreq(600)

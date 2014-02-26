@@ -43,7 +43,7 @@ while True:
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
 	
-	if(time.time() > deltaT + 1):
+	if(time.time() > deltaT + 0.3):
 		deltaT = time.time()
 		currentTone = toneLib.upSteps(2, currentTone)
 		osc1.SetFreq(toneLib.getToneToFreq(currentTone))

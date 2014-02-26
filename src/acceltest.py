@@ -40,6 +40,7 @@ while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
 	accelYValue = accelY.getAccelValue()
 	print("AccelY:" + str(accelYValue))
+	print("Current Tone: " + currentTone)
 	
 	if(time.time() > deltaT):
 		deltaT = time.time()

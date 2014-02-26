@@ -2,9 +2,13 @@ import sndobj
 import time
 import psutil
 from accelsensor import *
+from toneLibrary import *
 
 # Create the accelerometer sensor objects
 accelY = accelSensor(0, 10)
+
+# Create toneLibrary object
+toneLib = toneLibrary()
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound

@@ -10,6 +10,7 @@ accelY = accelSensor(0, 10)
 # Create toneLibrary object
 toneLib = toneLibrary()
 currentTone = 'C2'
+print(toneLib.upSteps(2, currentTone))
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound

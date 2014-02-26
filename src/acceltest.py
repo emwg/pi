@@ -36,6 +36,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 deltaT = time.time()
+scaleDirection = 'up'
 
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
@@ -45,7 +46,14 @@ while True:
 	
 	if(time.time() > deltaT + 0.3):
 		deltaT = time.time()
-		currentTone = toneLib.upSteps(2, currentTone)
+		if(toneLib.getToneToIndex(currentTone) == 72):
+			scaleDirection = 'down'
+		if(toneLib.getToneToIndex(currentTone) == 1):
+			scaleDirection = 'up'
+		if(scaleDirection == 'up'):
+			currentTone = toneLib.upSteps(2, currentTone)
+		else:
+			currentTone = toneLib.downSteps(2, currentTone)
 		osc1.SetFreq(toneLib.getToneToFreq(currentTone))
 	#newAmp = (accelYValue - 400)
 	#if(newAmp < 0): newAmp = 0

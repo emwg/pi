@@ -17,11 +17,11 @@ class toneLibrary:
                            ('C7',2093), ('Cs7',2217.46), ('D7',2349.32), ('Ds7',2489.02), ('E7',2637.02), ('F7',2793.83), ('Fs7',2959.96), ('G7',3135.96), ('Gs7',3322.44), ('A7',3520), ('As7',3729.31), ('B7',3951.07)])
     
     
-    def getToneToIndex(self):
-        return self.toneToIndex
+    def getToneToIndex(self, tone):
+        return self.toneToIndex[tone]
     
-    def getIndexToTone(self):
-        return self.indexToTone
+    def getIndexToTone(self, index):
+        return self.indexToTone[index]
     
     def upSteps(self, numSteps, startingTone):
         index = self.toneToIndex[startingTone]

@@ -43,5 +43,5 @@ class toneLibrary:
         else:
             return 'C2'
     
-    def toneToFreq(self, tone):
+    def getToneToFreq(self, tone):
         return self.toneToFreq[tone]

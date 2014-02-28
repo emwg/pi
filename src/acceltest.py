@@ -50,7 +50,7 @@ while True:
 		deltaT = time.time()
 		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 			scaleDirection = 'down'
-		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
+		if(toneLib.getToneToIndex(currentTone) <= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
 			scaleDirection = 'up'
 		if(scaleDirection == 'up'):
 			currentTone = toneLib.upSteps(2, currentTone)

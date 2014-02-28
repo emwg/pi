@@ -46,7 +46,7 @@ while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
 	accelYValue = accelY.getAccelValue()
 	print("AccelY:" + str(accelYValue))
-	print("Current Tone: " + currentTone)
+	#print("Current Tone: " + currentTone)
 	
 	#if(accelYValue < 400):
 	#	highestTone = 'As4'
@@ -62,7 +62,7 @@ while True:
 	if(accelYValue < 500):
 		harmTable.SetHarm(100, sndobj.SINE)
 	elif(accelYValue >= 500):
-		harmTable.SetHarm(100, sndobj.SAW)
+		harmTable.SetHarm(50, sndobj.SAW)
 	
 	if(time.time() > deltaT + stepTime):
 		deltaT = time.time()

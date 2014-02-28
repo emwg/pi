@@ -1,6 +1,10 @@
-#from collections import OrderedDict
-
+# This object makes it easier to produce the frequencies required to sound musical notes of 12-equal temperament tuned to 440.
 class toneLibrary:
+    # The constructor defines the arrays containing the index value of a note, as well as its frequency value
+    # The reason a separate index array is needed is because Python dictionaries do not keep track of indices. In order to do simple addition and subtraction of scale
+    # values, we need to keep track of the index value of a particular tone. Though it's not ideal, as of right now this library increments steps by converting the note
+    # name string value to the index number, incrementing that index number, then converting the index number back to the note name string value. The note name string value
+    # can also be converted to its corresponding frequency value.
     def __init__(self):
         self.toneToIndex = dict([('C2',1), ('Cs2',2), ('D2',3), ('Ds2',4), ('E2', 5), ('F2', 6), ('Fs2', 7), ('G2', 8), ('Gs2',9), ('A2',10), ('As2',11), ('B2',12),
                                      ('C3',13), ('Cs3',14), ('D3',15), ('Ds3',16), ('E3', 17), ('F3', 18), ('Fs3', 19), ('G3', 20), ('Gs3',21), ('A3',22), ('As3',23), ('B3',24),
@@ -16,13 +20,15 @@ class toneLibrary:
                            ('C6',1046.5), ('Cs6',1108.73), ('D6',1174.66), ('Ds6',1244.51), ('E6',1318.51), ('F6',1396.91), ('Fs6',1479.98), ('G6',1567.98), ('Gs6',1661.22), ('A6',1760), ('As6',1864.66), ('B6',1975.53),
                            ('C7',2093), ('Cs7',2217.46), ('D7',2349.32), ('Ds7',2489.02), ('E7',2637.02), ('F7',2793.83), ('Fs7',2959.96), ('G7',3135.96), ('Gs7',3322.44), ('A7',3520), ('As7',3729.31), ('B7',3951.07)])
     
-    
+    # Takes a note name string value and returns the corresponding index value
     def getToneToIndex(self, tone):
         return self.toneToIndex[tone]
     
+    # Takes an index value and returns the corresponding note name string value
     def getIndexToTone(self, index):
         return self.indexToTone[index]
     
+    # Raises the startingTone note name string value by numSteps number of half steps, returns the note name string value of the result
     def upSteps(self, numSteps, startingTone):
         index = self.toneToIndex[startingTone]
         index += numSteps
@@ -33,6 +39,7 @@ class toneLibrary:
         elif index < 1:
             return 'C2'
     
+    # Lowering the startingTone note name string value by numSteps number of half steps, returns the note name string value of the result
     def downSteps(self, numSteps, startingTone):
         index = self.toneToIndex[startingTone]
         index -= numSteps
@@ -43,5 +50,6 @@ class toneLibrary:
         elif index < 1:
             return 'C2'
     
+    # Takes a note name string value and returns the corresponding frequency value
     def getToneToFreq(self, tone):
         return self.toneToFreq[tone]

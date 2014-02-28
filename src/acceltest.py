@@ -9,10 +9,11 @@ accelY = accelSensor(0, 10)
 
 # Create toneLibrary object
 toneLib = toneLibrary()
-currentTone = 'C2'
+# Define tone library parameters
+currentTone = 'C3'
 lowestTone = 'C3'
 highestTone = 'D4'
-print(toneLib.upSteps(2, currentTone))
+stepTime = 0.1
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
@@ -46,7 +47,18 @@ while True:
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
 	
-	if(time.time() > deltaT + 0.1):
+	if(accelYValue < 400):
+		highestTone = 'As4'
+	elif(accelYValue < 450):
+		highestTone = 'Fs5'
+	elif(accelYValue < 500):
+		highestTone = 'D6'
+	elif(accelYValue < 550):
+		highestTone = 'As6'
+	elif(accelYValue >= 550):
+		highestTone = 'Fs7'
+	
+	if(time.time() > deltaT + stepTime):
 		deltaT = time.time()
 		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 			scaleDirection = 'down'

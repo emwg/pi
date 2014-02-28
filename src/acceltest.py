@@ -6,6 +6,7 @@ from toneLibrary import *
 
 # Create the accelerometer sensor objects
 accelY = accelSensor(0, 10)
+accelX = accelSensor(1, 10)
 
 # Create toneLibrary object
 toneLib = toneLibrary()
@@ -47,16 +48,21 @@ while True:
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
 	
-	if(accelYValue < 400):
-		highestTone = 'As4'
-	elif(accelYValue < 450):
-		highestTone = 'Fs5'
-	elif(accelYValue < 500):
-		highestTone = 'D6'
-	elif(accelYValue < 550):
-		highestTone = 'As6'
-	elif(accelYValue >= 550):
-		highestTone = 'Fs7'
+	#if(accelYValue < 400):
+	#	highestTone = 'As4'
+	#elif(accelYValue < 450):
+	#	highestTone = 'Fs5'
+	#elif(accelYValue < 500):
+	#	highestTone = 'D6'
+	#elif(accelYValue < 550):
+	#	highestTone = 'As6'
+	#elif(accelYValue >= 550):
+	#	highestTone = 'Fs7'
+	
+	if(accelYValue < 500):
+		harmTable.SetHarm(100, sndobj.SINE)
+	elif(accelYValue >= 500):
+		harmTable.SetHarm(100, sndobj.SAW)
 	
 	if(time.time() > deltaT + stepTime):
 		deltaT = time.time()

@@ -10,6 +10,8 @@ accelY = accelSensor(0, 10)
 # Create toneLibrary object
 toneLib = toneLibrary()
 currentTone = 'C2'
+lowestTone = 'C3'
+highestTone = 'B7'
 print(toneLib.upSteps(2, currentTone))
 
 # Create the harmonic table and attach to oscilators
@@ -43,13 +45,12 @@ while True:
 	accelYValue = accelY.getAccelValue()
 	print("AccelY:" + str(accelYValue))
 	print("Current Tone: " + currentTone)
-	print("Current Tone Index Value: " + str(toneLib.getToneToIndex(currentTone)))
 	
 	if(time.time() > deltaT + 0.1):
 		deltaT = time.time()
-		if(toneLib.getToneToIndex(currentTone) >= 71):
+		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 			scaleDirection = 'down'
-		if(toneLib.getToneToIndex(currentTone) <= 2):
+		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
 			scaleDirection = 'up'
 		if(scaleDirection == 'up'):
 			currentTone = toneLib.upSteps(2, currentTone)

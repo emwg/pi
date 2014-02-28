@@ -11,7 +11,7 @@ accelY = accelSensor(0, 10)
 toneLib = toneLibrary()
 currentTone = 'C2'
 lowestTone = 'C3'
-highestTone = 'B7'
+highestTone = 'D4'
 print(toneLib.upSteps(2, currentTone))
 
 # Create the harmonic table and attach to oscilators

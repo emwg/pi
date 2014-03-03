@@ -11,9 +11,9 @@ accelX = accelSensor(1, 10)
 # Create toneLibrary object
 toneLib = toneLibrary()
 # Define tone library parameters
-currentTone = 'C3'
-lowestTone = 'C3'
-highestTone = 'D4'
+currentTone = 'C2'
+lowestTone = 'C2'
+highestTone = 'B7'
 stepTime = 0.1
 
 # Create the harmonic table and attach to oscilators
@@ -59,10 +59,10 @@ while True:
 	#elif(accelYValue >= 550):
 	#	highestTone = 'Fs7'
 	
-	if(accelYValue < 500):
-		harmTable.SetHarm(100, sndobj.SINE)
-	elif(accelYValue >= 500):
-		harmTable.SetHarm(50, sndobj.SAW)
+	#if(accelYValue < 500):
+	#	harmTable.SetHarm(100, sndobj.SINE)
+	#elif(accelYValue >= 500):
+	#	harmTable.SetHarm(50, sndobj.SAW)
 	
 	if(time.time() > deltaT + stepTime):
 		deltaT = time.time()

@@ -5,8 +5,8 @@ from lightSensor import *
 
 lsensor = lightSensor(0, 10)
 
-tab = sndobj.HarmTable(1000, 1, 1)
-osc1 = sndobj.Oscili(tab, 440, 6000)
+tab = sndobj.HarmTable(1000, 1, sndobj.SAW)
+osc1 = sndobj.Oscili(tab, 400, 5000)
 #osc2 = sndobj.Oscili(tab, 0, 0)
 #osc3 = sndobj.Oscili(tab, 0, 0)
 #osc4 = sndobj.Oscili(tab, 0, 0)

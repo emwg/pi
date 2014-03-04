@@ -5,11 +5,11 @@ from lightSensor import *
 
 lsensor = lightSensor(0, 10)
 
-tab = sndobj.HarmTable(1000, 1, 2)
+tab = sndobj.HarmTable(1000, 1, 3)
 osc1 = sndobj.Oscili(tab, 0, 0)
-osc2 = sndobj.Oscili(tab, 0, 0)
-osc3 = sndobj.Oscili(tab, 0, 0)
-osc4 = sndobj.Oscili(tab, 0, 0)
+#osc2 = sndobj.Oscili(tab, 0, 0)
+#osc3 = sndobj.Oscili(tab, 0, 0)
+#osc4 = sndobj.Oscili(tab, 0, 0)
 #buzz = sndobj.Buzz(0, 0, 0)
 #pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
@@ -26,9 +26,9 @@ mod = sndobj.Oscili(tab, 0, 100)
 out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
-mixer.AddObj(osc2)
-mixer.AddObj(osc3)
-mixer.AddObj(osc4)
+#mixer.AddObj(osc2)
+#mixer.AddObj(osc3)
+#mixer.AddObj(osc4)
 #mixer.AddObj(pluck1)
 #mixer.AddObj(buzz)
 
@@ -40,9 +40,9 @@ out.SetOutput(2, pan.right)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)
-thread.AddObj(osc2)
-thread.AddObj(osc3)
-thread.AddObj(osc4)
+#thread.AddObj(osc2)
+#thread.AddObj(osc3)
+#thread.AddObj(osc4)
 #thread.AddObj(pluck1)
 #thread.AddObj(buzz)
 thread.AddObj(mixer)
@@ -112,9 +112,9 @@ while True:
         amp = 4
     #print(amp)
     osc1.SetAmp(amp)
-    osc2.SetAmp(amp)
-    osc3.SetAmp(amp)
-    osc4.SetAmp(amp)
+    #osc2.SetAmp(amp)
+    #osc3.SetAmp(amp)
+    #osc4.SetAmp(amp)
     #buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
@@ -139,9 +139,9 @@ while True:
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
+    #osc2.SetFreq(osc2freq, mod)
+    #osc3.SetFreq(osc3freq, mod)
+    #osc4.SetFreq(osc4freq, mod)
     
     #panning
     pan.SetPan((lightValue / 512.0) - 1)

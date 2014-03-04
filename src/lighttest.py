@@ -5,7 +5,7 @@ from lightSensor import *
 
 lsensor = lightSensor(0, 10)
 
-tab = sndobj.HarmTable(1000, 20, sndobj.SAW)
+tab = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
 osc1 = sndobj.Oscili(tab, 400, 5000)
 #osc2 = sndobj.Oscili(tab, 0, 0)
 #osc3 = sndobj.Oscili(tab, 0, 0)

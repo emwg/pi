@@ -7,11 +7,11 @@ lsensor = lightSensor(0, 10)
 
 tab = sndobj.HarmTable(1000, 20, sndobj.SAW)
 osc1 = sndobj.Oscili(tab, 0, 0)
-#osc2 = sndobj.Oscili(tab, 0, 0)
-#osc3 = sndobj.Oscili(tab, 0, 0)
-#osc4 = sndobj.Oscili(tab, 0, 0)
-#buzz = sndobj.Buzz(0, 0, 0)
-#pluck1 = sndobj.Pluck(400, 0)
+osc2 = sndobj.Oscili(tab, 0, 0)
+osc3 = sndobj.Oscili(tab, 0, 0)
+osc4 = sndobj.Oscili(tab, 0, 0)
+buzz = sndobj.Buzz(0, 0, 0)
+pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
 osc2amp = 0
 osc3amp = 0
@@ -26,11 +26,11 @@ mod = sndobj.Oscili(tab, 0, 100)
 out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
-#mixer.AddObj(osc2)
-#mixer.AddObj(osc3)
-#mixer.AddObj(osc4)
-#mixer.AddObj(pluck1)
-#mixer.AddObj(buzz)
+mixer.AddObj(osc2)
+mixer.AddObj(osc3)
+mixer.AddObj(osc4)
+mixer.AddObj(pluck1)
+mixer.AddObj(buzz)
 
 pan = sndobj.Pan(0, mixer)
 
@@ -40,11 +40,11 @@ out.SetOutput(2, pan.right)
 
 thread.AddObj(mod)
 thread.AddObj(osc1)
-#thread.AddObj(osc2)
-#thread.AddObj(osc3)
-#thread.AddObj(osc4)
-#thread.AddObj(pluck1)
-#thread.AddObj(buzz)
+thread.AddObj(osc2)
+thread.AddObj(osc3)
+thread.AddObj(osc4)
+thread.AddObj(pluck1)
+thread.AddObj(buzz)
 thread.AddObj(mixer)
 thread.AddObj(pan)
 thread.AddObj(out, sndobj.SNDIO_OUT)
@@ -101,10 +101,10 @@ while True:
         
     #print("osc1amp: " + str(osc4amp))    
     #set amplitudes
-    #osc1.SetAmp(osc1amp)
-    #osc2.SetAmp(osc2amp)
-    #osc3.SetAmp(osc3amp)
-    #osc4.SetAmp(osc4amp)
+    osc1.SetAmp(osc1amp)
+    osc2.SetAmp(osc2amp)
+    osc3.SetAmp(osc3amp)
+    osc4.SetAmp(osc4amp)
 
     if(lightValue != 0):
         amp = lightValue * 10
@@ -112,10 +112,10 @@ while True:
         amp = 4
     #print(amp)
     osc1.SetAmp(amp)
-    #osc2.SetAmp(amp)
-    #osc3.SetAmp(amp)
-    #osc4.SetAmp(amp)
-    #buzz.SetAmp(amp)
+    osc2.SetAmp(amp)
+    osc3.SetAmp(amp)
+    osc4.SetAmp(amp)
+    buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
     print(str(pluckWait))
@@ -134,14 +134,14 @@ while True:
     osc4freq = 900
     pluck1freq = 700 #this does nothing
     
-    #buzz.SetFreq(amp / 2)
-    #buzz.SetHarm(amp / 20)
+    buzz.SetFreq(amp / 2)
+    buzz.SetHarm(amp / 20)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)
-    #osc2.SetFreq(osc2freq, mod)
-    #osc3.SetFreq(osc3freq, mod)
-    #osc4.SetFreq(osc4freq, mod)
+    osc2.SetFreq(osc2freq, mod)
+    osc3.SetFreq(osc3freq, mod)
+    osc4.SetFreq(osc4freq, mod)
     
     #panning
     pan.SetPan((lightValue / 512.0) - 1)

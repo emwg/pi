@@ -10,8 +10,8 @@ osc1 = sndobj.Oscili(tab, 0, 0)
 osc2 = sndobj.Oscili(tab, 0, 0)
 osc3 = sndobj.Oscili(tab, 0, 0)
 osc4 = sndobj.Oscili(tab, 0, 0)
-buzz = sndobj.Buzz(0, 0, 0)
-pluck1 = sndobj.Pluck(400, 0)
+#buzz = sndobj.Buzz(0, 0, 0)
+#pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0
 osc2amp = 0
 osc3amp = 0
@@ -29,8 +29,8 @@ mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 mixer.AddObj(osc3)
 mixer.AddObj(osc4)
-mixer.AddObj(pluck1)
-mixer.AddObj(buzz)
+#mixer.AddObj(pluck1)
+#mixer.AddObj(buzz)
 
 pan = sndobj.Pan(0, mixer)
 
@@ -43,8 +43,8 @@ thread.AddObj(osc1)
 thread.AddObj(osc2)
 thread.AddObj(osc3)
 thread.AddObj(osc4)
-thread.AddObj(pluck1)
-thread.AddObj(buzz)
+#thread.AddObj(pluck1)
+#thread.AddObj(buzz)
 thread.AddObj(mixer)
 thread.AddObj(pan)
 thread.AddObj(out, sndobj.SNDIO_OUT)
@@ -115,14 +115,14 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
-    buzz.SetAmp(amp)
+    #buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
     print(str(pluckWait))
     
-    if ((time.time() - pluckTime) > pluckWait):
-        pluck1.SetAmp(amp)
-        pluckTime = time.time()
+    #if ((time.time() - pluckTime) > pluckWait):
+        #pluck1.SetAmp(amp)
+        #pluckTime = time.time()
     
     # root
     osc1freq = amp / 4
@@ -134,8 +134,8 @@ while True:
     osc4freq = 900
     pluck1freq = 700 #this does nothing
     
-    buzz.SetFreq(amp / 2)
-    buzz.SetHarm(amp / 20)
+    #buzz.SetFreq(amp / 2)
+    #buzz.SetHarm(amp / 20)
     
     #set frequencies
     osc1.SetFreq(osc1freq, mod)

@@ -5,8 +5,8 @@ from lightSensor import *
 
 lsensor = lightSensor(0, 10)
 
-tab = sndobj.HarmTable(1000, sndobj.SQUARE, 1)
-osc1 = sndobj.Oscili(tab, 0, 0)
+tab = sndobj.HarmTable(1000, 1, 1)
+osc1 = sndobj.Oscili(tab, 440, 440)
 #osc2 = sndobj.Oscili(tab, 0, 0)
 #osc3 = sndobj.Oscili(tab, 0, 0)
 #osc4 = sndobj.Oscili(tab, 0, 0)
@@ -111,7 +111,7 @@ while True:
     else:
         amp = 4
     #print(amp)
-    osc1.SetAmp(amp)
+    ###osc1.SetAmp(amp)
     #osc2.SetAmp(amp)
     #osc3.SetAmp(amp)
     #osc4.SetAmp(amp)
@@ -138,7 +138,7 @@ while True:
     #buzz.SetHarm(amp / 20)
     
     #set frequencies
-    osc1.SetFreq(osc1freq, mod)
+    ###osc1.SetFreq(osc1freq, mod)
     #osc2.SetFreq(osc2freq, mod)
     #osc3.SetFreq(osc3freq, mod)
     #osc4.SetFreq(osc4freq, mod)

@@ -120,9 +120,9 @@ while True:
     pluckWait = 500.0 / amp
     print(str(pluckWait))
     
-    #if ((time.time() - pluckTime) > pluckWait):
-        #pluck1.SetAmp(amp)
-        #pluckTime = time.time()
+    if ((time.time() - pluckTime) > pluckWait):
+        pluck1.SetAmp(amp)
+        pluckTime = time.time()
     
     # root
     osc1freq = amp / 4

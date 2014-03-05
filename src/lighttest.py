@@ -146,7 +146,7 @@ while True:
     # fifth
     osc2freq = osc1freq * (3/2)
     # third
-    osc3freq = osc1freq * (5/4)
+    osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
     # constant pitch
     osc4freq = 900
     pluck1freq = 700 #this does nothing

@@ -25,7 +25,7 @@ osc2freq = 200
 osc3freq = 300
 osc4freq = 400
 pluck1freq = 0
-mod = sndobj.Oscili(tab, 0, 100)
+mod = sndobj.Oscili(sine, 0, 100)
 out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)

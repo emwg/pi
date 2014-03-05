@@ -115,7 +115,7 @@ while True:
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
     osc4.SetAmp(amp)
-    buzz.SetAmp(amp)
+    #buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
     print(str(pluckWait))

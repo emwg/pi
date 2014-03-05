@@ -5,11 +5,14 @@ from lightSensor import *
 
 lsensor = lightSensor(0, 10)
 
-tab = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
-osc1 = sndobj.Oscili(tab, 0, 0)
-osc2 = sndobj.Oscili(tab, 0, 0)
-osc3 = sndobj.Oscili(tab, 0, 0)
-osc4 = sndobj.Oscili(tab, 0, 0)
+sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
+saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
+square = sndobj.HarmTable(1000, 20, sndobj.SQUARE)
+buzz = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
+osc1 = sndobj.Oscili(sine, 0, 0)
+osc2 = sndobj.Oscili(saw, 0, 0)
+osc3 = sndobj.Oscili(square, 0, 0)
+osc4 = sndobj.Oscili(buzz, 0, 0)
 #buzz = sndobj.Buzz(0, 0, 0)
 #pluck1 = sndobj.Pluck(400, 0)
 osc1amp = 0

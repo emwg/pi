@@ -124,7 +124,7 @@ while True:
     osc4.SetAmp(osc4amp)
 
     if(lightValue != 0):
-        amp = lightValue * 9
+        amp = lightValue * 10
     else:
         amp = 4
     #print(amp)

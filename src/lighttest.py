@@ -63,6 +63,10 @@ lightAdjust = 1
 flexAdjust = 1
 knobAdjust = 0.1
 
+dimCutoff = 200
+minCutoff = 500
+majCutoff = 700
+
 pluckWait = 0.25
 pluckTime = 0
 
@@ -100,6 +104,16 @@ while True:
     #osc2amp = lightValue - osc2subtract
     #osc3amp = lightValue - osc3subtract
     #osc4amp = lightValue - osc4subtract
+    
+    #set chord type
+    if (lightValue < dimCutoff):
+        chord = "dim"
+    elif(lightValue < minCutoff):
+        chord = "min"
+    elif(lightValue < majCutoff):
+        chord = "maj"
+    else: #(lightValue < augCutoff):
+        chord = "aug"
         
         
     #print("osc1amp: " + str(osc4amp))    
@@ -110,7 +124,7 @@ while True:
     osc4.SetAmp(osc4amp)
 
     if(lightValue != 0):
-        amp = lightValue * 10
+        amp = lightValue * 9
     else:
         amp = 4
     #print(amp)
@@ -130,9 +144,9 @@ while True:
     # root
     osc1freq = amp / 4
     # fifth
-    osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2) 
+    osc2freq = osc1freq * (3/2)
     # third
-    osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
+    osc3freq = osc1freq * (5/4)
     # constant pitch
     osc4freq = 900
     pluck1freq = 700 #this does nothing

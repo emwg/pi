@@ -144,7 +144,7 @@ while True:
     # root
     osc1freq = amp / 4
     # fifth
-    osc2freq = osc1freq * (osc1freq * 3) / (osc1freq * 2)
+    osc2freq = osc1freq * (3/2)
     # third
     osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
     # constant pitch

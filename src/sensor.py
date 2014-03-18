@@ -63,6 +63,7 @@ class sensor:
 		self.tolerance = .005
 		self.lastread = 0
 		self.maxValue = 1024
+        adc = 1
         self.adc = adc
         
         # set up the SPI interface pins

@@ -48,20 +48,16 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 # change these as desired - they're the pins connected from the
 # SPI port on the ADC to the Cobbler
 SPICLK = 18
-SPIMISO = 23
+SPIMISO0 = 23
+SPIMISO1 = 22
 SPIMOSI = 24
 SPICS = 25
 
-# set up the SPI interface pins
-GPIO.setup(SPIMOSI, GPIO.OUT)
-GPIO.setup(SPIMISO, GPIO.IN)
-GPIO.setup(SPICLK, GPIO.OUT)
-GPIO.setup(SPICS, GPIO.OUT)
-
 class sensor:
 	
-	def __init__(self, channel, type):
+	def __init__(self, adc, channel, type):
 		
+        self.adc = adc
 		self.channel = channel
 		self.type = type
 		self.changed = False
@@ -69,6 +65,15 @@ class sensor:
 		self.tolerance = .005
 		self.lastread = 0
 		self.maxValue = 1024
+        
+        # set up the SPI interface pins
+        GPIO.setup(SPIMOSI, GPIO.OUT)
+        if (adc == 0):
+            GPIO.setup(SPIMISO0, GPIO.IN)
+        elif (adc == 1):
+            GPIO.setup(SPIMISO1)
+        GPIO.setup(SPICLK, GPIO.OUT)
+        GPIO.setup(SPICS, GPIO.OUT)
 
 	def __str__(self):
 		return ("Channel: " + self.channel + " Value: " + self.value)

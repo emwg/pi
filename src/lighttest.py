@@ -3,7 +3,7 @@ import time
 import psutil
 from lightSensor import *
 
-lsensor = lightSensor(8, 10)
+lsensor = lightSensor(1, 0, 10)
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
 saw = sndobj.HarmTable(1000, 20, sndobj.SAW)

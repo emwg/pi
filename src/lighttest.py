@@ -3,7 +3,6 @@ import time
 import psutil
 from lightSensor import *
 
-
 lsensor = lightSensor(0, 10)
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
@@ -82,7 +81,7 @@ osc4subtract = osc3subtract * subtractMult
 while True:
     
     #print system info
-    print("RAM usage: " + str(psutil.virtual_memory().percent) + "%")
+    print("RAM usageaSduyg: " + str(psutil.virtual_memory().percent) + "%")
     print("CPU usage: " + str(psutil.cpu_percent(interval=0)) + "%")
     
     ###

@@ -70,7 +70,7 @@ class sensor:
 		if (self.adc == 0):
 			GPIO.setup(SPIMISO0, GPIO.IN)
 		elif (self.adc == 1):
-			GPIO.setup(SPIMISO1)
+			GPIO.setup(SPIMISO1, GPIO.IN)
 		GPIO.setup(SPICLK, GPIO.OUT)
 		GPIO.setup(SPICS, GPIO.OUT)
 

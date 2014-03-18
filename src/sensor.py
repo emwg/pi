@@ -91,7 +91,10 @@ class sensor:
 
 	def update(self):
 		potadjust = 0
-		currentvalue = readadc(self.channel, SPICLK, SPIMOSI, SPIMISO, SPICS)
+		if (self.adc == 0):
+			currentvalue = readadc(self.channel, SPICLK, SPIMOSI, SPIMISO0, SPICS)
+		elif (self.adc == 1):
+			currentvalue = readadc(self.channel, SPICLK, SPIMOSI, SPIMISO1, SPICS)
 		potadjust = abs(currentvalue - self.lastread)
 		if (potadjust > self.tolerance):
 			self.changed = True

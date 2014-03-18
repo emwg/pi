@@ -66,13 +66,13 @@ class sensor:
 		self.maxValue = 1024        
         
         # set up the SPI interface pins
-        GPIO.setup(SPIMOSI, GPIO.OUT)
-        if (adc == 0):
-            GPIO.setup(SPIMISO0, GPIO.IN)
-        elif (adc == 1):
-            GPIO.setup(SPIMISO1)
-        GPIO.setup(SPICLK, GPIO.OUT)
-        GPIO.setup(SPICS, GPIO.OUT)
+		GPIO.setup(SPIMOSI, GPIO.OUT)
+		if (self.adc == 0):
+			GPIO.setup(SPIMISO0, GPIO.IN)
+		elif (self.adc == 1):
+			GPIO.setup(SPIMISO1)
+		GPIO.setup(SPICLK, GPIO.OUT)
+		GPIO.setup(SPICS, GPIO.OUT)
 
 	def __str__(self):
 		return ("Channel: " + self.channel + " Value: " + self.value)

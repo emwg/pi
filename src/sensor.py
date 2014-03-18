@@ -56,8 +56,6 @@ SPICS = 25
 class sensor:
 	
 	def __init__(self, adc, channel, type):
-		
-        self.adc = adc
 		self.channel = channel
 		self.type = type
 		self.changed = False
@@ -65,6 +63,7 @@ class sensor:
 		self.tolerance = .005
 		self.lastread = 0
 		self.maxValue = 1024
+        self.adc = adc
         
         # set up the SPI interface pins
         GPIO.setup(SPIMOSI, GPIO.OUT)

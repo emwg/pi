@@ -4,7 +4,6 @@ import psutil
 from lightSensor import *
 
 lsensor = lightSensor(1, 0, 10)
-knob = sensor(2, 0, "knob")
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
 saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
@@ -91,9 +90,6 @@ while True:
     #get light sensor value
     light = lsensor.getLightValue() * lightAdjust
     print("Light: " + str(light))
-    
-    knob.update()
-    print("Knob: " + str(knob.getValue()))
     
     #interpolate lightValue
     if (lightValue < light):

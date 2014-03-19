@@ -13,7 +13,7 @@ from sensor import *
 
 
 
-mySensor = sensor(0,'knob')
+mySensor = sensor(0,0,'knob')
 
 while True:
 	mySensor.update()

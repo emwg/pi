@@ -3,8 +3,8 @@ from sensor import *
 
 class pressureSensor:
 	
-	def __init__(self, channel, sensitivity):
-		self.sensor = sensor(channel,"pressure")
+	def __init__(self, adc, channel, sensitivity):
+		self.sensor = sensor(adc, channel, "pressure")
 		self.sensitivity = sensitivity
 
 	def __str__(self):

@@ -20,7 +20,7 @@ stepTime = 0.1
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
 #coeffs = [4.0, 2.0];
 harmTable = sndobj.HarmTable()
-harmTable.SetHarm(100, sndobj.SAW)
+harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
 #osc1.SetAmp(6000)
 #osc1.SetFreq(600)

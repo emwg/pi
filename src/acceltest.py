@@ -32,7 +32,7 @@ osc1 = sndobj.Oscili(harmTable, 440, 900)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 out.SetOutput(1, osc1)
 
-mod = sndobj.Oscili(harmTable, 1, 250)
+mod = sndobj.Oscili(harmTable, 0.4, 250)
 osc1.SetFreq(440, mod)
 
 thread = sndobj.SndThread()

@@ -35,6 +35,9 @@ out.SetOutput(1, osc1)
 mod = sndobj.Oscili(harmTable, 4, 50)
 osc1.SetFreq(440, mod)
 
+mod2 = sndobj.Oscili(harmTable, 2, 15)
+mod.SetFreq(4, mod2)
+
 thread = sndobj.SndThread()
 #out.SetOutput(1, mixer)
 
@@ -42,6 +45,7 @@ thread = sndobj.SndThread()
 thread.AddObj(osc1)
 #thread.AddObj(mixer)
 thread.AddObj(mod)
+thread.AddObj(mod2)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 

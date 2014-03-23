@@ -22,7 +22,7 @@ stepTime = 0.1
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 #osc1 = sndobj.Oscili(harmTable, 440, 900)
-ocs1 = sndobj.Randh(10000, 1000)
+osc1 = sndobj.Randh(10000, 1000)
 #osc1.SetAmp(6000)
 #osc1.SetFreq(600)
 

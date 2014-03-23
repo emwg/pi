@@ -22,6 +22,7 @@ stepTime = 0.1
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
+sound2 = sndobj.Oscili(harmTable, 550, 900)
 noise = sndobj.Randh(10000, 1000)
 #osc1.SetAmp(6000)
 #osc1.SetFreq(600)
@@ -29,6 +30,7 @@ noise = sndobj.Randh(10000, 1000)
 # Create a mixer
 mixer = sndobj.Mixer()
 mixer.AddObj(osc1)
+mixer.AddObj(sound2)
 
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 #out.SetOutput(1, osc1)

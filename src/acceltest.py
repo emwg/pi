@@ -30,7 +30,7 @@ osc1 = sndobj.Oscili(harmTable, 440, 900)
 #mixer.AddObj(osc1)
 
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
-out.SetOutput(1, osc)
+out.SetOutput(1, osc1)
 
 mod = sndobj.Oscili(harmTable, 2, 250)
 osc1.SetFreq(440, mod)

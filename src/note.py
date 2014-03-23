@@ -8,31 +8,35 @@ const int SIXTEENTH_NOTE = 4
 
 bool tied
 string pitch
+
+Note is responsible for its own pitch and keeping track of its initial and remaining duration
 '''
 from toneLibrary import *
 
 class note:
-    self.WHOLE_NOTE = 16
-    self.HALF_NOTE = 8
-    self.QUARTER_NOTE = 4
-    self.EIGHTH_NOTE = 2
-    self.SIXTEENTH_NOTE = 1
-    self.DOTTED_HALF_NOTE = 12
-    self.DOTTED_QUARTER_NOTE = 6
-    self.DOTTED_EIGHTH_NOTE = 3
+    WHOLE_NOTE = 16
+    HALF_NOTE = 8
+    QUARTER_NOTE = 4
+    EIGHTH_NOTE = 2
+    SIXTEENTH_NOTE = 1
+    DOTTED_HALF_NOTE = 12
+    DOTTED_QUARTER_NOTE = 6
+    DOTTED_EIGHTH_NOTE = 3
     
-    def __init__(self, noteLength, pitch, start):
-        self.noteType = noteLength
+    def __init__(self, noteLength, pitch):
+        self.noteLength = noteLength
         self.pitch = pitch
-        self.start = start
-    
-    def getStartingPosition(self):
-        return self.start
     
     def getPitchAsName(self):
         return self.pitch
     
     def getPitchAsFreq(self):
-        
+        return toneLibrary.getToneToFreq(self.pitch)
+    
+    def getNoteLength(self):
+        return self.noteLength
+    
+    def decrementNoteLength(self):
+        self.noteLength -= 1
         
     

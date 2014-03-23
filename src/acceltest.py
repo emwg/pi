@@ -33,7 +33,7 @@ noise = sndobj.Randh(10000, 1000)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 out.SetOutput(1, osc1)
 
-mod = sndobj.Oscili(harmTable, 40, 15)
+mod = sndobj.Oscili(harmTable, 20, 15)
 osc1.SetFreq(440, mod)
 
 thread = sndobj.SndThread()

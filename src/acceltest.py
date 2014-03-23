@@ -43,6 +43,7 @@ out.SetOutput(1, mixer)
 
 # Attach sound objects to the sound thread
 thread.AddObj(osc1)
+thread.AddObj(sound2)
 thread.AddObj(mixer)
 thread.AddObj(mod)
 #thread.AddObj(noise)

@@ -21,7 +21,7 @@ stepTime = 0.1
 #coeffs = [4.0, 2.0];
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
-osc1 = sndobj.Oscili(harmTable, 220, 900)
+osc1 = sndobj.Oscili(harmTable, 440, 900)
 #osc1.SetAmp(6000)
 #osc1.SetFreq(600)
 
@@ -32,8 +32,8 @@ osc1 = sndobj.Oscili(harmTable, 220, 900)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 out.SetOutput(1, osc1)
 
-mod = sndobj.Oscili(harmTable, 2, 250)
-osc1.SetFreq(880, mod)
+mod = sndobj.Oscili(harmTable, 4, 250)
+osc1.SetFreq(440, mod)
 
 thread = sndobj.SndThread()
 #out.SetOutput(1, mixer)

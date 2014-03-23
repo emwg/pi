@@ -32,8 +32,8 @@ osc1 = sndobj.Oscili(harmTable, 440, 900)
 out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
 out.SetOutput(1, osc1)
 
-#mod = sndobj.Oscili(harmTable, 2, 250)
-#osc1.SetFreq(440, mod)
+mod = sndobj.Oscili(harmTable, 2, 250)
+osc1.SetFreq(440, mod)
 
 thread = sndobj.SndThread()
 #out.SetOutput(1, mixer)
@@ -41,7 +41,7 @@ thread = sndobj.SndThread()
 # Attach sound objects to the sound thread
 thread.AddObj(osc1)
 #thread.AddObj(mixer)
-#thread.AddObj(mod)
+thread.AddObj(mod)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 

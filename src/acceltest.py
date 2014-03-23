@@ -20,7 +20,7 @@ stepTime = 0.1
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
 #coeffs = [4.0, 2.0];
 harmTable = sndobj.HarmTable()
-harmTable.SetHarm(100, sndobj.SINE)
+harmTable.SetHarm(100, sndobj.SQUARE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
 #osc1.SetAmp(6000)
 #osc1.SetFreq(600)
@@ -35,9 +35,6 @@ out.SetOutput(1, osc1)
 mod = sndobj.Oscili(harmTable, 2, 50)
 osc1.SetFreq(440, mod)
 
-mod2 = sndobj.Oscili(harmTable, 0.1, 8)
-mod.SetFreq(2, mod2)
-
 thread = sndobj.SndThread()
 #out.SetOutput(1, mixer)
 
@@ -45,7 +42,6 @@ thread = sndobj.SndThread()
 thread.AddObj(osc1)
 #thread.AddObj(mixer)
 thread.AddObj(mod)
-thread.AddObj(mod2)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 

@@ -5,8 +5,8 @@ from accelsensor import *
 from toneLibrary import *
 
 # Create the accelerometer sensor objects
-accelY = accelSensor(0, 10)
-accelX = accelSensor(1, 10)
+#accelY = accelSensor(0, 10)
+#accelX = accelSensor(1, 10)
 
 # Create toneLibrary object
 toneLib = toneLibrary()
@@ -50,8 +50,9 @@ scaleDirection = 'up'
 
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
-	accelYValue = accelY.getAccelValue()
-	print("AccelY:" + str(accelYValue))
+	#accelYValue = accelY.getAccelValue()
+	#print("AccelY:" + str(accelYValue))
+	print("Running")
 	#print("Current Tone: " + currentTone)
 	
 	#if(accelYValue < 400):

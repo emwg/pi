@@ -78,7 +78,7 @@ osc2subtract = osc1subtract * subtractMult
 osc3subtract = osc2subtract * subtractMult
 osc4subtract = osc3subtract * subtractMult
 
-avgSamples = 20
+avgSamples = 10
 samples = 0
 ramSum = 0
 cpuSum = 0

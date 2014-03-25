@@ -78,11 +78,32 @@ osc2subtract = osc1subtract * subtractMult
 osc3subtract = osc2subtract * subtractMult
 osc4subtract = osc3subtract * subtractMult
 
+avgSamples = 20
+samples = 0
+ramSum = 0
+cpuSum = 0
+avgRam = 0
+avgCpu = 0
+
 while True:
     
     #print system info
-    print("RAM usage: " + str(psutil.virtual_memory().percent) + "%")
-    print("CPU usage: " + str(psutil.cpu_percent(interval=0)) + "%")
+    ram = psutil.virtual_memory().percent
+    cpu = psutil.cpu_percent(interval=0)
+    
+    if (samples < avgSamples):
+        ramSum += ram
+        cpuSum += cpu
+        samples += 1
+    else:
+        avgRam = (ramSum / avgSamples)
+        avgCpu = (cpuSum / avgSamples)
+        samples = 0
+        ramSum = 0
+        cpuSum = 0
+    
+    print("RAM usage: " + str(avgRam) + "%")
+    print("CPU usage: " + str(avgCpu) + "%")
     
     ###
     # Light sensor

@@ -34,6 +34,8 @@ mixer.AddObj(osc3)
 mixer.AddObj(osc4)
 #mixer.AddObj(pluck1)
 #mixer.AddObj(buzz)
+lowpass = sndobj.LoPass(400, mixer)
+mixer.AddObj(lowpass)
 
 pan = sndobj.Pan(0, mixer)
 
@@ -50,6 +52,7 @@ thread.AddObj(osc4)
 #thread.AddObj(buzz)
 thread.AddObj(mixer)
 thread.AddObj(pan)
+thread.AddObj(lowpass)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()

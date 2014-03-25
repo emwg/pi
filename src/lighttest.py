@@ -13,10 +13,10 @@ osc1 = sndobj.Oscili(sine, 0, 0)
 osc2 = sndobj.Oscili(saw, 0, 0)
 osc3 = sndobj.Oscili(square, 0, 0)
 osc4 = sndobj.Oscili(buzz, 0, 0)
-comb1 = sndobj.Comb(0.5, 0.2, osc1)
-comb2 = sndobj.Comb(0.5, 0.2, osc2)
-comb3 = sndobj.Comb(0.5, 0.2, osc3)
-comb4 = sndobj.Comb(0.5, 0.2, osc4)
+comb1 = sndobj.Comb(0, 0.2, osc1)
+comb2 = sndobj.Comb(0, 0.2, osc2)
+comb3 = sndobj.Comb(0, 0.2, osc3)
+comb4 = sndobj.Comb(0, 0.2, osc4)
 #ring = sndobj.Ring(osc1, osc2)
 #buzz = sndobj.Buzz(0, 0, 0)
 #pluck1 = sndobj.Pluck(400, 0)
@@ -84,6 +84,8 @@ majCutoff = 700
 
 pluckWait = 0.25
 pluckTime = 0
+
+combGain = 0.8
 
 lightValue = 0
 rhythmCount = 0
@@ -196,6 +198,12 @@ while True:
     osc2.SetFreq(osc2freq, mod)
     osc3.SetFreq(osc3freq, mod)
     osc4.SetFreq(osc4freq, mod)
+    
+    #comb
+    comb1.SetGain(combGain)
+    comb2.SetGain(combGain)
+    comb3.SetGain(combGain)
+    comb4.SetGain(combGain)
     
     #panning
     pan.SetPan((lightValue / 512.0) - 1)

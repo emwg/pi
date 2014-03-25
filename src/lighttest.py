@@ -85,7 +85,7 @@ majCutoff = 700
 pluckWait = 0.25
 pluckTime = 0
 
-combGain = 0.2
+combGainMult = 0.9
 
 lightValue = 0
 rhythmCount = 0
@@ -200,10 +200,10 @@ while True:
     osc4.SetFreq(osc4freq, mod)
     
     #comb
-    comb1.SetGain(combGain)
-    comb2.SetGain(combGain)
-    comb3.SetGain(combGain)
-    comb4.SetGain(combGain)
+    comb1.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb2.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb3.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb4.SetGain(((light / lightAdjust) / 1024) * combGainMult)
     
     #panning
     pan.SetPan((lightValue / 512.0) - 1)

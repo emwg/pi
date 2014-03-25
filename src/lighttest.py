@@ -85,7 +85,7 @@ majCutoff = 700
 pluckWait = 0.25
 pluckTime = 0
 
-combGain = 0.8
+combGain = 0.2
 
 lightValue = 0
 rhythmCount = 0

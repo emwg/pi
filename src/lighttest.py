@@ -34,7 +34,7 @@ mixer.AddObj(osc3)
 mixer.AddObj(osc4)
 #mixer.AddObj(pluck1)
 #mixer.AddObj(buzz)
-lowpass = sndobj.LoPass(800, mixer)
+lowpass = sndobj.LoPass(200, osc1)
 mixer.AddObj(lowpass)
 
 pan = sndobj.Pan(0, mixer)

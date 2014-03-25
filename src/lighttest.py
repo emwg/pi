@@ -200,10 +200,10 @@ while True:
     osc4.SetFreq(osc4freq, mod)
     
     #comb
-    comb1.SetGain((((light / lightAdjust) / 600) * combGainMult) % 0.99)
-    comb2.SetGain((((light / lightAdjust) / 600) * combGainMult) % 0.99)
-    comb3.SetGain((((light / lightAdjust) / 600) * combGainMult) % 0.99)
-    comb4.SetGain((((light / lightAdjust) / 600) * combGainMult) % 0.99)
+    comb1.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb2.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb3.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb4.SetGain(((light / lightAdjust) / 1024) * combGainMult)
     
     #panning
     pan.SetPan((lightValue / 512.0) - 1)

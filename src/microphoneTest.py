@@ -17,9 +17,18 @@ thread.AddObj(osc)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
+currentAvgIndex = 0
+avgValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 while True:
     microphoneValue = microphone.getMicrophoneValue()
-    if microphoneValue > 1023:
-        print("It's so big we can't even handle it!")
-    print("Microphone: " + str(microphoneValue))
-    osc.SetFreq(middleC + microphoneValue)
+    avgValue[currentAvgIndex] = microphoneValue
+    if(currentAvgIndex < 9):
+        currentAvgIndex +=1
+    else:
+        currentAvgIndex = 0
+    avgMicrophoneValue = 0
+    for avgM in avgValue:
+        avgMicrophoneValue += avgM
+    avgMicrophoneValue /= 10
+    print("Microphone: " + str(avgMicrophoneValue))
+    osc.SetFreq(middleC + avgMicrophoneValue)

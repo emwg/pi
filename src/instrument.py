@@ -50,4 +50,8 @@ class instrument:
         self.timeStep += 1
         
     def addOscillator(self, pitch):
-        osc = 
+        osc = sndobj.Oscili(self.harmonicTable, pitch, self.amplitude)
+        self.oscillators.append(osc)
+        
+    def cleanOscilators:
+        

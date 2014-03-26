@@ -19,4 +19,4 @@ thread.ProcOn()
 while True:
     microphoneValue = microphone.getMicrophoneValue()
     print("Microphone: " + str(microphoneValue))
-    osc.SetFreq(middleC + microphoneValue)
+    #osc.SetFreq(middleC + microphoneValue)

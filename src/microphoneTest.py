@@ -19,5 +19,7 @@ thread.ProcOn()
 
 while True:
     microphoneValue = microphone.getMicrophoneValue()
+    if microphoneValue > 1023:
+        print("It's so big we can't even handle it!")
     print("Microphone: " + str(microphoneValue))
     osc.SetFreq(middleC + microphoneValue)

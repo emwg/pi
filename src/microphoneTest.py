@@ -2,7 +2,7 @@ import sndobj
 from microphoneSensor import *
 from toneLibrary import *
 
-#microphone = microphoneSensor(0, 2, 10)
+microphone = microphoneSensor(0, 2, 10)
 toneLib = toneLibrary()
 middleC = toneLib.getToneToFreq('C4')
 
@@ -18,7 +18,6 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 while True:
-    #microphoneValue = microphone.getMicrophoneValue()
-    #print("Microphone: " + str(microphoneValue))
-    print("Running")
-    #osc.SetFreq(middleC + microphoneValue)
+    microphoneValue = microphone.getMicrophoneValue()
+    print("Microphone: " + str(microphoneValue))
+    osc.SetFreq(middleC + microphoneValue)

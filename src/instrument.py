@@ -16,7 +16,10 @@ class instrument:
         self.currentlyPlaying = []
         self.timeStep = 0
         
+        self.harmonicTable = sndobj.HarmTable(options.getHarmTableLength(), options.getNumHarmonics(), options.getWaveType())
         # TODO still need to set up the harm table and oscillators and mixer thread and all that
+        self.oscillators = []
+        self.amplitude = options.getAmplitude()
     
     # Find notes that begin at the current time step and append them to the list preparedNotes
     def prepareNotes(self):
@@ -45,3 +48,6 @@ class instrument:
     # Increment the current time step
     def incrementTimeStep(self):
         self.timeStep += 1
+        
+    def addOscillator(self, pitch):
+        osc = 

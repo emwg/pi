@@ -4,7 +4,7 @@ from toneLibrary import *
 
 microphone = microphoneSensor(0, 2, 10)
 toneLib = toneLibrary()
-middleC = toneLib.getToneToFreq('C4')
+middleC = toneLib.getToneToFreq('C6')
 
 harmTable = sndobj.HarmTable(1024, 100, sndobj.SINE)
 osc = sndobj.Oscili(harmTable, toneLib.getToneToFreq('C4'), 900)

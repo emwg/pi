@@ -60,6 +60,7 @@ while True:
 	accelYValue = accelY.getAccelValue()
 	accelZValue = accelZ.getAccelValue()
 	mod.SetFreq(2 + (float(accelXValue)/100.0))
+	osc1.SetFreq(accelYValue, mod)
 	print("Total Accel:" + str(accelXValue + accelYValue + accelZValue))
 	#print("Running")
 	#print("Current Tone: " + currentTone)

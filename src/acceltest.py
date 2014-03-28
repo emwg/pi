@@ -59,7 +59,7 @@ while True:
 	accelXValue = accelX.getAccelValue()
 	accelYValue = accelY.getAccelValue()
 	accelZValue = accelZ.getAccelValue()
-	mod.SetFreq(2 + (float(accelX)/200.0))
+	mod.SetFreq(2 + (float(accelXValue)/200.0))
 	print("Total Accel:" + str(accelXValue + accelYValue + accelZValue))
 	#print("Running")
 	#print("Current Tone: " + currentTone)

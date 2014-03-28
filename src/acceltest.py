@@ -56,8 +56,10 @@ scaleDirection = 'up'
 
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
+	accelXValue = accelX.getAccelValue()
 	accelYValue = accelY.getAccelValue()
-	print("AccelY:" + str(accelYValue))
+	accelZValue = accelZ.getAccelValue()
+	print("AccelX:" + str(accelXValue))
 	#print("Running")
 	#print("Current Tone: " + currentTone)
 	

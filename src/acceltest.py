@@ -59,7 +59,7 @@ while True:
 	accelXValue = accelX.getAccelValue()
 	accelYValue = accelY.getAccelValue()
 	accelZValue = accelZ.getAccelValue()
-	print("AccelZ:" + str(accelZValue))
+	print("Total Accel:" + str(accelXValue + accelYValue + accelZValue))
 	#print("Running")
 	#print("Current Tone: " + currentTone)
 	

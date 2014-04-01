@@ -139,7 +139,7 @@ while True:
     # Light sensor
     ###
     #get light sensor values
-    for x in range(NUM_SENSORS):
+    for x in sensors:
         light[x] = sensors[x].getLightValue() * lightAdjust
         print("Sensor " + str(x) + ": " + str(light[x]))
         #interpolate lightValue

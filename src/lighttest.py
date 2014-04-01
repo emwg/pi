@@ -10,7 +10,7 @@ AMP_SENSOR = 1
 PAN_SENSOR = 2
 COMB_SENSOR = 3
 
-for x in count(NUM_SENSORS):
+for x in range(NUM_SENSORS):
     sensors[x] = lightSensor(1, x, 10)
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
@@ -96,7 +96,7 @@ pluckTime = 0
 
 combGainMult = 0.9
 
-for x in count(NUM_SENSORS):
+for x in range(NUM_SENSORS):
     lightValue[x] = 0
     
 rhythmCount = 0
@@ -137,7 +137,7 @@ while True:
     # Light sensor
     ###
     #get light sensor values
-    for x in count(NUM_SENSORS):
+    for x in range(NUM_SENSORS):
         light[x] = sensors[x].getLightValue() * lightAdjust
         print("Sensor " + str(x) + ": " + str(light[x]))
         #interpolate lightValue

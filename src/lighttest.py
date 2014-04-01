@@ -10,10 +10,10 @@ AMP_SENSOR = 1
 PAN_SENSOR = 2
 COMB_SENSOR = 3
 
-sensors = [None] * NUM_SENSORS
+sensors = []
 
-for x in sensors:
-    sensors[x] = lightSensor(1, x, 10)
+for x in range(NUM_SENSORS):
+    sensors.append(lightSensor(1, x, 10))
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
 saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
@@ -139,7 +139,7 @@ while True:
     # Light sensor
     ###
     #get light sensor values
-    for x in sensors:
+    for x in range(NUM_SENSORS):
         light[x] = sensors[x].getLightValue() * lightAdjust
         print("Sensor " + str(x) + ": " + str(light[x]))
         #interpolate lightValue

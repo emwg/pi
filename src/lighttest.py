@@ -10,7 +10,7 @@ AMP_SENSOR = 1
 PAN_SENSOR = 2
 COMB_SENSOR = 3
 
-sensors = 0
+sensors = []
 
 for x in range(NUM_SENSORS):
     sensors[x] = lightSensor(1, x, 10)

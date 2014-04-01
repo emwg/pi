@@ -22,10 +22,13 @@ class note:
     DOTTED_HALF_NOTE = 12
     DOTTED_QUARTER_NOTE = 6
     DOTTED_EIGHTH_NOTE = 3
+    noteId = 0
     
     def __init__(self, noteLength, pitch):
         self.noteLength = noteLength
         self.pitch = pitch
+        self.noteId = note.noteId
+        note.noteId += 1
     
     def getPitchAsName(self):
         return self.pitch
@@ -35,6 +38,9 @@ class note:
     
     def getNoteLength(self):
         return self.noteLength
+    
+    def getNoteId(self):
+        return self.noteId
     
     def decrementNoteLength(self):
         self.noteLength -= 1

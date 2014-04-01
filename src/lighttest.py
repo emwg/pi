@@ -3,7 +3,15 @@ import time
 import psutil
 from lightSensor import *
 
-lsensor = lightSensor(1, 0, 10)
+NUM_SENSORS = 8
+
+CHORD_SENSOR = 0
+AMP_SENSOR = 1
+PAN_SENSOR = 2
+COMB_SENSOR = 3
+
+for x in count(NUM_SENSORS):
+    sensors[x] = lightSensor(1, x, 10)
 
 sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
 saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
@@ -77,6 +85,7 @@ lightStep = 40
 lightAdjust = 1
 flexAdjust = 1
 knobAdjust = 0.1
+ampAdjust = 10
 
 dimCutoff = 200
 minCutoff = 500
@@ -87,7 +96,9 @@ pluckTime = 0
 
 combGainMult = 0.9
 
-lightValue = 0
+for x in count(NUM_SENSORS):
+    lightValue[x] = 0
+    
 rhythmCount = 0
 subtractMult = 5000
 osc1subtract = 1
@@ -125,19 +136,19 @@ while True:
     ###
     # Light sensor
     ###
-    #get light sensor value
-    light = lsensor.getLightValue() * lightAdjust
-    print("Light: " + str(light))
-    
-    #interpolate lightValue
-    if (lightValue < light):
-        #slide up
-        if (lightValue + lightStep < light): lightValue += lightStep
-        else: lightValue = light
-    elif (lightValue > light):
-        #slide down
-        if (lightValue - lightStep > light): lightValue -= lightStep
-        else: lightValue = light
+    #get light sensor values
+    for x in count(NUM_SENSORS):
+        light[x] = sensors[x].getLightValue() * lightAdjust
+        print("Sensor " + str(x) + ": " + str(light[x]))
+        #interpolate lightValue
+        if (lightValue[x] < light[x]):
+            #slide up
+            if (lightValue[x] + lightStep < light[x]): lightValue[x] += lightStep
+            else: lightValue[x] = light[x]
+        elif (lightValue[x] > light[x]):
+            #slide down
+            if (lightValue[x] - lightStep > light[x]): lightValue[x] -= lightStep
+            else: lightValue[x] = light[x]
         
     #osc1amp = lightValue - osc1subtract
     #osc2amp = lightValue - osc2subtract
@@ -145,14 +156,16 @@ while True:
     #osc4amp = lightValue - osc4subtract
     
     #set chord type
-    if (lightValue < dimCutoff):
+    if (lightValue[CHORD_SENSOR] < dimCutoff):
         chord = "dim"
-    elif(lightValue < minCutoff):
+    elif(lightValue[CHORD_SENSOR] < minCutoff):
         chord = "min"
-    elif(lightValue < majCutoff):
+    elif(lightValue[CHORD_SENSOR] < majCutoff):
         chord = "maj"
-    else: #(lightValue < augCutoff):
+    else: #(lightValue[CHORD_SENSOR] < augCutoff):
         chord = "aug"
+        
+    print("Chord:" + chord)
         
         
     #print("osc1amp: " + str(osc4amp))    
@@ -163,10 +176,11 @@ while True:
     osc4.SetAmp(osc4amp)
 
     if(lightValue != 0):
-        amp = lightValue * 10
+        amp = lightValue[AMP_SENSOR] * ampAdjust
     else:
         amp = 4
-    #print(amp)
+    print("Amplitude: " + str(amp))
+    
     osc1.SetAmp(amp)
     osc2.SetAmp(amp)
     osc3.SetAmp(amp)
@@ -174,7 +188,7 @@ while True:
     #buzz.SetAmp(amp)
     
     pluckWait = 500.0 / amp
-    print(str(pluckWait))
+    print("Pluck delay: " + str(pluckWait))
     
     #if ((time.time() - pluckTime) > pluckWait):
         #pluck1.SetAmp(amp)
@@ -200,13 +214,13 @@ while True:
     osc4.SetFreq(osc4freq, mod)
     
     #comb
-    comb1.SetGain(((light / lightAdjust) / 1024) * combGainMult)
-    comb2.SetGain(((light / lightAdjust) / 1024) * combGainMult)
-    comb3.SetGain(((light / lightAdjust) / 1024) * combGainMult)
-    comb4.SetGain(((light / lightAdjust) / 1024) * combGainMult)
+    comb1.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
+    comb2.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
+    comb3.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
+    comb4.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
     
     #panning
-    pan.SetPan((lightValue / 512.0) - 1)
+    pan.SetPan((lightValue[PAN_SENSOR] / 512.0) - 1)
     
     print("")
 

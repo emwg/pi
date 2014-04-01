@@ -2,17 +2,6 @@
 int beatsInMeasure
 int rythmicCount - this is the beats in the measure * 4
 
-
-
-
-
-
-
-
-
-
-
-
 '''
 
 from note import *

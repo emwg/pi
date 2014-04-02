@@ -89,7 +89,7 @@ lightAdjust = 1
 flexAdjust = 1
 knobAdjust = 0.1
 ampAdjust = 10
-freqAdjust = 0.25
+freqAdjust = 1
 
 dimCutoff = 200
 minCutoff = 500

@@ -31,8 +31,8 @@ while True:
         avgMicrophoneValue += avgM
     avgMicrophoneValue /= 20
     if avgMicrophoneValue > 650:
-        print("Microphone High")
-    else: print("Microphone Low")
+        print("Microphone High" + str(avgMicrophoneValue))
+    else: print("Microphone Low " + str(avgMicrophoneValue))
     '''
     if avgMicrophoneValue - 500 < 0 or avgMicrophoneValue - 500 > 100:
         osc.SetFreq(1318)

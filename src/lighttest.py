@@ -10,6 +10,7 @@ AMP_SENSOR = 1
 PAN_SENSOR = 2
 COMB_SENSOR = 3
 FREQ_SENSOR = 4
+WAVE_SENSOR = 5
 
 sensors = []
 
@@ -21,9 +22,9 @@ saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
 square = sndobj.HarmTable(1000, 20, sndobj.SQUARE)
 buzz = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
 osc1 = sndobj.Oscili(sine, 0, 0)
-osc2 = sndobj.Oscili(saw, 0, 0)
-osc3 = sndobj.Oscili(square, 0, 0)
-osc4 = sndobj.Oscili(buzz, 0, 0)
+osc2 = sndobj.Oscili(sine, 0, 0)
+osc3 = sndobj.Oscili(sine, 0, 0)
+osc4 = sndobj.Oscili(sine, 0, 0)
 comb1 = sndobj.Comb(0, 0.2, osc1)
 comb2 = sndobj.Comb(0, 0.2, osc2)
 comb3 = sndobj.Comb(0, 0.2, osc3)
@@ -91,14 +92,27 @@ knobAdjust = 0.1
 ampAdjust = 10
 freqAdjust = 1
 
+#chord cutoffs
 dimCutoff = 200
 minCutoff = 500
 majCutoff = 700
 
+#wave cutoffs
+sineCutoff = 200
+sawCutoff = 500
+squareCutoff = 700
+
+ampCutoff = 200
+
+alreadySine = True
+alreadySaw = False
+alreadySquare = False
+alreadyBuzz = False
+
 pluckWait = 0.25
 pluckTime = 0
 
-combGainMult = 0.9
+combGainMult = 0.99
 
 lightValue = [0] * NUM_SENSORS
 light = [0] * NUM_SENSORS
@@ -164,14 +178,40 @@ while True:
     #set chord type
     if (lightValue[CHORD_SENSOR] < dimCutoff):
         chord = "dim"
-    elif(lightValue[CHORD_SENSOR] < minCutoff):
+    elif (lightValue[CHORD_SENSOR] < minCutoff):
         chord = "min"
-    elif(lightValue[CHORD_SENSOR] < majCutoff):
+    elif (lightValue[CHORD_SENSOR] < majCutoff):
         chord = "maj"
     else: #(lightValue[CHORD_SENSOR] < augCutoff):
         chord = "aug"
         
     print("Chord: " + chord)
+    
+    #set wave type
+    if (lightValue[WAVE_SENSOR] < sineCutoff and alreadySine == False):
+        osc1 = sndobj.Oscili(sine, 0, 0)
+        osc2 = sndobj.Oscili(sine, 0, 0)
+        osc3 = sndobj.Oscili(sine, 0, 0)
+        osc4 = sndobj.Oscili(sine, 0, 0)
+        alreadySine = True
+    elif (lightValue[WAVE_SENSOR] < sawCutoff and alreadySaw == False):
+        osc1 = sndobj.Oscili(saw, 0, 0)
+        osc2 = sndobj.Oscili(saw, 0, 0)
+        osc3 = sndobj.Oscili(saw, 0, 0)
+        osc4 = sndobj.Oscili(saw, 0, 0)
+        alreadySaw = True
+    elif (lightValue[WAVE_SENSOR] < squareCutoff and alreadySquare == False):
+        osc1 = sndobj.Oscili(square, 0, 0)
+        osc2 = sndobj.Oscili(square, 0, 0)
+        osc3 = sndobj.Oscili(square, 0, 0)
+        osc4 = sndobj.Oscili(square, 0, 0)
+        alreadySquare = True
+    elif (alreadyBuzz == False):
+        osc1 = sndobj.Oscili(buzz, 0, 0)
+        osc2 = sndobj.Oscili(buzz, 0, 0)
+        osc3 = sndobj.Oscili(buzz, 0, 0)
+        osc4 = sndobj.Oscili(buzz, 0, 0)
+        alreadyBuzz = True
         
         
     #print("osc1amp: " + str(osc4amp))    
@@ -183,6 +223,8 @@ while True:
 
 
     amp = lightValue[AMP_SENSOR] * ampAdjust
+    if (amp < ampCutoff):
+        amp = 0
     print("Amplitude: " + str(amp))
     
     osc1.SetAmp(amp)

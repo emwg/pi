@@ -5,6 +5,9 @@ testDict = dict([])
 testDict['hj'] = 19
 testDict['other'] = 73
 
+testList = [9,4,5,3,2]
+print(testList)
+
 for key in testDict:
     print(key)
 

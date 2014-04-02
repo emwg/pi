@@ -194,23 +194,35 @@ while True:
         osc3 = sndobj.Oscili(sine, 0, 0)
         osc4 = sndobj.Oscili(sine, 0, 0)
         alreadySine = True
+        alreadySaw = False
+        alreadySquare = False
+        alreadyBuzz = False
     elif (lightValue[WAVE_SENSOR] < sawCutoff and alreadySaw == False):
         osc1 = sndobj.Oscili(saw, 0, 0)
         osc2 = sndobj.Oscili(saw, 0, 0)
         osc3 = sndobj.Oscili(saw, 0, 0)
         osc4 = sndobj.Oscili(saw, 0, 0)
+        alreadySine = False
         alreadySaw = True
+        alreadySquare = False
+        alreadyBuzz = False
     elif (lightValue[WAVE_SENSOR] < squareCutoff and alreadySquare == False):
         osc1 = sndobj.Oscili(square, 0, 0)
         osc2 = sndobj.Oscili(square, 0, 0)
         osc3 = sndobj.Oscili(square, 0, 0)
         osc4 = sndobj.Oscili(square, 0, 0)
+        alreadySine = False
+        alreadySaw = False
         alreadySquare = True
+        alreadyBuzz = False
     elif (alreadyBuzz == False):
         osc1 = sndobj.Oscili(buzz, 0, 0)
         osc2 = sndobj.Oscili(buzz, 0, 0)
         osc3 = sndobj.Oscili(buzz, 0, 0)
         osc4 = sndobj.Oscili(buzz, 0, 0)
+        alreadySine = False
+        alreadySaw = False
+        alreadySquare = False
         alreadyBuzz = True
         
         

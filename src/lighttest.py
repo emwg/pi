@@ -227,5 +227,5 @@ while True:
     print("")
 
     #wait before doing another iteration
-    time.sleep(0.07)
+    time.sleep(0.1)
 thread.ProcOff()

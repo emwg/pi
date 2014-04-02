@@ -33,7 +33,7 @@ while True:
             avgMicrophoneValue += avgM
             summedValues += 1
     avgMicrophoneValue /= summedValues
-    if avgMicrophoneValue > 650:
+    if avgMicrophoneValue > 600:
         print("Microphone High" + str(avgMicrophoneValue))
     else: print("Microphone Low " + str(avgMicrophoneValue))
     #print(avgValue)

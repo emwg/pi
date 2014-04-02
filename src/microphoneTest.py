@@ -2,7 +2,7 @@ import sndobj
 from microphoneSensor import *
 from toneLibrary import *
 
-microphone = microphoneSensor(0, 2, 10)
+microphone = microphoneSensor(0, 0, 10)
 toneLib = toneLibrary()
 middleC = toneLib.getToneToFreq('C4')
 
@@ -18,21 +18,23 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 currentAvgIndex = 0
-avgValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+avgValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 while True:
     microphoneValue = microphone.getMicrophoneValue()
     avgValue[currentAvgIndex] = microphoneValue
-    if(currentAvgIndex < 9):
+    if(currentAvgIndex < 19):
         currentAvgIndex +=1
     else:
         currentAvgIndex = 0
     avgMicrophoneValue = 0
     for avgM in avgValue:
         avgMicrophoneValue += avgM
-    avgMicrophoneValue /= 10
-    print("Microphone: " + str(avgMicrophoneValue))
-    
+    avgMicrophoneValue /= 20
+    if avgMicrophoneValue > 650:
+        print("Microphone High")
+    else: print("Microphone Low")
+    '''
     if avgMicrophoneValue - 500 < 0 or avgMicrophoneValue - 500 > 100:
         osc.SetFreq(1318)
     else:
-        osc.SetFreq(middleC)
+        osc.SetFreq(middleC)'''

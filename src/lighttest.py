@@ -257,8 +257,8 @@ while True:
     osc4.SetAmp(amp)
     #buzz.SetAmp(amp)
     
-    pluckWait = 500.0 / amp
-    print("Pluck delay: " + str(pluckWait))
+    #pluckWait = 500.0 / amp
+    #print("Pluck delay: " + str(pluckWait))
     
     #if ((time.time() - pluckTime) > pluckWait):
         #pluck1.SetAmp(amp)

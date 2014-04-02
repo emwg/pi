@@ -188,7 +188,18 @@ while True:
     print("Chord: " + chord)
     
     #set wave type
-    if (lightValue[WAVE_SENSOR] < sineCutoff and alreadySine == False):
+    if (lightValue[WAVE_SENSOR] < sineCutoff):
+        wave = "sine"
+    elif (lightValue[WAVE_SENSOR] < sawCutoff):
+        wave = "saw"
+    elif (lightValue[WAVE_SENSOR] < squareCutoff):
+        wave = "square"
+    else: #(lightValue[WAVE_SENSOR] < buzzCutoff):
+        wave = "buzz"
+        
+    print ("Wave: " + wave)
+    
+    if (wave == "sine" and alreadySine == False):
         osc1.SetTable(sine)
         osc2.SetTable(sine)
         osc3.SetTable(sine)
@@ -197,7 +208,7 @@ while True:
         alreadySaw = False
         alreadySquare = False
         alreadyBuzz = False
-    elif (lightValue[WAVE_SENSOR] < sawCutoff and alreadySaw == False):
+    elif (wave == "saw" and alreadySaw == False):
         osc1.SetTable(saw)
         osc2.SetTable(saw)
         osc3.SetTable(saw)
@@ -206,7 +217,7 @@ while True:
         alreadySaw = True
         alreadySquare = False
         alreadyBuzz = False
-    elif (lightValue[WAVE_SENSOR] < squareCutoff and alreadySquare == False):
+    elif (wave == "square" and alreadySquare == False):
         osc1.SetTable(square)
         osc2.SetTable(square)
         osc3.SetTable(square)

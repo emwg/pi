@@ -216,7 +216,16 @@ while True:
         osc3freq = 0
         osc4freq = 0
         
-    pluck1freq = 700 #this does nothing
+    if (chord == "dim"):
+        osc2freq = osc3freq * (2^(-1/12))
+        osc3freq = osc3freq * (2^(-1/12))
+    elif (chord == "min"):
+        osc3freq = osc3freq * (2^(-1/12))
+    elif (chord == "aug"):
+        osc2freq = osc3freq * (2^(1/12))
+        osc3freq = osc3freq * (2^(1/12))
+        
+    #pluck1freq = 700 #this does nothing
     
     #buzz.SetFreq(amp / 2)
     #buzz.SetHarm(amp / 20)

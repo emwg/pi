@@ -199,15 +199,23 @@ while True:
         #pluckTime = time.time()
     
     freq = lightValue[FREQ_SENSOR] * freqAdjust
+    print("Frequency: " + str(freq))
     
-    # root
-    osc1freq = freq
-    # fifth
-    osc2freq = osc1freq * (3/2)
-    # third
-    osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
-    # constant pitch
-    osc4freq = 900
+    if (freq != 0):
+        # root
+        osc1freq = freq
+        # fifth
+        osc2freq = osc1freq * (3/2)
+        # third
+        osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
+        # octave
+        osc4freq = osc1freq * 2
+    else:
+        osc1freq = 0
+        osc2freq = 0
+        osc3freq = 0
+        osc4freq = 0
+        
     pluck1freq = 700 #this does nothing
     
     #buzz.SetFreq(amp / 2)

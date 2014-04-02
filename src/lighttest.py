@@ -141,7 +141,7 @@ while True:
     #get light sensor values
     for x in range(NUM_SENSORS):
         light[x] = sensors[x].getLightValue() * lightAdjust
-        print("Sensor " + str(x) + ": " + str(light[x]))
+        #print("Sensor " + str(x) + ": " + str(light[x]))
         #interpolate lightValue
         if (lightValue[x] < light[x]):
             #slide up
@@ -151,6 +151,8 @@ while True:
             #slide down
             if (lightValue[x] - lightStep > light[x]): lightValue[x] -= lightStep
             else: lightValue[x] = light[x]
+    
+    print("Sensors: " + str(light))
         
     #osc1amp = lightValue - osc1subtract
     #osc2amp = lightValue - osc2subtract
@@ -167,7 +169,7 @@ while True:
     else: #(lightValue[CHORD_SENSOR] < augCutoff):
         chord = "aug"
         
-    print("Chord:" + chord)
+    print("Chord: " + chord)
         
         
     #print("osc1amp: " + str(osc4amp))    

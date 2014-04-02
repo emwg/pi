@@ -245,9 +245,10 @@ while True:
     osc4.SetAmp(osc4amp)
 
 
-    amp = lightValue[AMP_SENSOR] * ampAdjust
-    if (amp < ampCutoff):
+    if (lightValue[AMP_SENSOR] < ampCutoff):
         amp = 0
+    else:
+        amp = lightValue[AMP_SENSOR] * ampAdjust
     print("Amplitude: " + str(amp))
     
     osc1.SetAmp(amp)

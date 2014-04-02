@@ -27,9 +27,12 @@ while True:
     else:
         currentAvgIndex = 0
     avgMicrophoneValue = 0
+    summedValues = 0
     for avgM in avgValue:
-        avgMicrophoneValue += avgM
-    avgMicrophoneValue /= 20
+        if(avgM > 0):
+            avgMicrophoneValue += avgM
+            summedValue += 1
+    avgMicrophoneValue /= summedValues
     if avgMicrophoneValue > 650:
         print("Microphone High" + str(avgMicrophoneValue))
     else: print("Microphone Low " + str(avgMicrophoneValue))

@@ -9,6 +9,7 @@ CHORD_SENSOR = 0
 AMP_SENSOR = 1
 PAN_SENSOR = 2
 COMB_SENSOR = 3
+FREQ_SENSOR = 4
 
 sensors = []
 
@@ -88,6 +89,7 @@ lightAdjust = 1
 flexAdjust = 1
 knobAdjust = 0.1
 ampAdjust = 10
+freqAdjust = 0.25
 
 dimCutoff = 200
 minCutoff = 500
@@ -179,10 +181,8 @@ while True:
     osc3.SetAmp(osc3amp)
     osc4.SetAmp(osc4amp)
 
-    if(lightValue != 0):
-        amp = lightValue[AMP_SENSOR] * ampAdjust
-    else:
-        amp = 4
+
+    amp = lightValue[AMP_SENSOR] * ampAdjust
     print("Amplitude: " + str(amp))
     
     osc1.SetAmp(amp)
@@ -198,8 +198,10 @@ while True:
         #pluck1.SetAmp(amp)
         #pluckTime = time.time()
     
+    freq = lightValue[FREQ_SENSOR] * freqAdjust
+    
     # root
-    osc1freq = amp / 4
+    osc1freq = freq
     # fifth
     osc2freq = osc1freq * (3/2)
     # third

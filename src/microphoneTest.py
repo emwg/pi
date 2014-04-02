@@ -29,7 +29,7 @@ while True:
     avgMicrophoneValue = 0
     summedValues = 0
     for avgM in avgValue:
-        if(avgM > 0):
+        if(avgM > 500):
             avgMicrophoneValue += avgM
             summedValues += 1
     avgMicrophoneValue /= summedValues

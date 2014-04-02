@@ -189,37 +189,37 @@ while True:
     
     #set wave type
     if (lightValue[WAVE_SENSOR] < sineCutoff and alreadySine == False):
-        osc1 = sndobj.Oscili(sine, 0, 0)
-        osc2 = sndobj.Oscili(sine, 0, 0)
-        osc3 = sndobj.Oscili(sine, 0, 0)
-        osc4 = sndobj.Oscili(sine, 0, 0)
+        osc1.setTable(sine)
+        osc2.setTable(sine)
+        osc3.setTable(sine)
+        osc4.setTable(sine)
         alreadySine = True
         alreadySaw = False
         alreadySquare = False
         alreadyBuzz = False
     elif (lightValue[WAVE_SENSOR] < sawCutoff and alreadySaw == False):
-        osc1 = sndobj.Oscili(saw, 0, 0)
-        osc2 = sndobj.Oscili(saw, 0, 0)
-        osc3 = sndobj.Oscili(saw, 0, 0)
-        osc4 = sndobj.Oscili(saw, 0, 0)
+        osc1.setTable(saw)
+        osc2.setTable(saw)
+        osc3.setTable(saw)
+        osc4.setTable(saw)
         alreadySine = False
         alreadySaw = True
         alreadySquare = False
         alreadyBuzz = False
     elif (lightValue[WAVE_SENSOR] < squareCutoff and alreadySquare == False):
-        osc1 = sndobj.Oscili(square, 0, 0)
-        osc2 = sndobj.Oscili(square, 0, 0)
-        osc3 = sndobj.Oscili(square, 0, 0)
-        osc4 = sndobj.Oscili(square, 0, 0)
+        osc1.setTable(square)
+        osc2.setTable(square)
+        osc3.setTable(square)
+        osc4.setTable(square)
         alreadySine = False
         alreadySaw = False
         alreadySquare = True
         alreadyBuzz = False
     elif (alreadyBuzz == False):
-        osc1 = sndobj.Oscili(buzz, 0, 0)
-        osc2 = sndobj.Oscili(buzz, 0, 0)
-        osc3 = sndobj.Oscili(buzz, 0, 0)
-        osc4 = sndobj.Oscili(buzz, 0, 0)
+        osc1.setTable(buzz)
+        osc2.setTable(buzz)
+        osc3.setTable(buzz)
+        osc4.setTable(buzz)
         alreadySine = False
         alreadySaw = False
         alreadySquare = False

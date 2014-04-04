@@ -63,10 +63,11 @@ class rhythmController:
             print("Running")
             if(timeInSeconds - time.time() < -rhythmController.rhythmControllerTimeStepLength):
                 rhythmController.instr1.processTimeStep()
-                for instr1Osc in rhythmController.instr1.getOscillators():
+                instr1Oscillators = rhythmController.instr1.getOscillators() 
+                for instr1OscId in instr1Oscillators:
                     print("DEBUG about to add object:")
-                    print(instr1Osc)
-                    rhythmController.rhythmControllerSoundThread.AddObj(instr1Osc)
+                    print(instr1OscId)
+                    rhythmController.rhythmControllerSoundThread.AddObj(instr1Oscillators[instr1OscId])
                 timeInSeconds = time.time()
 
 rhythmController.startRhythmController()

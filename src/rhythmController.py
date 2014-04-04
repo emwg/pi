@@ -18,7 +18,7 @@ class rhythmController:
     
     rhythmControllerTempo = 120 #Default tempo
     rhythmControllerNewTempoFlag = False
-    rhythmControllerTimeStepLength = rhythmController.computeTimeStepLength(rhythmControllerTempo)
+    rhythmControllerTimeStepLength = computeTimeStepLength(rhythmControllerTempo)
     
     # Set up and program instrument 1
     instr1Options = instrumentOptions(1024, 10, sndobj.SINE, 800, True)
@@ -53,7 +53,7 @@ class rhythmController:
     # Computes and returns the time in seconds that a time step will last at a given tempo
     # One time step is always equal to the length on one sixteenth note at the given tempo
     @staticmethod
-    def computeTimeStepLength(self, tempo):
+    def computeTimeStepLength(tempo):
         return 1.0 / float((tempo * 4))
     
     @staticmethod

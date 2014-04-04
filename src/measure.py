@@ -29,7 +29,7 @@ class measure:
             raise ValueError("Given beat does not exist in the measure")
         if subdivision > 4 or subdivision < 1:
             raise ValueError("Given subdivision does not exist in the beat")
-        if length < 1:
+        if newNote.getNoteLength() < 1:
             raise ValueError("Note cannot have must have nonzero positive length")
         startPos = ((beat-1) * 4 + 1) + (subdivision - 1)
         self.notesInMeasure[startPos].append(newNote)

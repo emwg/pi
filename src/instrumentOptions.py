@@ -1,11 +1,12 @@
 
 
 class instrumentOptions:
-    def __init__(self, harmTableLength, numHarmonics, waveType, amplitude):
+    def __init__(self, harmTableLength, numHarmonics, waveType, amplitude, loop):
         self.harmTableLength = harmTableLength
         self.numHarmonics = numHarmonics
         self.waveType = waveType
         self.amplitude = amplitude
+        self.loop = loop
         
     def setHarmTableLength(self, harmTableLength):
         self.harmTableLength = harmTableLength
@@ -19,6 +20,9 @@ class instrumentOptions:
     def setAmplitude(self, amplitude):
         self.amplitude = amplitude
         
+    def setLoop(self, loop):
+        self.loop = loop
+        
     def getHarmTableLength(self):
         return self.harmTableLength
     
@@ -30,3 +34,6 @@ class instrumentOptions:
     
     def getAmplitude(self):
         return self.amplitude
+    
+    def getLoop(self):
+        return self.loop

@@ -16,6 +16,8 @@ class instrument:
         # List to hold the notes are currently being sounded
         self.currentlyPlaying = []
         self.timeStep = 0
+        self.maxTimeStep = (numMeasures * beatsInMeasure * 4) - 1
+        self.loop = options.getLoop()
         
         self.harmonicTable = sndobj.HarmTable(options.getHarmTableLength(), options.getNumHarmonics(), options.getWaveType())
         self.oscillators = dict([])
@@ -33,7 +35,7 @@ class instrument:
     # Called at every time step to process the next time step in the measure
     def processTimeStep(self):
         decrementCurrentlyPlayingNoteLengths()
-        cleanOscilators()
+        cleanOscillators()
         prepareNotes()
         incrementTimeStep()
     
@@ -63,18 +65,21 @@ class instrument:
     # Increment the current time step
     def incrementTimeStep(self):
         self.timeStep += 1
+        if(self.timeStep > self.maxTimeStep and self.loop):
+            self.timeStep = 0
+        
         
     # Adds an oscillator object to the list of oscillators. This method does not actually sound them, that is the job of the rhythm controller
     def addOscillator(self, pitch, noteId):
         osc = sndobj.Oscili(self.harmonicTable, pitch, self.amplitude)
         self.oscillators[noteId] = osc
       
-    # Returns the list of oscillators  
-    def getOscilators(self):
+    # Returns the list of oscillators
+    def getOscillators(self):
         return self.oscillators
         
     # Removes from the list oscillators with note values that have expired
-    def cleanOscilators(self):
+    def cleanOscillators(self):
         for noteId in self.oscillators:
             # I can get away from with because if the first conditional clause evaluates to false [getNoteById() returns None because the note doesn't exist] then the
             # second conditional clause is not evaluated. If Python even gets to the second clause, the noteId must be valid

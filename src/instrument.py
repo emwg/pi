@@ -43,8 +43,8 @@ class instrument:
     # Find notes that begin at the current time step and append them to the list currentlyPlaying
     def prepareNotes(self):
         # Calculate the current measure number and position in measure based on current time step
-        measureNum = self.timeStep / (self.beatsInMeasure*4)
-        measurePos = self.timeStep % (self.beatsInMeasure*4)
+        measureNum = self.timeStep / (self.beatsInMeasure*4) + 1
+        measurePos = self.timeStep % (self.beatsInMeasure*4) + 1
         print("DEBUG about to retrieve notes at measureNum " + str(measureNum) + " and measurePos " + str(measurePos))
         # Get notes based on measure number and position
         notesInMeasure = self.measures[measureNum].getNotesAtPosition(measurePos)

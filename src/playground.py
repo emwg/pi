@@ -24,11 +24,4 @@ print(testNote2.getNoteId())
 testNote = note(4, 'Cs4')
 print(testNote.getNoteId())
 
-timeInSec = time.time()
-count = 1
-while True:
-    if(timeInSec - time.time() < -1):
-        print('It has been ' + str(count) + ' seconds')
-        print(timeInSec)
-        count += 1
-        timeInSec = time.time()
+print(1/16)

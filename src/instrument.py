@@ -79,6 +79,7 @@ class instrument:
       
     # Returns the list of oscillators
     def getOscillators(self):
+        print("DEBUG size of oscillators[] is " + len(self.oscillators))
         return self.oscillators
         
     # Removes from the list oscillators with note values that have expired

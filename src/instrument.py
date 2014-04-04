@@ -86,6 +86,7 @@ class instrument:
             # I can get away from with because if the first conditional clause evaluates to false [getNoteById() returns None because the note doesn't exist] then the
             # second conditional clause is not evaluated. If Python even gets to the second clause, the noteId must be valid
             if self.getNoteById(noteId) != None and self.getNoteById(noteId).getNoteLength() == 0:
+                print("DEBUG deleted oscillator id " + str(noteId))
                 del self.oscillators[noteId]
             
         

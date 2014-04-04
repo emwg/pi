@@ -35,10 +35,10 @@ class instrument:
     
     # Called at every time step to process the next time step in the measure
     def processTimeStep(self):
-        decrementCurrentlyPlayingNoteLengths()
-        cleanOscillators()
-        prepareNotes()
-        incrementTimeStep()
+        self.decrementCurrentlyPlayingNoteLengths()
+        self.cleanOscillators()
+        self.prepareNotes()
+        self.incrementTimeStep()
     
     # Find notes that begin at the current time step and append them to the list currentlyPlaying
     def prepareNotes(self):
@@ -46,10 +46,10 @@ class instrument:
         measureNum = self.timeStep / (self.beatsInMeasure*4)
         measurePos = self.timeStep % (self.beatsInMeasure*4)
         # Get notes based on measure number and position
-        notesInMeasure = measures[measureNum].getNotesAtPosition(measurePos)
+        notesInMeasure = self.measures[measureNum].getNotesAtPosition(measurePos)
         for note in notesInMeasure:
             self.currentlyPlaying.append(note)
-            addOscillator(note.getPitchAsFreq(), note.getNoteId())
+            self.addOscillator(note.getPitchAsFreq(), note.getNoteId())
         
     # Search the list currentlyPlaying for the note with the corresponding noteId. If none is found, return None
     def getNoteById(self, noteId):
@@ -84,7 +84,7 @@ class instrument:
         for noteId in self.oscillators:
             # I can get away from with because if the first conditional clause evaluates to false [getNoteById() returns None because the note doesn't exist] then the
             # second conditional clause is not evaluated. If Python even gets to the second clause, the noteId must be valid
-            if getNoteById(noteId) != None and getNoteById(noteId).getNoteLength() == 0:
+            if self.getNoteById(noteId) != None and self.getNoteById(noteId).getNoteLength() == 0:
                 del self.oscillators[noteId]
             
         

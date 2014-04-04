@@ -60,6 +60,7 @@ class rhythmController:
     def startRhythmController():
         timeInSeconds = time.time()
         while True:
+            print("Running")
             if(timeInSeconds - time.time() < -rhythmController.rhythmControllerTimeStepLength):
                 rhythmController.instr1.processTimeStep()
                 for instr1Osc in rhythmController.instr1.getOscillators():

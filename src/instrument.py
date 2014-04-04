@@ -28,7 +28,7 @@ class instrument:
         if measureNum > numMeasures or measureNum < 1:
             raise Exception("Measure does not exist")
         measures[measureNum - 1].addNoteAsNote(noteToAdd, beat, subdivision)
-    def addNoteToMeasure(self, measureNum, beat, subdivison, pitch, length):
+    def addNoteToMeasure(self, measureNum, beat, subdivision, pitch, length):
         noteToAdd = note(length, pitch)
         self.addNoteToMeasureAsNote(measureNum, beat, subdivision, noteToAdd)
     

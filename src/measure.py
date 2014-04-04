@@ -35,7 +35,7 @@ class measure:
         self.notesInMeasure[startPos].append(newNote)
         
     def getNotesAtPosition(self, position):
-        if position < 1 or position > (beatsInMeasure * 4):
+        if position < 1 or position > (self.beatsInMeasure * 4):
             raise ValueError("Given beat or subdivision does not exist in the measure; position = " + str(position))
         print("DEBUG returned notes as position " + str(position))
         return self.notesInMeasure[position]

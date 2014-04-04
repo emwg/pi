@@ -82,11 +82,13 @@ class instrument:
         
     # Removes from the list oscillators with note values that have expired
     def cleanOscillators(self):
+        noteIdsToDelete = []
         for noteId in self.oscillators:
             # I can get away from with because if the first conditional clause evaluates to false [getNoteById() returns None because the note doesn't exist] then the
             # second conditional clause is not evaluated. If Python even gets to the second clause, the noteId must be valid
             if self.getNoteById(noteId) != None and self.getNoteById(noteId).getNoteLength() == 0:
-                print("DEBUG deleted oscillator id " + str(noteId))
-                del self.oscillators[noteId]
+                noteIdsToDelete.append(noteId)
+        for noteId in noteIdsToDelete:
+            del self.oscillators[noteId]
             
         

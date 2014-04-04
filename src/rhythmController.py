@@ -12,7 +12,7 @@ from instrumentOptions import *
 
 class rhythmController:
     rhythmControllerMixer = sndobj.Mixer()
-    rhythmControllerPan = sndobj.Pan(0, mixer)
+    rhythmControllerPan = sndobj.Pan(0, rhythmControllerMixer)
     rhythmControllerOut = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
     rhythmControllerSoundThread = sndobj.SndThread()
     

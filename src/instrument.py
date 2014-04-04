@@ -30,7 +30,7 @@ class instrument:
         measures[measureNum - 1].addNoteAsNote(noteToAdd, beat, subdivision)
     def addNoteToMeasure(self, measureNum, beat, subdivison, pitch, length):
         noteToAdd = note(length, pitch)
-        addNoteToMeasureAsNote(measureNum, beat, subdivision, noteToAdd)
+        self.addNoteToMeasureAsNote(measureNum, beat, subdivision, noteToAdd)
     
     # Called at every time step to process the next time step in the measure
     def processTimeStep(self):

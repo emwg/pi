@@ -11,7 +11,7 @@ class instrument:
         self.measures = []
         self.beatsInMeasure = beatsInMeasure
         for i in range(0, numMeasures):
-            measures.append(measure(beatsInMeasure))
+            self.measures.append(measure(beatsInMeasure))
         
         # List to hold the notes are currently being sounded
         self.currentlyPlaying = []

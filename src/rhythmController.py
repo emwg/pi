@@ -61,9 +61,9 @@ class rhythmController:
         timeInSeconds = time.time()
         while True:
             if(timeInSeconds - time.time() < -rhythmController.rhythmControllerTimeStepLength):
-                instr1.processTimeStep()
-                for instr1Osc in instr1.getOscillators():
-                    rhythmControllerSoundThread.AddObj(instr1Osc)
+                rhythmController.instr1.processTimeStep()
+                for instr1Osc in rhythmController.instr1.getOscillators():
+                    rhythmController.rhythmControllerSoundThread.AddObj(instr1Osc)
                 timeInSeconds = time.time()
 
 rhythmController.startRhythmController()

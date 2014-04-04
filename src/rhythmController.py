@@ -18,7 +18,7 @@ class rhythmController:
     
     rhythmControllerTempo = 120 #Default tempo
     rhythmControllerNewTempoFlag = False
-    rhythmControllerTimeStepLength = computeTimeStepLength(rhythmControllerTempo)
+    rhythmControllerTimeStepLength = rhythmController.computeTimeStepLength(rhythmControllerTempo)
     
     # Set up and program instrument 1
     instr1Options = instrumentOptions(1024, 10, sndobj.SINE, 800, True)

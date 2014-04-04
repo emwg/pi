@@ -60,7 +60,7 @@ class rhythmController:
     def startRhythmController():
         timeInSeconds = time.time()
         while True:
-            if(timeInSeconds - time.time() < -rhythmControllerTimeStepLength):
+            if(timeInSeconds - time.time() < -rhythmController.rhythmControllerTimeStepLength):
                 instr1.processTimeStep()
                 for instr1Osc in instr1.getOscillators():
                     rhythmControllerSoundThread.AddObj(instr1Osc)

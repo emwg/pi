@@ -9,6 +9,7 @@ class instrument:
     def __init__(self, numMeasures, beatsInMeasure, options):
         # List to hold the measures, all initialized in the constructor
         self.measures = []
+        self.numMeasures = numMeasures
         self.beatsInMeasure = beatsInMeasure
         for i in range(0, numMeasures):
             self.measures.append(measure(beatsInMeasure))
@@ -25,9 +26,9 @@ class instrument:
     
     # Add notes to a specified measure, indexed starting at 1
     def addNoteToMeasureAsNote(self, measureNum, beat, subdivision, noteToAdd):
-        if measureNum > numMeasures or measureNum < 1:
+        if measureNum > self.numMeasures or measureNum < 1:
             raise Exception("Measure does not exist")
-        measures[measureNum - 1].addNoteAsNote(noteToAdd, beat, subdivision)
+        self.measures[measureNum - 1].addNoteAsNote(noteToAdd, beat, subdivision)
     def addNoteToMeasure(self, measureNum, beat, subdivision, pitch, length):
         noteToAdd = note(length, pitch)
         self.addNoteToMeasureAsNote(measureNum, beat, subdivision, noteToAdd)

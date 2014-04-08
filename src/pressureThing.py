@@ -1,7 +1,7 @@
 import sndobj
 import time
 import psutil
-from lightSensor import *
+from pressureSensor import *
 
 NUM_SENSORS = 4
 

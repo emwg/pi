@@ -6,9 +6,9 @@ from pressureSensor import *
 NUM_SENSORS = 4
 
 CHORD_SENSOR = 0
-AMP_SENSOR = 1
-PAN_SENSOR = 2
-COMB_SENSOR = 3
+AMP_SENSOR = 0
+PAN_SENSOR = 0
+COMB_SENSOR = 0
 FIXME_SENSOR = 0
 
 sensors = []

@@ -3,7 +3,7 @@ import time
 import psutil
 from lightSensor import *
 
-NUM_SENSORS = 8
+NUM_SENSORS = 6
 
 CHORD_SENSOR = 0
 AMP_SENSOR = 1

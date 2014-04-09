@@ -70,16 +70,16 @@ while True:
 	if(accelYValue < 550):
 		if(toneLibrary.getToneToIndex('As3') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'As3'
-	elif(accelYValue < 600):
+	elif(accelYValue < 580):
 		if(toneLibrary.getToneToIndex('Fs4') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'Fs4'
-	elif(accelYValue < 650):
+	elif(accelYValue < 610):
 		if(toneLibrary.getToneToIndex('D5') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'D5'
-	elif(accelYValue < 700):
+	elif(accelYValue < 640):
 		if(toneLibrary.getToneToIndex('As5') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'As5'
-	elif(accelYValue >= 750):
+	elif(accelYValue >= 670):
 		if(toneLibrary.getToneToIndex('Fs6') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'Fs6'
 		

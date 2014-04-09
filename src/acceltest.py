@@ -88,7 +88,7 @@ while True:
 		newStepTime = 0
 	else:
 		# Will convert value 450-560 to 0.3-0.05
-		stepTime = 0.3 - (0.00227 * newStepTime)
+		stepTime = 0.3 - (0.005 * newStepTime)
 		if(stepTime < 0.05):
 			stepTime = 0.05
 	

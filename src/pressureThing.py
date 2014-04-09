@@ -192,6 +192,7 @@ while True:
     
     #check to see if a strum should happen
     print ("Strum sensor value:" + str(pressureValue[STRUM_SENSOR]))
+    print ("Strum cutoff:" + str(strumCutoff))
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
         strummed = False
     else:

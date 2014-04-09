@@ -102,7 +102,7 @@ ampCutoff = 200
 pluckWait = 0.1
 pluckTime = 0
 pluckIndex = 0
-strumCutoff = 300
+strumCutoff = 600
 strummed = False
 
 pressureValue = [0] * NUM_SENSORS

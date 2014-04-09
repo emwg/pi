@@ -24,6 +24,7 @@ class toneLibrary:
     # Takes a note name string value and returns the corresponding index value
     @staticmethod
     def getToneToIndex(tone):
+        print("Getting tone for index " + str(tone))
         try:
             return toneLibrary.toneToIndex[tone]
         except KeyError:

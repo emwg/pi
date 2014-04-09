@@ -68,21 +68,26 @@ while True:
 	print("Current Tone: " + currentTone)
 	
 	if(accelYValue < 400):
-		highestTone = 'As4'
+		if(toneLibrary.getToneToIndex('As3') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'As3'
 	elif(accelYValue < 450):
-		highestTone = 'Fs5'
+		if(toneLibrary.getToneToIndex('Fs4') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'Fs4'
 	elif(accelYValue < 500):
-		highestTone = 'D6'
+		if(toneLibrary.getToneToIndex('D5') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'D5'
 	elif(accelYValue < 550):
-		highestTone = 'As6'
+		if(toneLibrary.getToneToIndex('As5') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'As5'
 	elif(accelYValue >= 550):
-		highestTone = 'Fs7'
+		if(toneLibrary.getToneToIndex('Fs6') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'Fs6'
 		
 	newStepTime = accelXValue - 450
 	if(newStepTime < 0):
 		newStepTime = 0
 	else:
-		# Will convert value 400-600 to 0.2-0.01
+		# Will convert value 450-560 to 0.3-0.05
 		stepTime = 0.3 - (0.00227 * newStepTime)
 		if(stepTime < 0.05):
 			stepTime = 0.05
@@ -97,6 +102,7 @@ while True:
 		deltaT = time.time()
 		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 			scaleDirection = 'down'
+			highestTone = toneLib.downSteps(1, highestTone)
 		if(toneLib.getToneToIndex(currentTone) <= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
 			scaleDirection = 'up'
 		if(scaleDirection == 'up'):

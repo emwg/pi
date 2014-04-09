@@ -117,7 +117,7 @@ avgCpu = 0
 
 avgSensorSamples = 3
 #avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
-sensorSamples = 0
+sensorSamples = [0] * NUM_SENSORS
 pressureSums = [0] * NUM_SENSORS
 
 while True:
@@ -145,13 +145,13 @@ while True:
     ###
     #get pressure sensor values
     for x in range(NUM_SENSORS):
-        if (sensorSamples < avgSensorSamples):
+        if (sensorSamples[x] < avgSensorSamples):
             pressureSums[x] += sensors[x].getPressureValue() * pressureAdjust
-            sensorSamples += 1
+            sensorSamples[x] += 1
         else:
             pressure[x] = pressureSums[x] / avgSensorSamples
-            sensorSamples = 0
-            pressureSums = [0] * NUM_SENSORS
+            sensorSamples[x] = 0
+            pressureSums[x] = 0
             
         #pressure[x] = sensors[x].getPressureValue() * pressureAdjust
 

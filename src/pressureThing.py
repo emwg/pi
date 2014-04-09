@@ -115,7 +115,7 @@ cpuSum = 0
 avgRam = 0
 avgCpu = 0
 
-avgSensorSamples = 3
+avgSensorSamples = 2
 #avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
 sensorSamples = [0] * NUM_SENSORS
 pressureSums = [0] * NUM_SENSORS

@@ -99,7 +99,7 @@ chord3Cutoff = 710
 ampCutoff = 200
 
 pluckWaitCutoff1 = 560
-pluckWaitCutoff2 = 610
+pluckWaitCutoff2 = 640
 pluckWait1 = 0.15
 pluckWait2 = 0.10
 pluckWait3 = 0.05

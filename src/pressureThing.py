@@ -89,7 +89,7 @@ pressureStep = 40
 
 #values by which to multiply the raw sensor values
 pressureAdjust = 1
-ampAdjust = 8
+ampAdjust = 10
 freqAdjust = 1
 
 #chord cutoffs
@@ -187,8 +187,16 @@ while True:
     
     #do a strum maybe
     if (((time.time() - pluckTime) > pluckWait) and strumming == True):
-        chord1[pluckIndex].SetAmp(amp)
-        if pluckIndex < len(chord1) - 1:
+        if chord == 1:
+            chord1[pluckIndex].SetAmp(amp) #setting the amplitude also plucks it, which is dumb but whattayagonnado
+        elif chord == 2:
+            chord2[pluckIndex].SetAmp(amp)
+        elif chord == 3:
+            chord3[pluckIndex].SetAmp(amp)
+        else: #chord == 4
+            chord4[pluckIndex].SetAmp(amp)
+            
+        if pluckIndex < len(chord1) - 1: #all chord arrays should be the same length
             pluckIndex += 1
         else:
             pluckIndex = 0

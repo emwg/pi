@@ -186,7 +186,7 @@ while True:
         strumming = False
         
     #set strum speed
-    if (pressureValue[SPEED_SENSOR] != 0):
+    if (pressureValue[SPEED_SENSOR] > 0):
         pluckWait = (1 / ((pressureValue[SPEED_SENSOR] / pressureAdjust) / 1024)) * maxPluckWait
     
     #do a strum maybe

@@ -98,8 +98,12 @@ chord3Cutoff = 710
 
 ampCutoff = 200
 
-maxPluckWait = 0.4
-pluckWait = maxPluckWait
+pluckWaitCutoff1 = 600
+pluckWaitCutoff2 = 660
+pluckWait1 = 0.15
+pluckWait2 = 0.10
+pluckWait3 = 0.05
+pluckWait = pluckWait1
 pluckTime = 0
 pluckIndex = 0
 strumCutoff = 525
@@ -196,8 +200,12 @@ while True:
     print("Amplitude: " + str(amp))
         
     #set strum speed
-    if (pressureValue[SPEED_SENSOR] > 0):
-        pluckWait = maxPluckWait - ((((float(pressureValue[SPEED_SENSOR]) / pressureAdjust) / 1024)) * maxPluckWait)
+    if (pressureValue[SPEED_SENSOR] < pluckWaitCutoff1):
+        pluckWait = pluckWait1
+    elif (pressureValue[SPEED_SENSOR] < pluckWaitCutoff2):
+        pluckWait = pluckWait2
+    else:
+        pluckWait = pluckWait3
     
     print ("Pluck wait: " + str(pluckWait))
     

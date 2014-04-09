@@ -87,6 +87,7 @@ while True:
 		if(stepTime < 0.01):
 			stepTime = 0.01
 	
+	print(stepTime)
 	#if(accelYValue < 500):
 	#	harmTable.SetHarm(100, sndobj.SINE)
 	#elif(accelYValue >= 500):

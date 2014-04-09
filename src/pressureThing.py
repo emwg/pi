@@ -102,7 +102,7 @@ maxPluckWait = 0.2
 pluckWait = maxPluckWait
 pluckTime = 0
 pluckIndex = 0
-strumCutoff = 540
+strumCutoff = 530
 strummed = False
 
 pressureValue = [0] * NUM_SENSORS

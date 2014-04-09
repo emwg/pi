@@ -189,13 +189,16 @@ while True:
     
     for x in chord4:
         x.SetAmp(amp)
-        
+    
+    #check to see if a strum should happen
+    print ("Strum sensor value:" + str(pressureValue[STRUM_SENSOR]))
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
         strummed = False
     else:
         pluckIndex = 0
         strummed = True
     
+    #do a strum maybe
     if (((time.time() - pluckTime) > pluckWait) and strummed == False):
         chord1[pluckIndex].RePluck()
         if pluckIndex < len(chord1) - 1:

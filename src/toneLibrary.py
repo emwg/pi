@@ -24,7 +24,6 @@ class toneLibrary:
     # Takes a note name string value and returns the corresponding index value
     @staticmethod
     def getToneToIndex(tone):
-        print("Getting tone for index " + str(tone))
         try:
             return toneLibrary.toneToIndex[tone]
         except KeyError:
@@ -43,17 +42,16 @@ class toneLibrary:
     # Raises the startingTone note name string value by numSteps number of half steps, returns the note name string value of the result
     @staticmethod
     def upSteps(numSteps, startingTone):
-        print("Starting tone is " + startingTone)
-        index = toneLibrary.getToneToIndex[startingTone]
+        index = toneLibrary.getToneToIndex(startingTone)
         index += numSteps
-        return toneLibrary.getIndexToTone[index]
+        return toneLibrary.getIndexToTone(index)
     
     # Lowering the startingTone note name string value by numSteps number of half steps, returns the note name string value of the result
     @staticmethod
     def downSteps(numSteps, startingTone):
-        index = toneLibrary.getToneToIndex[startingTone]
+        index = toneLibrary.getToneToIndex(startingTone)
         index -= numSteps
-        return toneLibrary.getIndexToTone[index]
+        return toneLibrary.getIndexToTone(index)
     
     # Takes a note name string value and returns the corresponding frequency value
     @staticmethod

@@ -198,7 +198,7 @@ while True:
     
     if (((time.time() - pluckTime) > pluckWait) and strummed == False):
         chord1[pluckIndex].RePluck()
-        if pluckIndex < len(chord1):
+        if pluckIndex < len(chord1) - 1:
             pluckIndex += 1
         else:
             pluckIndex = 0

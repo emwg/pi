@@ -98,7 +98,7 @@ chord3Cutoff = 710
 
 ampCutoff = 200
 
-maxPluckWait = 0.2
+maxPluckWait = 0.4
 pluckWait = maxPluckWait
 pluckTime = 0
 pluckIndex = 0

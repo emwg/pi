@@ -183,20 +183,17 @@ while True:
         chord = 4
         
     print("Chord: " + str(chord))
-
-
-    if (pressureValue[STRUM_SENSOR] < ampCutoff):
-        amp = 0
-    else:
-        amp = pressureValue[STRUM_SENSOR] * ampAdjust
-    print("Amplitude: " + str(amp))
     
     #check to see if a strum should happen
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
         strumming = True
+        amp = pressureValue[STRUM_SENSOR] * ampAdjust
     else:
         pluckIndex = 0
         strumming = False
+        amp = 0
+        
+    print("Amplitude: " + str(amp))
         
     #set strum speed
     if (pressureValue[SPEED_SENSOR] > 0):

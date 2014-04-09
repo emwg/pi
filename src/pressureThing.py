@@ -92,9 +92,9 @@ ampAdjust = 10
 freqAdjust = 1
 
 #chord cutoffs
-chord1Cutoff = 200
-chord2Cutoff = 500
-chord3Cutoff = 700
+chord1Cutoff = 575
+chord2Cutoff = 660
+chord3Cutoff = 710
 
 ampCutoff = 200
 

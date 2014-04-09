@@ -65,7 +65,7 @@ while True:
 	print("AccelY: " + str(accelYValue))
 	print("AccelZ: " + str(accelZValue))
 	#print("Running")
-	#print("Current Tone: " + currentTone)
+	print("Current Tone: " + currentTone)
 	
 	if(accelYValue < 400):
 		highestTone = 'As4'

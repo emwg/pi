@@ -98,7 +98,7 @@ chord3Cutoff = 700
 
 ampCutoff = 200
 
-maxPluckWait = 0.15
+maxPluckWait = 0.2
 pluckWait = maxPluckWait
 pluckTime = 0
 pluckIndex = 0
@@ -108,12 +108,17 @@ strummed = False
 pressureValue = [0] * NUM_SENSORS
 pressure = [0] * NUM_SENSORS
 
-avgSamples = 10
-samples = 0
+avgSysInfoSamples = 10
+sysInfoSamples = 0
 ramSum = 0
 cpuSum = 0
 avgRam = 0
 avgCpu = 0
+
+avgSensorSamples = 3
+avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
+sensorSamples = 0
+pressureSums = [0] * NUM_SENSORS
 
 while True:
     
@@ -121,14 +126,14 @@ while True:
     ram = psutil.virtual_memory().percent
     cpu = psutil.cpu_percent(interval=0)
     
-    if (samples < avgSamples):
+    if (sysInfoSamples < avgSysInfoSamples):
         ramSum += ram
         cpuSum += cpu
-        samples += 1
+        sysInfoSamples += 1
     else:
-        avgRam = (ramSum / avgSamples)
-        avgCpu = (cpuSum / avgSamples)
-        samples = 0
+        avgRam = (ramSum / avgSysInfoSamples)
+        avgCpu = (cpuSum / avgSysInfoSamples)
+        sysInfoSamples = 0
         ramSum = 0
         cpuSum = 0
     
@@ -140,8 +145,16 @@ while True:
     ###
     #get pressure sensor values
     for x in range(NUM_SENSORS):
-        pressure[x] = sensors[x].getPressureValue() * pressureAdjust
-        #print("Sensor " + str(x) + ": " + str(pressure[x]))
+        if (sensorSamples < avgSensorLoopIterations):
+            pressureSums[x] += sensors[x].getPressureValue() * pressureAdjust
+            sensorSamples += 1
+        else:
+            pressure[x] = pressureSums[x] / avgSensorSamples
+            sensorSamples = 0
+            pressureSums = [0] * NUM_SENSORS
+            
+        #pressure[x] = sensors[x].getPressureValue() * pressureAdjust
+
         #interpolate pressureValue
         if (pressureValue[x] < pressure[x]):
             #slide up

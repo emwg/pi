@@ -89,7 +89,7 @@ pressureStep = 40
 
 #values by which to multiply the raw sensor values
 pressureAdjust = 1
-ampAdjust = 10
+ampAdjust = 7
 freqAdjust = 1
 
 #chord cutoffs
@@ -178,18 +178,6 @@ while True:
         amp = pressureValue[STRUM_SENSOR] * ampAdjust
     print("Amplitude: " + str(amp))
     
-    for x in chord1:
-        x.SetAmp(amp)
-    
-    for x in chord2:
-        x.SetAmp(amp)
-    
-    for x in chord3:
-        x.SetAmp(amp)
-    
-    for x in chord4:
-        x.SetAmp(amp)
-    
     #check to see if a strum should happen
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
         strummed = False
@@ -202,7 +190,7 @@ while True:
     #do a strum maybe
     if (((time.time() - pluckTime) > pluckWait) and strummed == False):
         print("NOW WE ARE STRUMMING")
-        chord1[pluckIndex].RePluck()
+        chord1[pluckIndex].SetAmp(amp)
         if pluckIndex < len(chord1) - 1:
             pluckIndex += 1
         else:

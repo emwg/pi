@@ -2,7 +2,7 @@ import sndobj
 import time
 import psutil
 from pressureSensor import *
-import toneLibrary
+from toneLibrary import *
 
 NUM_SENSORS = 3
 

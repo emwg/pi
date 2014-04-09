@@ -45,7 +45,6 @@ chord1amp = 0
 chord2amp = 0
 chord3amp = 0
 chord4amp = 0
-mod = sndobj.Oscili(sine, 0, 100)
 out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
 
@@ -78,7 +77,6 @@ for x in chord3:
 for x in chord4:
     thread.AddObj(x)
 
-thread.AddObj(mod)
 thread.AddObj(mixer)
 thread.AddObj(pan)
 thread.AddObj(out, sndobj.SNDIO_OUT)

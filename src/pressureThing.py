@@ -99,7 +99,7 @@ chord3Cutoff = 700
 
 ampCutoff = 200
 
-pluckWait = 0.1
+pluckWait = 0.15
 pluckTime = 0
 pluckIndex = 0
 strumCutoff = 600
@@ -191,16 +191,17 @@ while True:
         x.SetAmp(amp)
     
     #check to see if a strum should happen
-    print ("Strum sensor value:" + str(pressureValue[STRUM_SENSOR]))
-    print ("Strum cutoff:" + str(strumCutoff))
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
         strummed = False
+        print("WE WILL DO A STRUM")
     else:
+        print("NO STRUMS FOR US")
         pluckIndex = 0
         strummed = True
     
     #do a strum maybe
     if (((time.time() - pluckTime) > pluckWait) and strummed == False):
+        print("NOW WE ARE STRUMMING")
         chord1[pluckIndex].RePluck()
         if pluckIndex < len(chord1) - 1:
             pluckIndex += 1

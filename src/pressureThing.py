@@ -19,15 +19,15 @@ for x in range(NUM_SENSORS):
 #build chords
 #C
 chord1 = []
-chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
-chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
-chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
 
 #D
 chord2 = []
-chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
 
 #G
 chord3 = []

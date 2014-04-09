@@ -83,7 +83,7 @@ while True:
 		newStepTime = 0
 	else:
 		# Will convert value 400-600 to 0.2-0.01
-		stepTime = 0.5 - (0.00245 * accelXValue)
+		stepTime = 0.5 - (0.00245 * newStepTime)
 		if(stepTime < 0.01):
 			stepTime = 0.01
 	

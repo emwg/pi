@@ -42,6 +42,7 @@ class toneLibrary:
     # Raises the startingTone note name string value by numSteps number of half steps, returns the note name string value of the result
     @staticmethod
     def upSteps(numSteps, startingTone):
+        print("Starting tone is " + startingTone)
         index = toneLibrary.getToneToIndex[startingTone]
         index += numSteps
         return toneLibrary.getIndexToTone[index]

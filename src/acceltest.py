@@ -66,7 +66,7 @@ while True:
 	print("AccelZ: " + str(accelZValue))
 	#print("Running")
 	#print("Current Tone: " + currentTone)
-	'''
+	
 	if(accelYValue < 400):
 		highestTone = 'As4'
 	elif(accelYValue < 450):
@@ -96,5 +96,5 @@ while True:
 		osc1.SetFreq(toneLib.getToneToFreq(currentTone))
 	#newAmp = (accelYValue - 400)
 	#if(newAmp < 0): newAmp = 0
-	#osc1.SetAmp(newAmp * 20)'''
+	#osc1.SetAmp(newAmp * 20)
 	

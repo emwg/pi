@@ -67,19 +67,19 @@ while True:
 	#print("Running")
 	print("Current Tone: " + currentTone)
 	
-	if(accelYValue < 400):
+	if(accelYValue < 550):
 		if(toneLibrary.getToneToIndex('As3') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'As3'
-	elif(accelYValue < 450):
+	elif(accelYValue < 600):
 		if(toneLibrary.getToneToIndex('Fs4') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'Fs4'
-	elif(accelYValue < 500):
+	elif(accelYValue < 650):
 		if(toneLibrary.getToneToIndex('D5') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'D5'
-	elif(accelYValue < 550):
+	elif(accelYValue < 700):
 		if(toneLibrary.getToneToIndex('As5') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'As5'
-	elif(accelYValue >= 550):
+	elif(accelYValue >= 750):
 		if(toneLibrary.getToneToIndex('Fs6') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'Fs6'
 		

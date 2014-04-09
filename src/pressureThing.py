@@ -2,80 +2,85 @@ import sndobj
 import time
 import psutil
 from pressureSensor import *
+import toneLibrary
 
-NUM_SENSORS = 4
+NUM_SENSORS = 3
 
 CHORD_SENSOR = 0
-AMP_SENSOR = 0
-PAN_SENSOR = 0
-COMB_SENSOR = 0
+STRUM_SENSOR = 1
+PITCH_SENSOR = 2
 FIXME_SENSOR = 0
 
 sensors = []
 
 for x in range(NUM_SENSORS):
     sensors.append(pressureSensor(0, x, 10))
+    
+#build chords
+#C
+chord1 = []
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
 
-sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
-saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
-square = sndobj.HarmTable(1000, 20, sndobj.SQUARE)
-buzz = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
-osc1 = sndobj.Oscili(sine, 0, 0)
-osc2 = sndobj.Oscili(sine, 0, 0)
-osc3 = sndobj.Oscili(sine, 0, 0)
-osc4 = sndobj.Oscili(sine, 0, 0)
-comb1 = sndobj.Comb(0, 0.2, osc1)
-comb2 = sndobj.Comb(0, 0.2, osc2)
-comb3 = sndobj.Comb(0, 0.2, osc3)
-comb4 = sndobj.Comb(0, 0.2, osc4)
-#ring = sndobj.Ring(osc1, osc2)
-#buzz = sndobj.Buzz(0, 0, 0)
-#pluck1 = sndobj.Pluck(400, 0)
-osc1amp = 0
-osc2amp = 0
-osc3amp = 0
-osc4amp = 0
-pluck1amp = 0
-osc1freq = 100
-osc2freq = 200
-osc3freq = 300
-osc4freq = 400
-pluck1freq = 0
+#D
+chord2 = []
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+
+#G
+chord3 = []
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+
+#another chord
+chord4 = []
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+
+chord1amp = 0
+chord2amp = 0
+chord3amp = 0
+chord4amp = 0
 mod = sndobj.Oscili(sine, 0, 100)
 out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
 mixer = sndobj.Mixer()
-mixer.AddObj(osc1)
-mixer.AddObj(osc2)
-mixer.AddObj(osc3)
-mixer.AddObj(osc4)
-mixer.AddObj(comb1)
-mixer.AddObj(comb2)
-mixer.AddObj(comb3)
-mixer.AddObj(comb4)
-#mixer.AddObj(ring)
-#mixer.AddObj(pluck1)
-#mixer.AddObj(buzz)
+
+for x in chord1:
+    mixer.AddObj(x)
+
+for x in chord2:
+    mixer.AddObj(x)
+
+for x in chord3:
+    mixer.AddObj(x)
+
+for x in chord4:
+    mixer.AddObj(x)
 
 pan = sndobj.Pan(0, mixer)
-
 thread = sndobj.SndThread()
 out.SetOutput(1, pan.left)
 out.SetOutput(2, pan.right)
 
+for x in chord1:
+    thread.AddObj(x)
+    
+for x in chord2:
+    thread.AddObj(x)
+    
+for x in chord3:
+    thread.AddObj(x)
+    
+for x in chord4:
+    thread.AddObj(x)
+
 thread.AddObj(mod)
-thread.AddObj(osc1)
-thread.AddObj(osc2)
-thread.AddObj(osc3)
-thread.AddObj(osc4)
-#thread.AddObj(pluck1)
-#thread.AddObj(buzz)
 thread.AddObj(mixer)
 thread.AddObj(pan)
-thread.AddObj(comb1)
-thread.AddObj(comb2)
-thread.AddObj(comb3)
-thread.AddObj(comb4)
-#thread.AddObj(ring)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 
 thread.ProcOn()
@@ -84,42 +89,26 @@ thread.ProcOn()
 freqStep = 10
 pressureStep = 40
 
-#values with which to multiply the raw sensor values
+#values by which to multiply the raw sensor values
 pressureAdjust = 1
 ampAdjust = 10
 freqAdjust = 1
 
 #chord cutoffs
-dimCutoff = 200
-minCutoff = 500
-majCutoff = 700
-
-#wave cutoffs
-sineCutoff = 200
-sawCutoff = 500
-squareCutoff = 700
+chord1Cutoff = 200
+chord2Cutoff = 500
+chord3Cutoff = 700
 
 ampCutoff = 200
 
-alreadySine = True
-alreadySaw = False
-alreadySquare = False
-alreadyBuzz = False
-
-pluckWait = 0.25
+pluckWait = 0.1
 pluckTime = 0
-
-combGainMult = 0.99
+pluckIndex = 0
+strumCutoff = 300
+strummed = False
 
 pressureValue = [0] * NUM_SENSORS
 pressure = [0] * NUM_SENSORS
-    
-rhythmCount = 0
-subtractMult = 5000
-osc1subtract = 1
-osc2subtract = osc1subtract * subtractMult
-osc3subtract = osc2subtract * subtractMult
-osc4subtract = osc3subtract * subtractMult
 
 avgSamples = 10
 samples = 0
@@ -173,140 +162,53 @@ while True:
     #osc4amp = pressureValue - osc4subtract
     
     #set chord type
-    if (pressureValue[CHORD_SENSOR] < dimCutoff):
-        chord = "dim"
-    elif (pressureValue[CHORD_SENSOR] < minCutoff):
-        chord = "min"
-    elif (pressureValue[CHORD_SENSOR] < majCutoff):
-        chord = "maj"
-    else: #(pressureValue[CHORD_SENSOR] < augCutoff):
-        chord = "aug"
+    if (pressureValue[CHORD_SENSOR] < chord1Cutoff):
+        chord = 1
+    elif (pressureValue[CHORD_SENSOR] < chord2Cutoff):
+        chord = 2
+    elif (pressureValue[CHORD_SENSOR] < chord3Cutoff):
+        chord = 3
+    else: #(pressureValue[CHORD_SENSOR] < chord4Cutoff):
+        chord = 4
         
-    print("Chord: " + chord)
-    
-    #set wave type
-    if (pressureValue[FIXME_SENSOR] < sineCutoff):
-        wave = "sine"
-    elif (pressureValue[FIXME_SENSOR] < sawCutoff):
-        wave = "saw"
-    elif (pressureValue[FIXME_SENSOR] < squareCutoff):
-        wave = "square"
-    else: #(pressureValue[FIXME_SENSOR] < buzzCutoff):
-        wave = "buzz"
-        
-    print ("Wave: " + wave)
-    
-    if (wave == "sine" and alreadySine == False):
-        osc1.SetTable(sine)
-        osc2.SetTable(sine)
-        osc3.SetTable(sine)
-        osc4.SetTable(sine)
-        alreadySine = True
-        alreadySaw = False
-        alreadySquare = False
-        alreadyBuzz = False
-    elif (wave == "saw" and alreadySaw == False):
-        osc1.SetTable(saw)
-        osc2.SetTable(saw)
-        osc3.SetTable(saw)
-        osc4.SetTable(saw)
-        alreadySine = False
-        alreadySaw = True
-        alreadySquare = False
-        alreadyBuzz = False
-    elif (wave == "square" and alreadySquare == False):
-        osc1.SetTable(square)
-        osc2.SetTable(square)
-        osc3.SetTable(square)
-        osc4.SetTable(square)
-        alreadySine = False
-        alreadySaw = False
-        alreadySquare = True
-        alreadyBuzz = False
-    elif (alreadyBuzz == False):
-        osc1.SetTable(buzz)
-        osc2.SetTable(buzz)
-        osc3.SetTable(buzz)
-        osc4.SetTable(buzz)
-        alreadySine = False
-        alreadySaw = False
-        alreadySquare = False
-        alreadyBuzz = True
-        
-        
-    #print("osc1amp: " + str(osc4amp))    
-    #set amplitudes
-    osc1.SetAmp(osc1amp)
-    osc2.SetAmp(osc2amp)
-    osc3.SetAmp(osc3amp)
-    osc4.SetAmp(osc4amp)
+    print("Chord: " + str(chord))
 
 
-    if (pressureValue[AMP_SENSOR] < ampCutoff):
+    if (pressureValue[STRUM_SENSOR] < ampCutoff):
         amp = 0
     else:
-        amp = pressureValue[AMP_SENSOR] * ampAdjust
+        amp = pressureValue[STRUM_SENSOR] * ampAdjust
     print("Amplitude: " + str(amp))
     
-    osc1.SetAmp(amp)
-    osc2.SetAmp(amp)
-    osc3.SetAmp(amp)
-    osc4.SetAmp(amp)
-    #buzz.SetAmp(amp)
+    for x in chord1:
+        x.SetAmp(amp)
     
-    #pluckWait = 500.0 / amp
-    #print("Pluck delay: " + str(pluckWait))
+    for x in chord2:
+        x.SetAmp(amp)
     
-    #if ((time.time() - pluckTime) > pluckWait):
-        #pluck1.SetAmp(amp)
-        #pluckTime = time.time()
+    for x in chord3:
+        x.SetAmp(amp)
     
-    freq = pressureValue[FIXME_SENSOR] * freqAdjust
-    print("Frequency: " + str(freq))
-    
-    if (freq != 0):
-        # root
-        osc1freq = freq
-        # fifth
-        osc2freq = osc1freq * (3/2)
-        # third
-        osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
-        # octave
-        osc4freq = osc1freq * 2
+    for x in chord4:
+        x.SetAmp(amp)
+        
+    if (pressureValue[STRUM_SENSOR] > strumCutoff):
+        strummed = False
     else:
-        osc1freq = 0
-        osc2freq = 0
-        osc3freq = 0
-        osc4freq = 0
-        
-    if (chord == "dim"):
-        osc2freq = osc3freq * (2^(-1/12))
-        osc3freq = osc3freq * (2^(-1/12))
-    elif (chord == "min"):
-        osc3freq = osc3freq * (2^(-1/12))
-    elif (chord == "aug"):
-        osc2freq = osc3freq * (2^(1/12))
-        osc3freq = osc3freq * (2^(1/12))
-        
-    #pluck1freq = 700 #this does nothing
+        pluckIndex = 0
+        strummed = True
     
-    #buzz.SetFreq(amp / 2)
-    #buzz.SetHarm(amp / 20)
-    
-    #set frequencies
-    osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
-    
-    #comb
-    comb1.SetGain(((pressureValue[COMB_SENSOR] / pressureAdjust) / 1024) * combGainMult)
-    comb2.SetGain(((pressureValue[COMB_SENSOR] / pressureAdjust) / 1024) * combGainMult)
-    comb3.SetGain(((pressureValue[COMB_SENSOR] / pressureAdjust) / 1024) * combGainMult)
-    comb4.SetGain(((pressureValue[COMB_SENSOR] / pressureAdjust) / 1024) * combGainMult)
+    if (((time.time() - pluckTime) > pluckWait) and strummed == False):
+        chord1[pluckIndex].RePluck()
+        if pluckIndex < len(chord1):
+            pluckIndex += 1
+        else:
+            pluckIndex = 0
+            strummed = True
+        pluckTime = time.time()
     
     #panning
-    pan.SetPan((pressureValue[PAN_SENSOR] / 512.0) - 1)
+    #pan.SetPan((pressureValue[PAN_SENSOR] / 512.0) - 1)
     
     print("")
 

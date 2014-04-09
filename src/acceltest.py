@@ -77,13 +77,22 @@ while True:
 		highestTone = 'As6'
 	elif(accelYValue >= 550):
 		highestTone = 'Fs7'
+		
+	newStepTime = accelXValue - 400
+	if(newStepTime < 0):
+		newStepTime = 0
+	else:
+		# Will convert value 400-600 to 0.2-0.01
+		stepTime = 0.2 - (0.00095 * accelXValue)
+		if(stepTime < 0.01):
+			stepTime = 0.01
 	
 	#if(accelYValue < 500):
 	#	harmTable.SetHarm(100, sndobj.SINE)
 	#elif(accelYValue >= 500):
 	#	harmTable.SetHarm(50, sndobj.SAW)
 	
-	if(time.time() > deltaT + stepTime):
+	if(stepTime > 0 and time.time() > deltaT + stepTime):
 		deltaT = time.time()
 		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 			scaleDirection = 'down'

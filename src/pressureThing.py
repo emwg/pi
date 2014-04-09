@@ -6,10 +6,9 @@ from toneLibrary import *
 
 NUM_SENSORS = 3
 
-CHORD_SENSOR = 0
+CHORD_SENSOR = 2
 STRUM_SENSOR = 1
-PITCH_SENSOR = 2
-FIXME_SENSOR = 0
+SPEED_SENSOR = 0
 
 sensors = []
 
@@ -100,6 +99,7 @@ chord3Cutoff = 700
 ampCutoff = 200
 
 pluckWait = 0.08
+maxPluckWait = 0.25
 pluckTime = 0
 pluckIndex = 0
 strumCutoff = 575
@@ -184,6 +184,9 @@ while True:
     else:
         pluckIndex = 0
         strumming = False
+        
+    #set strum speed
+    pluckWait = (1 / ((pressureValue[SPEED_SENSOR] / pressureAdjust) / 1024)) * maxPluckWait
     
     #do a strum maybe
     if (((time.time() - pluckTime) > pluckWait) and strumming == True):
@@ -200,7 +203,6 @@ while True:
             pluckIndex += 1
         else:
             pluckIndex = 0
-            strumming = False
         pluckTime = time.time()
     
     #panning

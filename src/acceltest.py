@@ -78,12 +78,12 @@ while True:
 	elif(accelYValue >= 550):
 		highestTone = 'Fs7'
 		
-	newStepTime = accelXValue - 400
+	newStepTime = accelXValue - 450
 	if(newStepTime < 0):
 		newStepTime = 0
 	else:
 		# Will convert value 400-600 to 0.2-0.01
-		stepTime = 0.5 - (0.00245 * newStepTime)
+		stepTime = 0.5 - (0.00445 * newStepTime)
 		if(stepTime < 0.01):
 			stepTime = 0.01
 	

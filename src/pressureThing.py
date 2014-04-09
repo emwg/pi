@@ -34,11 +34,11 @@ chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
 chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
 chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
 
-#another chord
+#am
 chord4 = []
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
 chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
 
 chord1amp = 0
 chord2amp = 0

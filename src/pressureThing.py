@@ -89,7 +89,7 @@ pressureStep = 40
 
 #values by which to multiply the raw sensor values
 pressureAdjust = 1
-ampAdjust = 7
+ampAdjust = 8
 freqAdjust = 1
 
 #chord cutoffs
@@ -99,10 +99,10 @@ chord3Cutoff = 700
 
 ampCutoff = 200
 
-pluckWait = 0.15
+pluckWait = 0.08
 pluckTime = 0
 pluckIndex = 0
-strumCutoff = 600
+strumCutoff = 575
 strummed = False
 
 pressureValue = [0] * NUM_SENSORS
@@ -180,22 +180,19 @@ while True:
     
     #check to see if a strum should happen
     if (pressureValue[STRUM_SENSOR] > strumCutoff):
-        strummed = False
-        print("WE WILL DO A STRUM")
+        strumming = True
     else:
-        print("NO STRUMS FOR US")
         pluckIndex = 0
-        strummed = True
+        strumming = False
     
     #do a strum maybe
-    if (((time.time() - pluckTime) > pluckWait) and strummed == False):
-        print("NOW WE ARE STRUMMING")
+    if (((time.time() - pluckTime) > pluckWait) and strumming == True):
         chord1[pluckIndex].SetAmp(amp)
         if pluckIndex < len(chord1) - 1:
             pluckIndex += 1
         else:
             pluckIndex = 0
-            strummed = True
+            strumming = False
         pluckTime = time.time()
     
     #panning

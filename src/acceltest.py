@@ -118,6 +118,8 @@ while True:
 			else:
 				currentTone = toneLib.downSteps(2, currentTone)
 			osc1.SetFreq(toneLib.getToneToFreq(currentTone))
+		else:
+			osc1.SetFreq(0)
 	#newAmp = (accelYValue - 400)
 	#if(newAmp < 0): newAmp = 0
 	#osc1.SetAmp(newAmp * 20)

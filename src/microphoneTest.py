@@ -1,10 +1,49 @@
 import sndobj
 from microphoneSensor import *
 from toneLibrary import *
+import time
 
-microphone = microphoneSensor(0, 0, 10)
+def calculateMicStatus(micNum):
+    micValue = microphone[micNum].getMicrophoneValue()
+    avgValue[micNum][currentAvgIndex[micNum]] = micValue
+    if(currentAvgIndex[micNum] < 19):
+        currentAvgIndex[micNum] += 1
+    else:
+        currentAvgIndex[micNum] = 0
+    avgMicValue = 0
+    summedValue = 0
+    for avgM in avgValue[micNum]:
+        if(avgM > 500):
+            avgMicValue += avgM
+            summedValue += 1
+    avgMicValue /= summedValues
+    if (avgMicValue >= 600):
+        return 1
+    return 0
+
+microphone = []
+microphone.append(microphoneSensor(2, 3, 10))
+microphone.append(microphoneSensor(2, 4, 10))
+microphone.append(microphoneSensor(2, 5, 10))
+microphone.append(microphoneSensor(2, 6, 10))
 toneLib = toneLibrary()
 middleC = toneLib.getToneToFreq('C4')
+
+twelveToneTable = dict([])
+twelveToneTable['P0'] = ['C4', 'Ds4', 'E4', 'G4', 'As4', 'B4', 'Gs4', 'A4', 'Cs4', 'D4', 'F4', 'Fs4']
+twelveToneTable['P3'] = ['Ds4', 'Fs4', 'G4', 'As4', 'Cs4', 'D4', 'B4', 'C4', 'E4', 'F4', 'Gs4', 'A4']
+twelveToneTable['P5'] = ['F4', 'Gs4', 'A4', 'C4', 'Ds4', 'E4', 'Cs4', 'D4', 'Fs4', 'G4', 'As4', 'B4']
+twelveToneTable['I0'] = ['C4', 'A4', 'Gs4', 'F4', 'D4', 'Cs4', 'E4', 'Ds4', 'B4', 'As4', 'G4', 'Fs4']
+twelveToneTable['I7'] = ['Cs4', 'As4', 'A4', 'Fs4', 'Ds4', 'D4', 'F4', 'E4', 'C4', 'B4', 'Gs4', 'G4']
+twelveToneTable['I9'] = ['A4', 'Fs4', 'F4', 'D4', 'B4', 'As4', 'Cs4', 'C4', 'Gs4', 'G4', 'E4', 'Ds4']
+twelveToneTable['I11'] = ['B4', 'Gs4', 'G4', 'E4', 'Cs4', 'C4', 'Ds4', 'D4', 'As4', 'A4', 'Fs4', 'F4']
+twelveToneTable['R3'] = ['A4', 'Gs4', 'F4', 'E4', 'C4', 'B4', 'D4', 'Cs4', 'As4', 'G4', 'Fs4', 'Ds4']
+twelveToneTable['R5'] = ['B4', 'As4', 'G4', 'Fs4', 'D4', 'Cs4', 'E4', 'Ds4', 'C4', 'A4', 'Gs4', 'F4']
+twelveToneTable['RI0'] = ['Fs4', 'G4', 'As4', 'B4', 'Ds4', 'E4', 'Cs4', 'D4', 'F4', 'Gs4', 'A4', 'C4']
+twelveToneTable['RI7'] = ['Cs4', 'D4', 'F4', 'Fs4', 'As4', 'B4', 'Gs4', 'A4', 'C4', 'Ds4', 'E4', 'G4']
+twelveToneTable['RI9'] = ['Ds4', 'E4', 'G4', 'Gs4', 'C4', 'Cs4', 'As4', 'B4', 'D4', 'F4', 'Fs4', 'A4']
+twelveToneTable['RI11'] = ['F4', 'Fs4', 'A4', 'As4', 'D4', 'Ds4', 'C4', 'Cs4', 'E4', 'G4', 'Gs4', 'B4']
+
 
 harmTable = sndobj.HarmTable(1024, 100, sndobj.SINE)
 osc = sndobj.Oscili(harmTable, toneLib.getToneToFreq('C4'), 900)
@@ -17,28 +56,72 @@ thread.AddObj(osc)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
-currentAvgIndex = 0
-avgValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+currentAvgIndex = []
+currentAvgIndex.append(0)
+currentAvgIndex.append(0)
+currentAvgIndex.append(0)
+currentAvgIndex.append(0)
+avgValue = []
+avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+deltaT = time.time()
 while True:
-    microphoneValue = microphone.getMicrophoneValue()
-    avgValue[currentAvgIndex] = microphoneValue
-    if(currentAvgIndex < 19):
-        currentAvgIndex +=1
-    else:
-        currentAvgIndex = 0
-    avgMicrophoneValue = 0
-    summedValues = 0
-    for avgM in avgValue:
-        if(avgM > 500):
-            avgMicrophoneValue += avgM
-            summedValues += 1
-    avgMicrophoneValue /= summedValues
-    if avgMicrophoneValue > 600:
-        print("Microphone High" + str(avgMicrophoneValue))
-    else: print("Microphone Low " + str(avgMicrophoneValue))
-    #print(avgValue)
-    '''
-    if avgMicrophoneValue - 500 < 0 or avgMicrophoneValue - 500 > 100:
-        osc.SetFreq(1318)
-    else:
-        osc.SetFreq(middleC)'''
+    mic0Status = calculateMicStatus(0)
+    mic1Status = calculateMicStatus(1)
+    mic2Status = calculateMicStatus(2)
+    mic3Status = calculateMicStatus(3)
+    
+    micStatus = str(mic0Status) + str(mic1Status) + str(mic2Status) + str(mic3Status)
+    currentToneTable = 'null'
+    previousToneTable = ''
+    newToneTableFlag = False
+    stepTime = 0.1
+    toneTableIndex = 0
+    if(micStatus == "0000"):
+        currentToneTable = 'null'
+    elif(micrStatus == "0001"):
+        currentToneTable = 'I0'
+    elif(micrStatus == "0010"):
+        currentToneTable = 'P3'
+    elif(micrStatus == "0011"):
+        currentToneTable = 'P5'
+    elif(micrStatus == "0100"):
+        currentToneTable = 'R3'
+    elif(micrStatus == "0101"):
+        currentToneTable = 'I9'
+    elif(micrStatus == "0110"):
+        currentToneTable = 'P0'
+    elif(micrStatus == "0111"):
+        currentToneTable = 'I7'
+    elif(micrStatus == "1000"):
+       currentToneTable = 'RI0'
+    elif(micrStatus == "1001"):
+       currentToneTable = 'P0'
+    elif(micrStatus == "1010"):
+        currentToneTable = 'RI9'
+    elif(micrStatus == "1011"):
+        currentToneTable = 'RI11'
+    elif(micrStatus == "1100"):
+        currentToneTable = 'R5'
+    elif(micrStatus == "1101"):
+        currentToneTable = 'I11'
+    elif(micrStatus == "1110"):
+        currentToneTable = 'RI7'
+    elif(micrStatus == "1111"):
+        currentToneTable = 'P0'
+        
+    if(currentToneTable != previousToneTable):
+        newToneTableFlag = True
+        previousToneTable = currentToneTable
+        toneTableIndex = 0
+        
+    if(stepTime > 0 and time.time() > deltaT + stepTime):
+        deltaT = time.time()
+        currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])
+        toneTableIndex += 1
+        osc.SetFreq(currentTone)
+    
+    

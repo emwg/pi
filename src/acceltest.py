@@ -77,11 +77,11 @@ while True:
 		if(toneLibrary.getToneToIndex('D5') > toneLibrary.getToneToIndex(currentTone)):
 			highestTone = 'D5'
 	elif(accelYValue < 640):
-		if(toneLibrary.getToneToIndex('As5') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'As5'
+		if(toneLibrary.getToneToIndex('E6') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'E6'
 	elif(accelYValue >= 670):
-		if(toneLibrary.getToneToIndex('Fs6') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'Fs6'
+		if(toneLibrary.getToneToIndex('B7') > toneLibrary.getToneToIndex(currentTone)):
+			highestTone = 'B7'
 		
 	newStepTime = accelXValue - 450
 	stepTimeCandidate = 0.3

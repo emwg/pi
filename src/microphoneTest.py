@@ -16,7 +16,8 @@ def calculateMicStatus(micNum):
         if(avgM > 500):
             avgMicValue += avgM
             summedValues += 1
-    avgMicValue /= summedValues
+    if(summedValue > 0):
+        avgMicValue /= summedValues
     if (avgMicValue >= 600):
         return 1
     return 0

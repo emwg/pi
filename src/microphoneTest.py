@@ -125,6 +125,7 @@ while True:
         if(currentToneTable != 'null'):
             currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])
             toneTableIndex += 1
+            print(currentTone)
             osc.SetFreq(currentTone)
     
     

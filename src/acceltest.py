@@ -88,9 +88,14 @@ while True:
 		newStepTime = 0
 	else:
 		# Will convert value 450-560 to 0.3-0.05
-		stepTime = 0.3 - (0.005 * newStepTime)
-		if(stepTime < 0.05):
-			stepTime = 0.05
+		stepTimeCandidate = 0.3 - (0.005 * newStepTime)
+		if(stepTimeCandidate < 0.05):
+			stepTimeCandidate = 0.05
+	
+	if(stepTimeCandidate >= stepTime):
+		stepTime = stepTimeCandidate
+	else:
+		stepTime -= 0.005
 	
 	print(stepTime)
 	#if(accelYValue < 500):

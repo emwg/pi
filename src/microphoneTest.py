@@ -119,6 +119,7 @@ while True:
         toneTableIndex = 0
         
     if(stepTime > 0 and time.time() > deltaT + stepTime):
+        print("Running")
         deltaT = time.time()
         if(currentToneTable != 'null'):
             currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])

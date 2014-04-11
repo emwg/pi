@@ -93,10 +93,11 @@ while True:
 		if(stepTimeCandidate < 0.05):
 			stepTimeCandidate = 0.05
 	
-	if(stepTimeCandidate >= stepTime):
+	if(stepTimeCandidate <= stepTime):
 		stepTime = stepTimeCandidate
 	else:
-		stepTime -= 0.005
+		if(stepTime < 0.3):
+			stepTime += 0.005
 	
 	print(stepTime)
 	#if(accelYValue < 500):

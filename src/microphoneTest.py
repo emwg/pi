@@ -11,7 +11,7 @@ def calculateMicStatus(micNum):
     else:
         currentAvgIndex[micNum] = 0
     avgMicValue = 0
-    summedValue = 0
+    summedValues = 0
     for avgM in avgValue[micNum]:
         if(avgM > 500):
             avgMicValue += avgM

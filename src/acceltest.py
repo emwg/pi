@@ -84,7 +84,7 @@ while True:
 			highestTone = 'Fs6'
 		
 	newStepTime = accelXValue - 450
-	stepTimeCandidate = 0.05
+	stepTimeCandidate = 0.3
 	if(newStepTime < 0):
 		newStepTime = 0
 	else:

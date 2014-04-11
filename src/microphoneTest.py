@@ -125,7 +125,10 @@ while True:
         deltaT = time.time()
         if(currentToneTable != 'null'):
             currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])
-            toneTableIndex += 1
+            if(toneTableIndex = 11):
+                toneTableIndex = 0
+            else:
+                toneTableIndex += 1
             print(currentTone)
             osc.SetFreq(currentTone)
     

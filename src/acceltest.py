@@ -15,7 +15,7 @@ toneLib = toneLibrary()
 currentTone = 'C2'
 lowestTone = 'C2'
 highestTone = 'C3'
-stepTime = 0.1
+stepTime = 0.3
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
@@ -97,7 +97,7 @@ while True:
 		stepTime = stepTimeCandidate
 	else:
 		if(stepTime < 0.3):
-			stepTime += 0.000000005
+			stepTime += 0.00000005
 	
 	print(stepTime)
 	#if(accelYValue < 500):

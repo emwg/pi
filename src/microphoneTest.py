@@ -120,6 +120,7 @@ while True:
         
     if(stepTime > 0 and time.time() > deltaT + stepTime):
         print("Running")
+        print("Status: [" + micStatus + "]")
         deltaT = time.time()
         if(currentToneTable != 'null'):
             currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])

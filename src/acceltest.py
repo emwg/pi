@@ -4,6 +4,12 @@ import psutil
 from accelsensor import *
 from toneLibrary import *
 
+def avgList(list):
+	listSum = 0
+	for item in list:
+		listSum += item
+	return listSum/len(list)
+
 # Create the accelerometer sensor objects
 accelX = accelSensor(2, 0, 10)
 accelY = accelSensor(2, 1, 10)
@@ -53,12 +59,29 @@ thread.ProcOn()
 
 deltaT = time.time()
 scaleDirection = 'up'
+avgAccelXValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+avgAccelYValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+avgAccelZValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+avgAccelXIndex = 0
+avgAccelYIndex = 0
+avgAccelZIndex = 0
 
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
 	accelXValue = accelX.getAccelValue()
 	accelYValue = accelY.getAccelValue()
 	accelZValue = accelZ.getAccelValue()
+	
+	avgAccelXValue[avgAccelXIndex] = accelXValue
+	avgAccelYValue[avgAccelYIndex] = accelYValue
+	if(avgAccelXIndex == 19):
+		avgAccelXIndex = 0
+	else:
+		avgAccelXIndex += 1
+	if(avgAccelYIndex == 19):
+		avgAccelYIndex = 0
+	else:
+		avgAccelYIndex += 1
 	#mod.SetFreq(2 + (float(accelXValue)/100.0))
 	#osc1.SetFreq(accelYValue, mod)
 	print("AccelX: " + str(accelXValue))
@@ -105,9 +128,10 @@ while True:
 	#elif(accelYValue >= 500):
 	#	harmTable.SetHarm(50, sndobj.SAW)
 	
+	
 	if(stepTime > 0 and time.time() > deltaT + stepTime):
 		deltaT = time.time()
-		if(accelXValue > 450 and accelYValue > 550):
+		if(avgList(avgAccelXValue) > 450 and avgList(avgAccelYValue) > 550):
 			if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 				scaleDirection = 'down'
 				highestTone = toneLib.downSteps(4, highestTone)

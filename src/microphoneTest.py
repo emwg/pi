@@ -131,5 +131,7 @@ while True:
                 toneTableIndex += 1
             print(currentTone)
             osc.SetFreq(currentTone)
+        else:
+            osc.SetFreq(0)
     
     

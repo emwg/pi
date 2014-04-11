@@ -107,16 +107,17 @@ while True:
 	
 	if(stepTime > 0 and time.time() > deltaT + stepTime):
 		deltaT = time.time()
-		if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
-			scaleDirection = 'down'
-			highestTone = toneLib.downSteps(4, highestTone)
-		if(toneLib.getToneToIndex(currentTone) <= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
-			scaleDirection = 'up'
-		if(scaleDirection == 'up'):
-			currentTone = toneLib.upSteps(2, currentTone)
-		else:
-			currentTone = toneLib.downSteps(2, currentTone)
-		osc1.SetFreq(toneLib.getToneToFreq(currentTone))
+		if(accelXValue > 450 and accelYValue > 550):
+			if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
+				scaleDirection = 'down'
+				highestTone = toneLib.downSteps(4, highestTone)
+			if(toneLib.getToneToIndex(currentTone) <= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
+				scaleDirection = 'up'
+			if(scaleDirection == 'up'):
+				currentTone = toneLib.upSteps(2, currentTone)
+			else:
+				currentTone = toneLib.downSteps(2, currentTone)
+			osc1.SetFreq(toneLib.getToneToFreq(currentTone))
 	#newAmp = (accelYValue - 400)
 	#if(newAmp < 0): newAmp = 0
 	#osc1.SetAmp(newAmp * 20)

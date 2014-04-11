@@ -68,6 +68,11 @@ avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 avgValue.append([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 
 deltaT = time.time()
+currentToneTable = 'null'
+previousToneTable = ''
+newToneTableFlag = False
+stepTime = 0.1
+toneTableIndex = 0
 while True:
     mic0Status = calculateMicStatus(0)
     mic1Status = calculateMicStatus(1)
@@ -75,11 +80,7 @@ while True:
     mic3Status = calculateMicStatus(3)
     
     micStatus = str(mic0Status) + str(mic1Status) + str(mic2Status) + str(mic3Status)
-    currentToneTable = 'null'
-    previousToneTable = ''
-    newToneTableFlag = False
-    stepTime = 0.1
-    toneTableIndex = 0
+
     if(micStatus == "0000"):
         currentToneTable = 'null'
     elif(micStatus == "0001"):

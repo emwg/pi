@@ -82,35 +82,35 @@ while True:
     toneTableIndex = 0
     if(micStatus == "0000"):
         currentToneTable = 'null'
-    elif(micrStatus == "0001"):
+    elif(micStatus == "0001"):
         currentToneTable = 'I0'
-    elif(micrStatus == "0010"):
+    elif(micStatus == "0010"):
         currentToneTable = 'P3'
-    elif(micrStatus == "0011"):
+    elif(micStatus == "0011"):
         currentToneTable = 'P5'
-    elif(micrStatus == "0100"):
+    elif(micStatus == "0100"):
         currentToneTable = 'R3'
-    elif(micrStatus == "0101"):
+    elif(micStatus == "0101"):
         currentToneTable = 'I9'
-    elif(micrStatus == "0110"):
+    elif(micStatus == "0110"):
         currentToneTable = 'P0'
-    elif(micrStatus == "0111"):
+    elif(micStatus == "0111"):
         currentToneTable = 'I7'
-    elif(micrStatus == "1000"):
+    elif(micStatus == "1000"):
        currentToneTable = 'RI0'
-    elif(micrStatus == "1001"):
+    elif(micStatus == "1001"):
        currentToneTable = 'P0'
-    elif(micrStatus == "1010"):
+    elif(micStatus == "1010"):
         currentToneTable = 'RI9'
-    elif(micrStatus == "1011"):
+    elif(micStatus == "1011"):
         currentToneTable = 'RI11'
-    elif(micrStatus == "1100"):
+    elif(micStatus == "1100"):
         currentToneTable = 'R5'
-    elif(micrStatus == "1101"):
+    elif(micStatus == "1101"):
         currentToneTable = 'I11'
-    elif(micrStatus == "1110"):
+    elif(micStatus == "1110"):
         currentToneTable = 'RI7'
-    elif(micrStatus == "1111"):
+    elif(micStatus == "1111"):
         currentToneTable = 'P0'
         
     if(currentToneTable != previousToneTable):
@@ -120,8 +120,9 @@ while True:
         
     if(stepTime > 0 and time.time() > deltaT + stepTime):
         deltaT = time.time()
-        currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])
-        toneTableIndex += 1
-        osc.SetFreq(currentTone)
+        if(currentToneTable != 'null'):
+            currentTone = toneLib.getToneToFreq(twelveToneTable[currentToneTable][toneTableIndex])
+            toneTableIndex += 1
+            osc.SetFreq(currentTone)
     
     

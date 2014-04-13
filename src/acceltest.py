@@ -125,8 +125,9 @@ while True:
 			stepTime += 0.0003
 	
 	print("silencerCount: " + str(silencerCount))
-	if(stepTime >= 0.3 and silencerCount < 200):
-		silencerCount += 1
+	if(stepTime >= 0.3):
+		if(silencerCount < 200):
+			silencerCount += 1
 	else:
 		silencerCount = 0
 		

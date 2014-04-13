@@ -53,6 +53,7 @@ thread.ProcOn()
 
 deltaT = time.time()
 scaleDirection = 'up'
+silencerCount = 0
 
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out

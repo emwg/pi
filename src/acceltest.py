@@ -68,19 +68,19 @@ class accel:
 		
 		# Set highest tone based on AccelY value
 		if(self.accelYValue < 550):
-			if(self.toneLibrary.getToneToIndex('As3') > self.toneLibrary.getToneToIndex(self.currentTone)):
+			if(self.toneLib.getToneToIndex('As3') > self.toneLib.getToneToIndex(self.currentTone)):
 				self.highestTone = 'As3'
 		elif(self.accelYValue < 580):
-			if(self.toneLibrary.getToneToIndex('Fs4') > self.toneLibrary.getToneToIndex(self.currentTone)):
+			if(self.toneLib.getToneToIndex('Fs4') > self.toneLib.getToneToIndex(self.currentTone)):
 				self.highestTone = 'Fs4'
 		elif(self.accelYValue < 610):
-			if(self.toneLibrary.getToneToIndex('D5') > self.toneLibrary.getToneToIndex(self.currentTone)):
+			if(self.toneLib.getToneToIndex('D5') > self.toneLib.getToneToIndex(self.currentTone)):
 				self.highestTone = 'D5'
 		elif(self.accelYValue < 640):
-			if(self.toneLibrary.getToneToIndex('E6') > self.toneLibrary.getToneToIndex(self.currentTone)):
+			if(self.toneLib.getToneToIndex('E6') > self.toneLib.getToneToIndex(self.currentTone)):
 				highestTone = 'E6'
 		elif(self.accelYValue >= 670):
-			if(self.toneLibrary.getToneToIndex('B7') > self.toneLibrary.getToneToIndex(self.currentTone)):
+			if(self.toneLib.getToneToIndex('B7') > self.toneLib.getToneToIndex(self.currentTone)):
 				self.highestTone = 'B7'
 			
 		# Set tempo based on AccelX value

@@ -62,9 +62,9 @@ class accel:
 	#while True:
 	def runAccel(self, osc):
 		# Get the accelerometer values, ranging from ~(400-600), print out
-		self.accelXValue = accelX.getAccelValue()
-		self.accelYValue = accelY.getAccelValue()
-		self.accelZValue = accelZ.getAccelValue()
+		self.accelXValue = self.accelX.getAccelValue()
+		self.accelYValue = self.accelY.getAccelValue()
+		self.accelZValue = self.accelZ.getAccelValue()
 		
 		# Set highest tone based on AccelY value
 		if(self.accelYValue < 550):

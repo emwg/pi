@@ -66,6 +66,8 @@ avgAccelXIndex = 0
 avgAccelYIndex = 0
 avgAccelZIndex = 0
 
+silencerCount = 0
+
 while True:
 	# Get the accelerometer values, ranging from ~(400-600), print out
 	accelXValue = accelX.getAccelValue()
@@ -123,6 +125,11 @@ while True:
 			stepTime += 0.0003
 	
 	print(stepTime)
+	if(stepTime >= 0.3 and silencerCount < 200):
+		silencerCount += 1
+	else:
+		silencerCount = 0
+		
 	#if(accelYValue < 500):
 	#	harmTable.SetHarm(100, sndobj.SINE)
 	#elif(accelYValue >= 500):
@@ -131,7 +138,7 @@ while True:
 	
 	if(stepTime > 0 and time.time() > deltaT + stepTime):
 		deltaT = time.time()
-		if(avgList(avgAccelXValue) > 450 and avgList(avgAccelYValue) > 550):
+		if(silencerCount >= 200):
 			if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 				scaleDirection = 'down'
 				highestTone = toneLib.downSteps(4, highestTone)

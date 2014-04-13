@@ -84,7 +84,7 @@ class accel:
 				self.highestTone = 'B7'
 			
 		# Set tempo based on AccelX value
-		newStepTime = accelXValue - 450
+		newStepTime = self.accelXValue - 450
 		stepTimeCandidate = 0.3
 		if(newStepTime < 0):
 			newStepTime = 0

@@ -48,7 +48,7 @@ class microphones:
     
     def calculateMicStatus(self, micNum):
         micValue = self.microphone[micNum].getMicrophoneValue()
-        avgValue[micNum][self.currentAvgIndex[micNum]] = micValue
+        self.avgValue[micNum][self.currentAvgIndex[micNum]] = micValue
         if(self.currentAvgIndex[micNum] < 19):
             self.currentAvgIndex[micNum] += 1
         else:

@@ -1,7 +1,9 @@
 import sndobj
 from acceltest import *
+from microphoneTest import *
 
 accelObj = accel()
+microphonesObj = microphones()
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
@@ -31,4 +33,5 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 while True:
-    accelObj.runAccel(osc1)
+    #accelObj.runAccel(osc1)
+    microphonesObj.runMicrophones(osc1)

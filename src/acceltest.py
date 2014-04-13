@@ -126,7 +126,7 @@ while True:
 	
 	print("silencerCount: " + str(silencerCount))
 	if(stepTime >= 0.3):
-		if(silencerCount < 200):
+		if(silencerCount < 2000):
 			silencerCount += 1
 	else:
 		silencerCount = 0
@@ -139,7 +139,7 @@ while True:
 	
 	if(stepTime > 0 and time.time() > deltaT + stepTime):
 		deltaT = time.time()
-		if(silencerCount < 200):
+		if(silencerCount < 2000):
 			if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
 				scaleDirection = 'down'
 				highestTone = toneLib.downSteps(4, highestTone)

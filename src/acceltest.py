@@ -105,6 +105,8 @@ class accel:
 				self.silencerCount += 1
 		else:
 			self.silencerCount = 0
+			
+		print(self.silencerCount)
 		
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):
@@ -118,7 +120,7 @@ class accel:
 				if(self.scaleDirection == 'up'):
 					self.currentTone = self.toneLib.upSteps(2, self.currentTone)
 				else:
-					self.currentTone = toneLib.downSteps(2, self.currentTone)
+					self.currentTone = self.toneLib.downSteps(2, self.currentTone)
 				osc.SetFreq(self.toneLib.getToneToFreq(self.currentTone))
 			else:
 				osc.SetFreq(0)

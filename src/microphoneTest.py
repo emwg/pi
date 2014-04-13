@@ -12,7 +12,7 @@ class microphones:
         self.microphone.append(microphoneSensor(2, 5, 10))
         self.microphone.append(microphoneSensor(2, 6, 10))
         self.toneLib = toneLibrary()
-        self.middleC = toneLib.getToneToFreq('C4')
+        self.middleC = self.toneLib.getToneToFreq('C4')
         
         self.twelveToneTable = dict([])
         self.twelveToneTable['P0'] = ['C4', 'Ds4', 'E4', 'G4', 'As4', 'B4', 'Gs4', 'A4', 'Cs4', 'D4', 'F4', 'Fs4']

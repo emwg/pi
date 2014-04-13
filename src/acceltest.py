@@ -86,11 +86,11 @@ while True:
 		avgAccelYIndex += 1
 	#mod.SetFreq(2 + (float(accelXValue)/100.0))
 	#osc1.SetFreq(accelYValue, mod)
-	print("AccelX: " + str(accelXValue))
+	'''print("AccelX: " + str(accelXValue))
 	print("AccelY: " + str(accelYValue))
 	print("AccelZ: " + str(accelZValue))
 	#print("Running")
-	print("Current Tone: " + currentTone)
+	print("Current Tone: " + currentTone)'''
 	
 	if(accelYValue < 550):
 		if(toneLibrary.getToneToIndex('As3') > toneLibrary.getToneToIndex(currentTone)):
@@ -124,7 +124,7 @@ while True:
 		if(stepTime < 0.3):
 			stepTime += 0.0003
 	
-	print(stepTime)
+	print("silencerCount: " + str(silencerCount))
 	if(stepTime >= 0.3 and silencerCount < 200):
 		silencerCount += 1
 	else:

@@ -55,7 +55,7 @@ class microphones:
             self.currentAvgIndex[micNum] = 0
         avgMicValue = 0
         summedValues = 0
-        for avgM in avgValue[micNum]:
+        for avgM in self.avgValue[micNum]:
             if(avgM > 500):
                 avgMicValue += avgM
                 summedValues += 1

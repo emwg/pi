@@ -5,28 +5,17 @@ from accelsensor import *
 from toneLibrary import *
 
 # Create the accelerometer sensor objects
-accelX = accelSensor(2, 0, 10)
-accelY = accelSensor(2, 1, 10)
-accelZ = accelSensor(2, 2, 10)
 
 # Create toneLibrary object
-toneLib = toneLibrary()
 # Define tone library parameters
-currentTone = 'C2'
-lowestTone = 'C2'
-highestTone = 'C3'
-stepTime = 0.3
+
 
 # Create the harmonic table and attach to oscilators
 # The higher the first parameter in harmTable.SetHarm is, the buzzier the sound
-#coeffs = [4.0, 2.0];
-harmTable = sndobj.HarmTable()
+#coeffs = [4.0, 2.0];'''
+'''harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 900)
-sound2 = sndobj.Oscili(harmTable, 550, 900)
-noise = sndobj.Randh(10000, 1000)
-#osc1.SetAmp(6000)
-#osc1.SetFreq(600)
 
 # Create a mixer
 mixer = sndobj.Mixer()
@@ -53,82 +42,83 @@ thread.ProcOn()
 
 deltaT = time.time()
 scaleDirection = 'up'
-silencerCount = 0
+silencerCount = 0'''
 
-while True:
-	# Get the accelerometer values, ranging from ~(400-600), print out
-	accelXValue = accelX.getAccelValue()
-	accelYValue = accelY.getAccelValue()
-	accelZValue = accelZ.getAccelValue()
-	#mod.SetFreq(2 + (float(accelXValue)/100.0))
-	#osc1.SetFreq(accelYValue, mod)
-	'''print("AccelX: " + str(accelXValue))
-	print("AccelY: " + str(accelYValue))
-	print("AccelZ: " + str(accelZValue))
-	#print("Running")
-	print("Current Tone: " + currentTone)'''
+class accel:
+
+	def __init__(self):
+		self.accelX = accelSensor(2, 0, 10)
+		self.accelY = accelSensor(2, 1, 10)
+		self.accelZ = accelSensor(2, 2, 10)
+		self.toneLib = toneLibrary()
+		self.currentTone = 'C2'
+		self.lowestTone = 'C2'
+		self.highestTone = 'C3'
+		self.stepTime = 0.3
+		self.deltaT = time.time()
+		self.scaleDirection = 'up'
+		self.silencerCount = 0
 	
-	if(accelYValue < 550):
-		if(toneLibrary.getToneToIndex('As3') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'As3'
-	elif(accelYValue < 580):
-		if(toneLibrary.getToneToIndex('Fs4') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'Fs4'
-	elif(accelYValue < 610):
-		if(toneLibrary.getToneToIndex('D5') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'D5'
-	elif(accelYValue < 640):
-		if(toneLibrary.getToneToIndex('E6') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'E6'
-	elif(accelYValue >= 670):
-		if(toneLibrary.getToneToIndex('B7') > toneLibrary.getToneToIndex(currentTone)):
-			highestTone = 'B7'
+	#while True:
+	def runAccel(self, osc):
+		# Get the accelerometer values, ranging from ~(400-600), print out
+		self.accelXValue = accelX.getAccelValue()
+		self.accelYValue = accelY.getAccelValue()
+		self.accelZValue = accelZ.getAccelValue()
 		
-	newStepTime = accelXValue - 450
-	stepTimeCandidate = 0.3
-	if(newStepTime < 0):
-		newStepTime = 0
-	else:
-		# Will convert value 450-560 to 0.3-0.05
-		stepTimeCandidate = 0.3 - (0.005 * newStepTime)
-		if(stepTimeCandidate < 0.05):
-			stepTimeCandidate = 0.05
-	
-	if(stepTimeCandidate <= stepTime):
-		stepTime = stepTimeCandidate
-	else:
-		if(stepTime < 0.3):
-			stepTime += 0.0003
-	
-	print("silencerCount: " + str(silencerCount))
-	if(stepTime >= 0.3):
-		if(silencerCount < 1200):
-			silencerCount += 1
-	else:
-		silencerCount = 0
-		
-	#if(accelYValue < 500):
-	#	harmTable.SetHarm(100, sndobj.SINE)
-	#elif(accelYValue >= 500):
-	#	harmTable.SetHarm(50, sndobj.SAW)
-	
-	
-	if(stepTime > 0 and time.time() > deltaT + stepTime):
-		deltaT = time.time()
-		if(silencerCount < 1200):
-			if(toneLib.getToneToIndex(currentTone) >= toneLib.getToneToIndex(highestTone) or toneLib.getToneToIndex(currentTone) >= 71):
-				scaleDirection = 'down'
-				highestTone = toneLib.downSteps(4, highestTone)
-			if(toneLib.getToneToIndex(currentTone) <= toneLib.getToneToIndex(lowestTone) or toneLib.getToneToIndex(currentTone) <= 2):
-				scaleDirection = 'up'
-			if(scaleDirection == 'up'):
-				currentTone = toneLib.upSteps(2, currentTone)
-			else:
-				currentTone = toneLib.downSteps(2, currentTone)
-			osc1.SetFreq(toneLib.getToneToFreq(currentTone))
+		# Set highest tone based on AccelY value
+		if(self.accelYValue < 550):
+			if(self.toneLibrary.getToneToIndex('As3') > self.toneLibrary.getToneToIndex(self.currentTone)):
+				self.highestTone = 'As3'
+		elif(self.accelYValue < 580):
+			if(self.toneLibrary.getToneToIndex('Fs4') > self.toneLibrary.getToneToIndex(self.currentTone)):
+				self.highestTone = 'Fs4'
+		elif(self.accelYValue < 610):
+			if(self.toneLibrary.getToneToIndex('D5') > self.toneLibrary.getToneToIndex(self.currentTone)):
+				self.highestTone = 'D5'
+		elif(self.accelYValue < 640):
+			if(self.toneLibrary.getToneToIndex('E6') > self.toneLibrary.getToneToIndex(self.currentTone)):
+				highestTone = 'E6'
+		elif(self.accelYValue >= 670):
+			if(self.toneLibrary.getToneToIndex('B7') > self.toneLibrary.getToneToIndex(self.currentTone)):
+				self.highestTone = 'B7'
+			
+		# Set tempo based on AccelX value
+		newStepTime = accelXValue - 450
+		stepTimeCandidate = 0.3
+		if(newStepTime < 0):
+			newStepTime = 0
 		else:
-			osc1.SetFreq(0)
-	#newAmp = (accelYValue - 400)
-	#if(newAmp < 0): newAmp = 0
-	#osc1.SetAmp(newAmp * 20)
-	
+			# Will convert value 450-560 to 0.3-0.05
+			stepTimeCandidate = 0.3 - (0.005 * newStepTime)
+			if(stepTimeCandidate < 0.05):
+				stepTimeCandidate = 0.05
+		if(stepTimeCandidate <= self.stepTime):
+			self.stepTime = stepTimeCandidate
+		else:
+			if(self.stepTime < 0.3):
+				self.stepTime += 0.0003
+		
+		# Increment silencer if needed
+		if(self.stepTime >= 0.3):
+			if(self.silencerCount < 1200):
+				self.silencerCount += 1
+		else:
+			self.silencerCount = 0
+		
+		# Calculate next tone at the next time step
+		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):
+			self.deltaT = time.time()
+			if(self.silencerCount < 1200):
+				if(self.toneLib.getToneToIndex(self.currentTone) >= self.toneLib.getToneToIndex(self.highestTone) or self.toneLib.getToneToIndex(self.currentTone) >= 71):
+					self.scaleDirection = 'down'
+					self.highestTone = self.toneLib.downSteps(4, self.highestTone)
+				if(self.toneLib.getToneToIndex(self.currentTone) <= self.toneLib.getToneToIndex(self.lowestTone) or self.toneLib.getToneToIndex(self.currentTone) <= 2):
+					self.scaleDirection = 'up'
+				if(self.scaleDirection == 'up'):
+					self.currentTone = self.toneLib.upSteps(2, self.currentTone)
+				else:
+					self.currentTone = toneLib.downSteps(2, self.currentTone)
+				osc.SetFreq(self.toneLib.getToneToFreq(self.currentTone))
+			else:
+				osc.SetFreq(0)

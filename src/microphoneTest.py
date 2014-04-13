@@ -89,7 +89,7 @@ class microphones:
     twelveToneTable['RI11'] = ['F4', 'Fs4', 'A4', 'As4', 'D4', 'Ds4', 'C4', 'Cs4', 'E4', 'G4', 'Gs4', 'B4']'''
     
     
-    harmTable = sndobj.HarmTable(1024, 100, sndobj.SINE)
+    '''harmTable = sndobj.HarmTable(1024, 100, sndobj.SINE)
     osc = sndobj.Oscili(harmTable, toneLib.getToneToFreq('C4'), 900)
     
     out = sndobj.SndRTIO(1, sndobj.SND_OUTPUT)
@@ -98,7 +98,7 @@ class microphones:
     thread = sndobj.SndThread()
     thread.AddObj(osc)
     thread.AddObj(out, sndobj.SNDIO_OUT)
-    thread.ProcOn()
+    thread.ProcOn()'''
     
     '''currentAvgIndex = []
     currentAvgIndex.append(0)

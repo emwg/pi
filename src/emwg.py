@@ -40,7 +40,7 @@ thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
 while True:
-    accelObj.runAccel(osc2)
+    #accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)
     #pressureObj.step()
     

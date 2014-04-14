@@ -6,12 +6,14 @@ from toneLibrary import *
 
 class pressureThing:
 
-    def __init__(self):
+    def __init__(self, sleepTime):
         NUM_SENSORS = 3
         
         CHORD_SENSOR = 2
         STRUM_SENSOR = 1
         SPEED_SENSOR = 0
+        
+        SLEEP_TIME = sleepTime
         
         sensors = []
         
@@ -103,9 +105,9 @@ class pressureThing:
         
         pluckWaitCutoff1 = 540
         pluckWaitCutoff2 = 620
-        pluckWait1 = sleepTime * 3
-        pluckWait2 = sleepTime * 2
-        pluckWait3 = sleepTime
+        pluckWait1 = SLEEP_TIME * 3
+        pluckWait2 = SLEEP_TIME * 2
+        pluckWait3 = SLEEP_TIME
         pluckWait = pluckWait1
         pluckTime = 0
         pluckIndex = 0
@@ -127,7 +129,7 @@ class pressureThing:
         sensorSamples = [0] * NUM_SENSORS
         pressureSums = [0] * NUM_SENSORS
 
-    def step(sleepTime):
+    def step():
     
         #print system info
         ram = psutil.virtual_memory().percent
@@ -235,7 +237,7 @@ class pressureThing:
         print("")
     
         #wait before doing another iteration
-        time.sleep(sleepTime)
+        time.sleep(SLEEP_TIME)
         
     def stop():
         thread.ProcOff()

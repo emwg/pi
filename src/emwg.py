@@ -1,9 +1,13 @@
 import sndobj
 from acceltest import *
 from microphoneTest import *
+from pressureThing import *
 
 accelObj = accel()
 microphonesObj = microphones()
+pressureObj = pressureThing()
+
+SLEEP_TIME = 0.05
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
@@ -38,3 +42,5 @@ thread.ProcOn()
 while True:
     accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)
+    pressureObj.step(SLEEP_TIME)
+    

@@ -39,6 +39,8 @@ thread.AddObj(mixer)
 thread.AddObj(out, sndobj.SNDIO_OUT)
 thread.ProcOn()
 
+osc2.SetFreq(0)
+
 while True:
     #accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)

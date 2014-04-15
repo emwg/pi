@@ -3,67 +3,6 @@ import time
 import psutil
 from pressureSensor import *
 from toneLibrary import *
-
-NUM_SENSORS = 3
-    
-CHORD_SENSOR = 2
-STRUM_SENSOR = 1
-SPEED_SENSOR = 0
-    
-SLEEP_TIME = 0.05
-    
-sensors = []
-chord1 = []
-chord2 = []
-chord3 = []
-chord4 = []
-    
-chord1amp = 0
-chord2amp = 0
-chord3amp = 0
-chord4amp = 0
-    
-#amounts the frequency and amplitude of the oscillators will change by during each loop iteration
-freqStep = 10
-pressureStep = 40
-        
-#values by which to multiply the raw sensor values
-pressureAdjust = 1
-ampAdjust = 10
-freqAdjust = 1
-        
-#chord cutoffs
-chord1Cutoff = 575
-chord2Cutoff = 660
-chord3Cutoff = 710
-        
-ampCutoff = 200
-    
-pluckWaitCutoff1 = 540
-pluckWaitCutoff2 = 620
-pluckWait1 = SLEEP_TIME * 3
-pluckWait2 = SLEEP_TIME * 2
-pluckWait3 = SLEEP_TIME
-pluckWait = pluckWait1
-pluckTime = 0
-pluckIndex = 0
-strumCutoff = 525
-strummed = False
-
-pressureValue = [0] * NUM_SENSORS
-pressure = [0] * NUM_SENSORS
-        
-avgSysInfoSamples = 10
-sysInfoSamples = 0
-ramSum = 0
-cpuSum = 0
-avgRam = 0
-avgCpu = 0
-        
-avgSensorSamples = 2
-#avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
-sensorSamples = [0] * NUM_SENSORS
-pressureSums = [0] * NUM_SENSORS
     
 class pressureThing:
 
@@ -71,45 +10,107 @@ class pressureThing:
         
         print("Creating pressureThing object")
         
-        SLEEP_TIME = sleepTime
+        #Constants
+        self.NUM_SENSORS = 3
+    
+        self.CHORD_SENSOR = 2
+        self.STRUM_SENSOR = 1
+        self.SPEED_SENSOR = 0
+            
+        self.SLEEP_TIME = 0.05
+            
+        self.sensors = []
+        self.chord1 = []
+        self.chord2 = []
+        self.chord3 = []
+        self.chord4 = []
+            
+        self.chord1amp = 0
+        self.chord2amp = 0
+        self.chord3amp = 0
+        self.chord4amp = 0
+            
+        #amounts the frequency and amplitude of the oscillators will change by during each loop iteration
+        self.freqStep = 10
+        self.pressureStep = 40
+                
+        #values by which to multiply the raw sensor values
+        self.pressureAdjust = 1
+        self.ampAdjust = 10
+        self.freqAdjust = 1
+                
+        #chord cutoffs
+        self.chord1Cutoff = 575
+        self.chord2Cutoff = 660
+        self.chord3Cutoff = 710
+                
+        self.ampCutoff = 200
+            
+        self.pluckWaitCutoff1 = 540
+        self.pluckWaitCutoff2 = 620
+        self.pluckWait1 = self.SLEEP_TIME * 3
+        self.pluckWait2 = self.SLEEP_TIME * 2
+        self.pluckWait3 = self.SLEEP_TIME
+        self.pluckWait = self.pluckWait1
+        self.pluckTime = 0
+        self.pluckIndex = 0
+        self.strumCutoff = 525
+        self.strummed = False
         
-        for x in range(NUM_SENSORS):
-            sensors.append(pressureSensor(0, x, 10))
+        self.pressureValue = [0] * self.NUM_SENSORS
+        self.pressure = [0] * self.NUM_SENSORS
+                
+        self.avgSysInfoSamples = 10
+        self.sysInfoSamples = 0
+        self.ramSum = 0
+        self.cpuSum = 0
+        self.avgRam = 0
+        self.avgCpu = 0
+                
+        self.avgSensorSamples = 2
+        #avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
+        self.sensorSamples = [0] * self.NUM_SENSORS
+        self.pressureSums = [0] * self.NUM_SENSORS
+        
+        self.SLEEP_TIME = sleepTime
+        
+        for x in range(self.NUM_SENSORS):
+            self.sensors.append(pressureSensor(0, x, 10))
             
         #build chords
         #C
-        chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-        chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
-        chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
+        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
+        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
         
         #D
-        chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
-        chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
-        chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
+        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
+        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
         
         #G
-        chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
-        chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
-        chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
+        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
+        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
         
         #am
-        chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
-        chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-        chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
+        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
+        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
         
         out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
         #mixer = sndobj.Mixer()
         
-        for x in chord1:
+        for x in self.chord1:
             mixer.AddObj(x)
         
-        for x in chord2:
+        for x in self.chord2:
             mixer.AddObj(x)
         
-        for x in chord3:
+        for x in self.chord3:
             mixer.AddObj(x)
         
-        for x in chord4:
+        for x in self.chord4:
             mixer.AddObj(x)
         
         pan = sndobj.Pan(0, mixer)
@@ -117,16 +118,16 @@ class pressureThing:
         out.SetOutput(1, pan.left)
         out.SetOutput(2, pan.right)
         
-        for x in chord1:
+        for x in self.chord1:
             thread.AddObj(x)
             
-        for x in chord2:
+        for x in self.chord2:
             thread.AddObj(x)
             
-        for x in chord3:
+        for x in self.chord3:
             thread.AddObj(x)
             
-        for x in chord4:
+        for x in self.chord4:
             thread.AddObj(x)
         
         thread.AddObj(mixer)
@@ -140,10 +141,10 @@ class pressureThing:
     def step(self):
         
         print("Beginning pressureThing step")
-        print(str(ramsum))
-        print(str(ramsum + 1))
-        ramsum += 1
-        print(str(ramsum))
+        print(str(self.ramsum))
+        print(str(self.ramsum + 1))
+        self.ramsum += 1
+        print(str(self.ramsum))
     
         #print system info
         ram = psutil.virtual_memory().percent

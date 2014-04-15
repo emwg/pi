@@ -5,67 +5,67 @@ from pressureSensor import *
 from toneLibrary import *
 
 NUM_SENSORS = 3
+    
+CHORD_SENSOR = 2
+STRUM_SENSOR = 1
+SPEED_SENSOR = 0
+    
+SLEEP_TIME = 0.05
+    
+sensors = []
+chord1 = []
+chord2 = []
+chord3 = []
+chord4 = []
+    
+chord1amp = 0
+chord2amp = 0
+chord3amp = 0
+chord4amp = 0
+    
+#amounts the frequency and amplitude of the oscillators will change by during each loop iteration
+freqStep = 10
+pressureStep = 40
+        
+#values by which to multiply the raw sensor values
+pressureAdjust = 1
+ampAdjust = 10
+freqAdjust = 1
+        
+#chord cutoffs
+chord1Cutoff = 575
+chord2Cutoff = 660
+chord3Cutoff = 710
+        
+ampCutoff = 200
+    
+pluckWaitCutoff1 = 540
+pluckWaitCutoff2 = 620
+pluckWait1 = SLEEP_TIME * 3
+pluckWait2 = SLEEP_TIME * 2
+pluckWait3 = SLEEP_TIME
+pluckWait = pluckWait1
+pluckTime = 0
+pluckIndex = 0
+strumCutoff = 525
+strummed = False
 
+pressureValue = [0] * NUM_SENSORS
+pressure = [0] * NUM_SENSORS
+        
+avgSysInfoSamples = 10
+sysInfoSamples = 0
+ramSum = 0
+cpuSum = 0
+avgRam = 0
+avgCpu = 0
+        
+avgSensorSamples = 2
+#avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
+sensorSamples = [0] * NUM_SENSORS
+pressureSums = [0] * NUM_SENSORS
+    
 class pressureThing:
-    
-    CHORD_SENSOR = 2
-    STRUM_SENSOR = 1
-    SPEED_SENSOR = 0
-    
-    SLEEP_TIME = 0.05
-    
-    sensors = []
-    chord1 = []
-    chord2 = []
-    chord3 = []
-    chord4 = []
-    
-    chord1amp = 0
-    chord2amp = 0
-    chord3amp = 0
-    chord4amp = 0
-    
-    #amounts the frequency and amplitude of the oscillators will change by during each loop iteration
-    freqStep = 10
-    pressureStep = 40
-        
-    #values by which to multiply the raw sensor values
-    pressureAdjust = 1
-    ampAdjust = 10
-    freqAdjust = 1
-        
-    #chord cutoffs
-    chord1Cutoff = 575
-    chord2Cutoff = 660
-    chord3Cutoff = 710
-        
-    ampCutoff = 200
-    
-    pluckWaitCutoff1 = 540
-    pluckWaitCutoff2 = 620
-    pluckWait1 = SLEEP_TIME * 3
-    pluckWait2 = SLEEP_TIME * 2
-    pluckWait3 = SLEEP_TIME
-    pluckWait = pluckWait1
-    pluckTime = 0
-    pluckIndex = 0
-    strumCutoff = 525
-    strummed = False
-        
-    pressureValue = [0] * NUM_SENSORS
-    pressure = [0] * NUM_SENSORS
-        
-    avgSysInfoSamples = 10
-    sysInfoSamples = 0
-    ramSum = 0
-    cpuSum = 0
-    avgRam = 0
-    avgCpu = 0
-        
-    avgSensorSamples = 2
-    #avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
-    sensorSamples = [0] * NUM_SENSORS
-    pressureSums = [0] * NUM_SENSORS
 
     def __init__(self, sleepTime, mixer, thread):
         

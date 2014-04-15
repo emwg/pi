@@ -47,3 +47,4 @@ while True:
     #print("Mic step")
     #microphonesObj.runMicrophones(osc1)
     print("Press step")
+    pressureObj.step()

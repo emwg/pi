@@ -66,7 +66,7 @@ class accel:
 		self.accelYValue = self.accelY.getAccelValue()
 		self.accelZValue = self.accelZ.getAccelValue()
 		
-		print("AccelX: " + str(self.accelXValue) + " AccelY: " + str(self.accelYValue) + " AccelZ: " + str(self.accelZValue))
+		#print("AccelX: " + str(self.accelXValue) + " AccelY: " + str(self.accelYValue) + " AccelZ: " + str(self.accelZValue))
 		
 		# Set highest tone based on AccelY value
 		if(self.accelYValue < 550):
@@ -108,8 +108,8 @@ class accel:
 		else:
 			self.silencerCount = 0
 			
-		print(self.silencerCount)
-		print(self.stepTime)
+		#print(self.silencerCount)
+		#print(self.stepTime)
 		
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):

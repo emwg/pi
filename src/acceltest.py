@@ -99,11 +99,11 @@ class accel:
 			self.stepTime = stepTimeCandidate
 		else:
 			if(self.stepTime < 0.3):
-				self.stepTime += 0.003
+				self.stepTime += 0.0009
 		
 		# Increment silencer if needed
 		if(self.stepTime >= 0.3):
-			if(self.silencerCount < 500):
+			if(self.silencerCount < 100):
 				self.silencerCount += 1
 		else:
 			self.silencerCount = 0
@@ -114,7 +114,7 @@ class accel:
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):
 			self.deltaT = time.time()
-			if(self.silencerCount < 500):
+			if(self.silencerCount < 100):
 				if(self.toneLib.getToneToIndex(self.currentTone) >= self.toneLib.getToneToIndex(self.highestTone) or self.toneLib.getToneToIndex(self.currentTone) >= 71):
 					self.scaleDirection = 'down'
 					self.highestTone = self.toneLib.downSteps(4, self.highestTone)

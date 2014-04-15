@@ -139,13 +139,13 @@ class pressureThing:
 
     def step(self):
         
-        '''print("Beginning pressureThing step")
+        print("Beginning pressureThing step")
     
         #print system info
         ram = psutil.virtual_memory().percent
         print("Got ram")
         cpu = psutil.cpu_percent(interval=0)
-        print("Got cpu")'''
+        print("Got cpu")
         
         if (self.sysInfoSamples < self.avgSysInfoSamples):
             self.ramSum += ram

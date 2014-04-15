@@ -99,7 +99,7 @@ class accel:
 			self.stepTime = stepTimeCandidate
 		else:
 			if(self.stepTime < 0.3):
-				self.stepTime += 0.0009
+				self.stepTime += 0.009
 		
 		# Increment silencer if needed
 		if(self.stepTime >= 0.3):

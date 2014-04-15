@@ -154,7 +154,7 @@ class pressureThing:
         #check to see if a strum should happen
         if (self.pressureValue[self.STRUM_SENSOR] > self.strumCutoff):
             strumming = True
-            amp = pressureValue[STRUM_SENSOR] * ampAdjust
+            amp = self.pressureValue[self.STRUM_SENSOR] * self.ampAdjust
         else:
             self.pluckIndex = 0
             strumming = False

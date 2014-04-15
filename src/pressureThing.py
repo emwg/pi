@@ -141,10 +141,6 @@ class pressureThing:
     def step(self):
         
         print("Beginning pressureThing step")
-        print(str(self.ramSum))
-        print(str(self.ramSum + 1))
-        self.ramSum += 1
-        print(str(self.ramSum))
     
         #print system info
         ram = psutil.virtual_memory().percent
@@ -152,10 +148,10 @@ class pressureThing:
         cpu = psutil.cpu_percent(interval=0)
         print("Got cpu")
         
-        if (sysInfoSamples < avgSysInfoSamples):
-            ramSum += ram
-            cpuSum += cpu
-            sysInfoSamples += 1
+        if (self.sysInfoSamples < self.avgSysInfoSamples):
+            self.ramSum += ram
+            self.cpuSum += cpu
+            self.sysInfoSamples += 1
         else:
             avgRam = (ramSum / avgSysInfoSamples)
             avgCpu = (cpuSum / avgSysInfoSamples)

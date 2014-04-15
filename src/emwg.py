@@ -13,8 +13,8 @@ harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 harmTableSaw = sndobj.HarmTable()
 harmTableSaw.SetHarm(100, sndobj.SAW)
-osc1 = sndobj.Oscili(harmTable, 440, 900)
-osc2 = sndobj.Oscili(harmTableSaw, 440, 900)
+osc1 = sndobj.Oscili(harmTableSaw, 440, 600)
+osc2 = sndobj.Oscili(harmTable, 440, 900)
 
 # Create a mixer
 mixer = sndobj.Mixer()

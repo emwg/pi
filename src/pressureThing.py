@@ -134,7 +134,7 @@ class pressureThing:
         
         print("Finished creating pressureThing object")
 
-    def step():
+    def step(self):
         
         print("Beginning pressureThing step")
     

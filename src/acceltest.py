@@ -107,6 +107,8 @@ class accel:
 				self.silencerCount += 1
 		else:
 			self.silencerCount = 0
+			
+		print(self.silencerCount)
 		
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):

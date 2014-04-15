@@ -7,7 +7,7 @@ SLEEP_TIME = 0.05
 
 accelObj = accel()
 microphonesObj = microphones()
-#pressureObj = pressureThing(SLEEP_TIME)
+pressureObj = pressureThing(SLEEP_TIME)
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
@@ -44,5 +44,5 @@ osc2.SetFreq(0)
 while True:
     accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)
-    #pressureObj.step()
+    pressureObj.step()
     

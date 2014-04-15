@@ -4,9 +4,9 @@ import psutil
 from pressureSensor import *
 from toneLibrary import *
 
+NUM_SENSORS = 3
+
 class pressureThing:
-    
-    NUM_SENSORS = 3
     
     CHORD_SENSOR = 2
     STRUM_SENSOR = 1

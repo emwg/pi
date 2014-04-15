@@ -85,7 +85,7 @@ class lightThing:
         ram = psutil.virtual_memory().percent
         cpu = psutil.cpu_percent(interval=0)
         
-        if (samples < avgSamples):
+        if (self.samples < self.avgSamples):
             self.ramSum += ram
             self.cpuSum += cpu
             self.samples += 1

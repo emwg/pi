@@ -3,316 +3,263 @@ import time
 import psutil
 from lightSensor import *
 
-NUM_SENSORS = 6
-
-CHORD_SENSOR = 0
-AMP_SENSOR = 1
-PAN_SENSOR = 2
-COMB_SENSOR = 3
-FREQ_SENSOR = 4
-WAVE_SENSOR = 5
-
-sensors = []
-
-for x in range(NUM_SENSORS):
-    sensors.append(lightSensor(1, x, 10))
-
-sine = sndobj.HarmTable(1000, 20, sndobj.SINE)
-saw = sndobj.HarmTable(1000, 20, sndobj.SAW)
-square = sndobj.HarmTable(1000, 20, sndobj.SQUARE)
-buzz = sndobj.HarmTable(1000, 20, sndobj.BUZZ)
-osc1 = sndobj.Oscili(sine, 0, 0)
-osc2 = sndobj.Oscili(sine, 0, 0)
-osc3 = sndobj.Oscili(sine, 0, 0)
-osc4 = sndobj.Oscili(sine, 0, 0)
-comb1 = sndobj.Comb(0, 0.2, osc1)
-comb2 = sndobj.Comb(0, 0.2, osc2)
-comb3 = sndobj.Comb(0, 0.2, osc3)
-comb4 = sndobj.Comb(0, 0.2, osc4)
-#ring = sndobj.Ring(osc1, osc2)
-#buzz = sndobj.Buzz(0, 0, 0)
-#pluck1 = sndobj.Pluck(400, 0)
-osc1amp = 0
-osc2amp = 0
-osc3amp = 0
-osc4amp = 0
-pluck1amp = 0
-osc1freq = 100
-osc2freq = 200
-osc3freq = 300
-osc4freq = 400
-pluck1freq = 0
-mod = sndobj.Oscili(sine, 0, 100)
-out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
-mixer = sndobj.Mixer()
-mixer.AddObj(osc1)
-mixer.AddObj(osc2)
-mixer.AddObj(osc3)
-mixer.AddObj(osc4)
-mixer.AddObj(comb1)
-mixer.AddObj(comb2)
-mixer.AddObj(comb3)
-mixer.AddObj(comb4)
-#mixer.AddObj(ring)
-#mixer.AddObj(pluck1)
-#mixer.AddObj(buzz)
-
-pan = sndobj.Pan(0, mixer)
-
-thread = sndobj.SndThread()
-out.SetOutput(1, pan.left)
-out.SetOutput(2, pan.right)
-
-thread.AddObj(mod)
-thread.AddObj(osc1)
-thread.AddObj(osc2)
-thread.AddObj(osc3)
-thread.AddObj(osc4)
-#thread.AddObj(pluck1)
-#thread.AddObj(buzz)
-thread.AddObj(mixer)
-thread.AddObj(pan)
-thread.AddObj(comb1)
-thread.AddObj(comb2)
-thread.AddObj(comb3)
-thread.AddObj(comb4)
-#thread.AddObj(ring)
-thread.AddObj(out, sndobj.SNDIO_OUT)
-
-thread.ProcOn()
-
-#amounts the frequency and amplitude of the oscillators will change by during each loop iteration
-freqStep = 10
-lightStep = 40
-
-#values with which to multiply the raw sensor values
-lightAdjust = 1
-flexAdjust = 1
-knobAdjust = 0.1
-ampAdjust = 10
-freqAdjust = 1
-
-#chord cutoffs
-dimCutoff = 350
-minCutoff = 650
-majCutoff = 750
-
-#wave cutoffs
-sineCutoff = 350
-sawCutoff = 450
-squareCutoff = 750
-
-ampCutoff = 350
-
-alreadySine = True
-alreadySaw = False
-alreadySquare = False
-alreadyBuzz = False
-
-pluckWait = 0.25
-pluckTime = 0
-
-combGainMult = 0.99
-
-lightValue = [0] * NUM_SENSORS
-light = [0] * NUM_SENSORS
+class lightThing:
     
-rhythmCount = 0
-subtractMult = 5000
-osc1subtract = 1
-osc2subtract = osc1subtract * subtractMult
-osc3subtract = osc2subtract * subtractMult
-osc4subtract = osc3subtract * subtractMult
+    def __init__(self):
 
-avgSamples = 10
-samples = 0
-ramSum = 0
-cpuSum = 0
-avgRam = 0
-avgCpu = 0
-
-while True:
+        self.NUM_SENSORS = 6
     
-    #print system info
-    ram = psutil.virtual_memory().percent
-    cpu = psutil.cpu_percent(interval=0)
+        self.CHORD_SENSOR = 0
+        self.AMP_SENSOR = 1
+        self.PAN_SENSOR = 2
+        self.COMB_SENSOR = 3
+        self.FREQ_SENSOR = 4
+        self.WAVE_SENSOR = 5
     
-    if (samples < avgSamples):
-        ramSum += ram
-        cpuSum += cpu
-        samples += 1
-    else:
-        avgRam = (ramSum / avgSamples)
-        avgCpu = (cpuSum / avgSamples)
-        samples = 0
-        ramSum = 0
-        cpuSum = 0
+        self.sensors = []
     
-    print("RAM usage: " + str(avgRam) + "%")
-    print("CPU usage: " + str(avgCpu) + "%")
+        for x in range(self.NUM_SENSORS):
+            self.sensors.append(lightSensor(1, x, 10))
     
-    ###
-    # Light sensor
-    ###
-    #get light sensor values
-    for x in range(NUM_SENSORS):
-        light[x] = sensors[x].getLightValue() * lightAdjust
-        #print("Sensor " + str(x) + ": " + str(light[x]))
-        #interpolate lightValue
-        if (lightValue[x] < light[x]):
-            #slide up
-            if (lightValue[x] + lightStep < light[x]): lightValue[x] += lightStep
-            else: lightValue[x] = light[x]
-        elif (lightValue[x] > light[x]):
-            #slide down
-            if (lightValue[x] - lightStep > light[x]): lightValue[x] -= lightStep
-            else: lightValue[x] = light[x]
+        self.osc1amp = 0
+        self.osc2amp = 0
+        self.osc3amp = 0
+        self.osc4amp = 0
+        self.pluck1amp = 0
+        self.osc1freq = 100
+        self.osc2freq = 200
+        self.osc3freq = 300
+        self.osc4freq = 400
+        self.pluck1freq = 0
     
-    print("Sensors: " + str(light))
+        #amounts the frequency and amplitude of the oscillators will change by during each loop iteration
+        self.freqStep = 10
+        self.lightStep = 40
+    
+        #values with which to multiply the raw sensor values
+        self.lightAdjust = 1
+        self.flexAdjust = 1
+        self.knobAdjust = 0.1
+        self.ampAdjust = 10
+        self.freqAdjust = 1
+    
+        #chord cutoffs
+        self.dimCutoff = 350
+        self.minCutoff = 650
+        self.majCutoff = 750
+    
+        #wave cutoffs
+        self.sineCutoff = 350
+        self.sawCutoff = 450
+        self.squareCutoff = 750
+    
+        self.ampCutoff = 350
+    
+        self.alreadySine = True
+        self.alreadySaw = False
+        self.alreadySquare = False
+        self.alreadyBuzz = False
+    
+        self.combGainMult = 0.99
+    
+        self.lightValue = [0] * self.NUM_SENSORS
+        self.light = [0] * self.NUM_SENSORS
         
-    #osc1amp = lightValue - osc1subtract
-    #osc2amp = lightValue - osc2subtract
-    #osc3amp = lightValue - osc3subtract
-    #osc4amp = lightValue - osc4subtract
+        self.rhythmCount = 0
+        self.subtractMult = 5000
+        self.osc1subtract = 1
+        self.osc2subtract = self.osc1subtract * self.subtractMult
+        self.osc3subtract = self.osc2subtract * self.subtractMult
+        self.osc4subtract = self.osc3subtract * self.subtractMult
     
-    #set chord type
-    if (lightValue[CHORD_SENSOR] < dimCutoff):
-        chord = "dim"
-    elif (lightValue[CHORD_SENSOR] < minCutoff):
-        chord = "min"
-    elif (lightValue[CHORD_SENSOR] < majCutoff):
-        chord = "maj"
-    else: #(lightValue[CHORD_SENSOR] < augCutoff):
-        chord = "aug"
-        
-    print("Chord: " + chord)
-    
-    #set wave type
-    if (lightValue[WAVE_SENSOR] < sineCutoff):
-        wave = "sine"
-    elif (lightValue[WAVE_SENSOR] < sawCutoff):
-        wave = "saw"
-    elif (lightValue[WAVE_SENSOR] < squareCutoff):
-        wave = "square"
-    else: #(lightValue[WAVE_SENSOR] < buzzCutoff):
-        wave = "buzz"
-        
-    print ("Wave: " + wave)
-    
-    if (wave == "sine" and alreadySine == False):
-        osc1.SetTable(sine)
-        osc2.SetTable(sine)
-        osc3.SetTable(sine)
-        osc4.SetTable(sine)
-        alreadySine = True
-        alreadySaw = False
-        alreadySquare = False
-        alreadyBuzz = False
-    elif (wave == "saw" and alreadySaw == False):
-        osc1.SetTable(saw)
-        osc2.SetTable(saw)
-        osc3.SetTable(saw)
-        osc4.SetTable(saw)
-        alreadySine = False
-        alreadySaw = True
-        alreadySquare = False
-        alreadyBuzz = False
-    elif (wave == "square" and alreadySquare == False):
-        osc1.SetTable(square)
-        osc2.SetTable(square)
-        osc3.SetTable(square)
-        osc4.SetTable(square)
-        alreadySine = False
-        alreadySaw = False
-        alreadySquare = True
-        alreadyBuzz = False
-    elif (alreadyBuzz == False):
-        osc1.SetTable(buzz)
-        osc2.SetTable(buzz)
-        osc3.SetTable(buzz)
-        osc4.SetTable(buzz)
-        alreadySine = False
-        alreadySaw = False
-        alreadySquare = False
-        alreadyBuzz = True
-        
-        
-    #print("osc1amp: " + str(osc4amp))    
-    #set amplitudes
-    osc1.SetAmp(osc1amp)
-    osc2.SetAmp(osc2amp)
-    osc3.SetAmp(osc3amp)
-    osc4.SetAmp(osc4amp)
+        self.avgSamples = 10
+        self.samples = 0
+        self.ramSum = 0
+        self.cpuSum = 0
+        self.avgRam = 0
+        self.avgCpu = 0
 
-
-    if (lightValue[AMP_SENSOR] < ampCutoff):
-        amp = 0
-    else:
-        amp = lightValue[AMP_SENSOR] * ampAdjust
-    print("Amplitude: " + str(amp))
+    def step(self, osc1, osc2, osc3, osc4, sine, saw, square, buzz, comb1, comb2, comb3, comb4, mod, pan):
     
-    osc1.SetAmp(amp)
-    osc2.SetAmp(amp)
-    osc3.SetAmp(amp)
-    osc4.SetAmp(amp)
-    #buzz.SetAmp(amp)
-    
-    #pluckWait = 500.0 / amp
-    #print("Pluck delay: " + str(pluckWait))
-    
-    #if ((time.time() - pluckTime) > pluckWait):
-        #pluck1.SetAmp(amp)
-        #pluckTime = time.time()
-    
-    freq = lightValue[FREQ_SENSOR] * freqAdjust
-    print("Frequency: " + str(freq))
-    
-    if (freq != 0):
-        # root
-        osc1freq = freq
-        # fifth
-        osc2freq = osc1freq * (3/2)
-        # third
-        osc3freq = osc1freq * (osc1freq * 5) / (osc2freq * 4)
-        # octave
-        osc4freq = osc1freq * 2
-    else:
-        osc1freq = 0
-        osc2freq = 0
-        osc3freq = 0
-        osc4freq = 0
+        #print system info
+        ram = psutil.virtual_memory().percent
+        cpu = psutil.cpu_percent(interval=0)
         
-    if (chord == "dim"):
-        osc2freq = osc3freq * (2^(-1/12))
-        osc3freq = osc3freq * (2^(-1/12))
-    elif (chord == "min"):
-        osc3freq = osc3freq * (2^(-1/12))
-    elif (chord == "aug"):
-        osc2freq = osc3freq * (2^(1/12))
-        osc3freq = osc3freq * (2^(1/12))
+        if (samples < avgSamples):
+            self.ramSum += ram
+            self.cpuSum += cpu
+            self.samples += 1
+        else:
+            self.avgRam = (self.ramSum / self.avgSamples)
+            self.avgCpu = (self.cpuSum / self.avgSamples)
+            self.samples = 0
+            self.ramSum = 0
+            self.cpuSum = 0
         
-    #pluck1freq = 700 #this does nothing
+        print("RAM usage: " + str(self.avgRam) + "%")
+        print("CPU usage: " + str(self.avgCpu) + "%")
+        
+        ###
+        # Light sensor
+        ###
+        #get light sensor values
+        for x in range(self.NUM_SENSORS):
+            self.light[x] = self.sensors[x].getLightValue() * self.lightAdjust
+            #print("Sensor " + str(x) + ": " + str(light[x]))
+            #interpolate lightValue
+            if (self.lightValue[x] < self.light[x]):
+                #slide up
+                if (self.lightValue[x] + self.lightStep < self.light[x]): self.lightValue[x] += self.lightStep
+                else: self.lightValue[x] = self.light[x]
+            elif (self.lightValue[x] > self.light[x]):
+                #slide down
+                if (self.lightValue[x] - self.lightStep > self.light[x]): self.lightValue[x] -= self.lightStep
+                else: self.lightValue[x] = self.light[x]
+        
+        print("Sensors: " + str(self.light))
+            
+        #osc1amp = lightValue - osc1subtract
+        #osc2amp = lightValue - osc2subtract
+        #osc3amp = lightValue - osc3subtract
+        #osc4amp = lightValue - osc4subtract
+        
+        #set chord type
+        if (self.lightValue[self.CHORD_SENSOR] < self.dimCutoff):
+            chord = "dim"
+        elif (self.lightValue[self.CHORD_SENSOR] < self.minCutoff):
+            chord = "min"
+        elif (self.lightValue[self.CHORD_SENSOR] < self.majCutoff):
+            chord = "maj"
+        else: #(self.lightValue[self.CHORD_SENSOR] < self.augCutoff):
+            chord = "aug"
+            
+        print("Chord: " + self.chord)
+        
+        #set wave type
+        if (self.lightValue[self.WAVE_SENSOR] < self.sineCutoff):
+            wave = "sine"
+        elif (self.lightValue[self.WAVE_SENSOR] < self.sawCutoff):
+            wave = "saw"
+        elif (self.lightValue[self.WAVE_SENSOR] < self.squareCutoff):
+            wave = "square"
+        else: #(self.lightValue[self.WAVE_SENSOR] < self.buzzCutoff):
+            wave = "buzz"
+            
+        print ("Wave: " + wave)
+        
+        if (wave == "sine" and self.alreadySine == False):
+            osc1.SetTable(sine)
+            osc2.SetTable(sine)
+            osc3.SetTable(sine)
+            osc4.SetTable(sine)
+            self.alreadySine = True
+            self.alreadySaw = False
+            self.alreadySquare = False
+            self.alreadyBuzz = False
+        elif (wave == "saw" and self.alreadySaw == False):
+            osc1.SetTable(saw)
+            osc2.SetTable(saw)
+            osc3.SetTable(saw)
+            osc4.SetTable(saw)
+            self.alreadySine = False
+            self.alreadySaw = True
+            self.alreadySquare = False
+            self.alreadyBuzz = False
+        elif (wave == "square" and self.alreadySquare == False):
+            osc1.SetTable(square)
+            osc2.SetTable(square)
+            osc3.SetTable(square)
+            osc4.SetTable(square)
+            self.alreadySine = False
+            self.alreadySaw = False
+            self.alreadySquare = True
+            self.alreadyBuzz = False
+        elif (self.alreadyBuzz == False):
+            osc1.SetTable(buzz)
+            osc2.SetTable(buzz)
+            osc3.SetTable(buzz)
+            osc4.SetTable(buzz)
+            self.alreadySine = False
+            self.alreadySaw = False
+            self.alreadySquare = False
+            self.alreadyBuzz = True
+            
+            
+        #print("osc1amp: " + str(osc4amp))    
+        #set amplitudes
+        osc1.SetAmp(self.osc1amp)
+        osc2.SetAmp(self.osc2amp)
+        osc3.SetAmp(self.osc3amp)
+        osc4.SetAmp(self.osc4amp)
     
-    #buzz.SetFreq(amp / 2)
-    #buzz.SetHarm(amp / 20)
     
-    #set frequencies
-    osc1.SetFreq(osc1freq, mod)
-    osc2.SetFreq(osc2freq, mod)
-    osc3.SetFreq(osc3freq, mod)
-    osc4.SetFreq(osc4freq, mod)
+        if (self.lightValue[self.AMP_SENSOR] < self.ampCutoff):
+            amp = 0
+        else:
+            amp = self.lightValue[self.AMP_SENSOR] * self.ampAdjust
+        print("Amplitude: " + str(amp))
+        
+        osc1.SetAmp(amp)
+        osc2.SetAmp(amp)
+        osc3.SetAmp(amp)
+        osc4.SetAmp(amp)
+        #buzz.SetAmp(amp)
+        
+        #pluckWait = 500.0 / amp
+        #print("Pluck delay: " + str(pluckWait))
+        
+        #if ((time.time() - pluckTime) > pluckWait):
+            #pluck1.SetAmp(amp)
+            #pluckTime = time.time()
+        
+        freq = self.lightValue[self.FREQ_SENSOR] * self.freqAdjust
+        print("Frequency: " + str(freq))
+        
+        if (freq != 0):
+            # root
+            self.osc1freq = freq
+            # fifth
+            self.osc2freq = self.osc1freq * (3/2)
+            # third
+            self.osc3freq = self.osc1freq * (self.osc1freq * 5) / (self.osc2freq * 4)
+            # octave
+            self.osc4freq = self.osc1freq * 2
+        else:
+            self.osc1freq = 0
+            self.osc2freq = 0
+            self.osc3freq = 0
+            self.osc4freq = 0
+            
+        if (chord == "dim"):
+            self.osc2freq = self.osc3freq * (2^(-1/12))
+            self.osc3freq = self.osc3freq * (2^(-1/12))
+        elif (chord == "min"):
+            self.osc3freq = self.osc3freq * (2^(-1/12))
+        elif (chord == "aug"):
+            self.osc2freq = self.osc3freq * (2^(1/12))
+            self.osc3freq = self.osc3freq * (2^(1/12))
+            
+        #pluck1freq = 700 #this does nothing
+        
+        #buzz.SetFreq(amp / 2)
+        #buzz.SetHarm(amp / 20)
+        
+        #set frequencies
+        osc1.SetFreq(self.osc1freq, mod)
+        osc2.SetFreq(self.osc2freq, mod)
+        osc3.SetFreq(self.osc3freq, mod)
+        osc4.SetFreq(self.osc4freq, mod)
+        
+        #comb
+        comb1.SetGain(((self.lightValue[self.COMB_SENSOR] / self.lightAdjust) / 1024) * self.combGainMult)
+        comb2.SetGain(((self.lightValue[self.COMB_SENSOR] / self.lightAdjust) / 1024) * self.combGainMult)
+        comb3.SetGain(((self.lightValue[self.COMB_SENSOR] / self.lightAdjust) / 1024) * self.combGainMult)
+        comb4.SetGain(((self.lightValue[self.COMB_SENSOR] / self.lightAdjust) / 1024) * self.combGainMult)
+        
+        #panning
+        pan.SetPan((self.lightValue[self.PAN_SENSOR] / 512.0) - 1)
+        
+        print("")
     
-    #comb
-    comb1.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
-    comb2.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
-    comb3.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
-    comb4.SetGain(((lightValue[COMB_SENSOR] / lightAdjust) / 1024) * combGainMult)
-    
-    #panning
-    pan.SetPan((lightValue[PAN_SENSOR] / 512.0) - 1)
-    
-    print("")
-
-    #wait before doing another iteration
-    time.sleep(0.05)
-thread.ProcOff()
+        #wait before doing another iteration
+        time.sleep(0.05)

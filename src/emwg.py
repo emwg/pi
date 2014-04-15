@@ -29,6 +29,8 @@ out.SetOutput(1, mixer)
 #mod = sndobj.Oscili(harmTable, 2, 150)
 #osc1.SetFreq(440, mod)
 
+
+
 # Attach sound objects to the sound thread
 thread.AddObj(osc1)
 thread.AddObj(osc2)

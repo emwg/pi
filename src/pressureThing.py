@@ -24,6 +24,7 @@ class pressureThing:
         self.chord2 = []
         self.chord3 = []
         self.chord4 = []
+        self.chord = 1
             
         self.chord1amp = 0
         self.chord2amp = 0
@@ -98,7 +99,7 @@ class pressureThing:
         self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
         self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
         
-        out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
+        #out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
         #mixer = sndobj.Mixer()
         
         for x in self.chord1:
@@ -114,9 +115,9 @@ class pressureThing:
             mixer.AddObj(x)
         
         pan = sndobj.Pan(0, mixer)
-        #thread = sndobj.SndThread()
+        '''#thread = sndobj.SndThread()
         out.SetOutput(1, pan.left)
-        out.SetOutput(2, pan.right)
+        out.SetOutput(2, pan.right)'''
         
         for x in self.chord1:
             thread.AddObj(x)
@@ -130,23 +131,21 @@ class pressureThing:
         for x in self.chord4:
             thread.AddObj(x)
         
-        thread.AddObj(mixer)
         thread.AddObj(pan)
-        thread.AddObj(out, sndobj.SNDIO_OUT)
         
-        #thread.ProcOn()
+        #thread.ProcOn()'''
         
-        print("Finished creating pressureThing object")
+        #print("Finished creating pressureThing object")
 
     def step(self):
         
-        print("Beginning pressureThing step")
+        '''print("Beginning pressureThing step")
     
         #print system info
         ram = psutil.virtual_memory().percent
         print("Got ram")
         cpu = psutil.cpu_percent(interval=0)
-        print("Got cpu")
+        print("Got cpu")'''
         
         if (self.sysInfoSamples < self.avgSysInfoSamples):
             self.ramSum += ram
@@ -166,28 +165,28 @@ class pressureThing:
         # Pressure sensors
         ###
         #get pressure sensor values
-        for x in range(NUM_SENSORS):
-            if (sensorSamples[x] < avgSensorSamples):
-                pressureSums[x] += sensors[x].getPressureValue() * pressureAdjust
-                sensorSamples[x] += 1
+        for x in range(self.NUM_SENSORS):
+            if (self.sensorSamples[x] < self.avgSensorSamples):
+                self.pressureSums[x] += self.sensors[x].getPressureValue() * self.pressureAdjust
+                self.sensorSamples[x] += 1
             else:
-                pressure[x] = pressureSums[x] / avgSensorSamples
-                sensorSamples[x] = 0
-                pressureSums[x] = 0
+                self.pressure[x] = self.pressureSums[x] / self.avgSensorSamples
+                self.sensorSamples[x] = 0
+                self.pressureSums[x] = 0
                 
             #pressure[x] = sensors[x].getPressureValue() * pressureAdjust
     
             #interpolate pressureValue
-            if (pressureValue[x] < pressure[x]):
+            if (self.pressureValue[x] < self.pressure[x]):
                 #slide up
-                if (pressureValue[x] + pressureStep < pressure[x]): pressureValue[x] += pressureStep
-                else: pressureValue[x] = pressure[x]
-            elif (pressureValue[x] > pressure[x]):
+                if (self.pressureValue[x] + self.pressureStep < self.pressure[x]): self.pressureValue[x] += self.pressureStep
+                else: self.pressureValue[x] = self.pressure[x]
+            elif (self.pressureValue[x] > self.pressure[x]):
                 #slide down
-                if (pressureValue[x] - pressureStep > pressure[x]): pressureValue[x] -= pressureStep
-                else: pressureValue[x] = pressure[x]
+                if (self.pressureValue[x] - self.pressureStep > self.pressure[x]): self.pressureValue[x] -= self.pressureStep
+                else: self.pressureValue[x] = self.pressure[x]
         
-        print("Sensors: " + str(pressure))
+        print("Sensors: " + str(self.pressure))
             
         #osc1amp = pressureValue - osc1subtract
         #osc2amp = pressureValue - osc2subtract
@@ -195,59 +194,59 @@ class pressureThing:
         #osc4amp = pressureValue - osc4subtract
         
         #set chord type
-        if (pressureValue[CHORD_SENSOR] < chord1Cutoff):
-            chord = 1
-        elif (pressureValue[CHORD_SENSOR] < chord2Cutoff):
-            chord = 2
-        elif (pressureValue[CHORD_SENSOR] < chord3Cutoff):
-            chord = 3
+        if (self.pressureValue[self.CHORD_SENSOR] < self.chord1Cutoff):
+            self.chord = 1
+        elif (self.pressureValue[self.CHORD_SENSOR] < self.chord2Cutoff):
+            self.chord = 2
+        elif (self.pressureValue[self.CHORD_SENSOR] < self.chord3Cutoff):
+            self.chord = 3
         else: #(pressureValue[CHORD_SENSOR] < chord4Cutoff):
-            chord = 4
+            self.chord = 4
             
-        print("Chord: " + str(chord))
+        print("Chord: " + str(self.chord))
         
         #check to see if a strum should happen
-        if (pressureValue[STRUM_SENSOR] > strumCutoff):
+        if (self.pressureValue[self.STRUM_SENSOR] > self.strumCutoff):
             strumming = True
             amp = pressureValue[STRUM_SENSOR] * ampAdjust
         else:
-            pluckIndex = 0
+            self.pluckIndex = 0
             strumming = False
             amp = 0
             
         print("Amplitude: " + str(amp))
             
         #set strum speed
-        if (pressureValue[SPEED_SENSOR] < pluckWaitCutoff1):
-            pluckWait = pluckWait1
-        elif (pressureValue[SPEED_SENSOR] < pluckWaitCutoff2):
-            pluckWait = pluckWait2
+        if (self.pressureValue[self.SPEED_SENSOR] < self.pluckWaitCutoff1):
+            self.pluckWait = self.pluckWait1
+        elif (self.pressureValue[self.SPEED_SENSOR] < self.pluckWaitCutoff2):
+            self.pluckWait = self.pluckWait2
         else:
-            pluckWait = pluckWait3
+            self.pluckWait = self.pluckWait3
         
-        print ("Pluck wait: " + str(pluckWait))
+        print ("Pluck wait: " + str(self.pluckWait))
         
         #do a strum maybe
-        if (((time.time() - pluckTime) > pluckWait) and strumming == True):
-            if chord == 1:
-                chord1[pluckIndex].SetAmp(amp) #setting the amplitude also plucks it, which is dumb but whattayagonnado
+        if (((time.time() - self.pluckTime) > self.pluckWait) and strumming == True):
+            if self.chord == 1:
+                self.chord1[self.pluckIndex].SetAmp(amp) #setting the amplitude also plucks it, which is dumb but whattayagonnado
             elif chord == 2:
-                chord2[pluckIndex].SetAmp(amp)
+                self.chord2[self.pluckIndex].SetAmp(amp)
             elif chord == 3:
-                chord3[pluckIndex].SetAmp(amp)
+                self.chord3[self.pluckIndex].SetAmp(amp)
             else: #chord == 4
-                chord4[pluckIndex].SetAmp(amp)
+                self.chord4[self.pluckIndex].SetAmp(amp)
                 
-            if pluckIndex < len(chord1) - 1: #all chord arrays should be the same length
-                pluckIndex += 1
+            if self.pluckIndex < len(self.chord1) - 1: #all chord arrays should be the same length
+                self.pluckIndex += 1
             else:
-                pluckIndex = 0
-            pluckTime = time.time()
+                self.pluckIndex = 0
+            self.pluckTime = time.time()
         
         #panning
         #pan.SetPan((pressureValue[PAN_SENSOR] / 512.0) - 1)
         
-        print("")
+        #print("")
     
         #wait before doing another iteration
         time.sleep(SLEEP_TIME)

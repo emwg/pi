@@ -40,7 +40,7 @@ class lightThing:
         self.lightAdjust = 1
         self.flexAdjust = 1
         self.knobAdjust = 0.1
-        self.ampAdjust = 2.5
+        self.ampAdjust = 1.75
         self.freqAdjust = 1
     
         #chord cutoffs
@@ -53,7 +53,7 @@ class lightThing:
         self.sawCutoff = 450
         self.squareCutoff = 750
     
-        self.ampCutoff = 350
+        self.ampCutoff = 375
     
         self.alreadySine = True
         self.alreadySaw = False

@@ -142,7 +142,7 @@ class pressureThing:
         print("Beginning pressureThing step")
     
         #print system info
-        ram = psutil.virtual_memory().percent
+        '''ram = psutil.virtual_memory().percent
         print("Got ram")
         cpu = psutil.cpu_percent(interval=0)
         print("Got cpu")
@@ -159,7 +159,7 @@ class pressureThing:
             cpuSum = 0
         
         print("RAM usage: " + str(avgRam) + "%")
-        print("CPU usage: " + str(avgCpu) + "%")
+        print("CPU usage: " + str(avgCpu) + "%")'''
         
         ###
         # Pressure sensors

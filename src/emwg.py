@@ -10,7 +10,68 @@ thread = sndobj.SndThread()
 
 accelObj = accel()
 microphonesObj = microphones()
-pressureObj = pressureThing(SLEEP_TIME, mixer, thread)
+pressureObj = pressureThing(SLEEP_TIME)
+
+
+#build chords
+chord1 = []
+chord2 = []
+chord3 = []
+chord4 = []
+
+#C
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
+chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
+
+#D
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
+chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
+
+#G
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
+chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
+
+#am
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
+chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
+
+#out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
+#mixer = sndobj.Mixer()
+
+for x in chord1:
+    mixer.AddObj(x)
+
+for x in chord2:
+    mixer.AddObj(x)
+
+for x in chord3:
+    mixer.AddObj(x)
+
+for x in chord4:
+    mixer.AddObj(x)
+
+pan = sndobj.Pan(0, mixer)
+'''#thread = sndobj.SndThread()
+out.SetOutput(1, pan.left)
+out.SetOutput(2, pan.right)'''
+
+for x in chord1:
+    thread.AddObj(x)
+    
+for x in chord2:
+    thread.AddObj(x)
+    
+for x in chord3:
+    thread.AddObj(x)
+    
+for x in chord4:
+    thread.AddObj(x)
+
+
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
@@ -49,4 +110,4 @@ while True:
     #print("Mic step")
     #microphonesObj.runMicrophones(osc1)
     print("Press step")
-    pressureObj.step()
+    pressureObj.step(chord1, chord2, chord3, chord4)

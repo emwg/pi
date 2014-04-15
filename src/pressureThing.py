@@ -6,7 +6,7 @@ from toneLibrary import *
     
 class pressureThing:
 
-    def __init__(self, sleepTime, mixer, thread):
+    def __init__(self, sleepTime):
         
         print("Creating pressureThing object")
         
@@ -20,11 +20,6 @@ class pressureThing:
         self.SLEEP_TIME = 0.05
             
         self.sensors = []
-        self.chord1 = []
-        self.chord2 = []
-        self.chord3 = []
-        self.chord4 = []
-        self.chord = 1
             
         self.chord1amp = 0
         self.chord2amp = 0
@@ -56,7 +51,6 @@ class pressureThing:
         self.pluckTime = 0
         self.pluckIndex = 0
         self.strumCutoff = 525
-        self.strummed = False
         
         self.pressureValue = [0] * self.NUM_SENSORS
         self.pressure = [0] * self.NUM_SENSORS
@@ -78,66 +72,14 @@ class pressureThing:
         for x in range(self.NUM_SENSORS):
             self.sensors.append(pressureSensor(0, x, 10))
             
-        #build chords
-        #C
-        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
-        self.chord1.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
         
-        #D
-        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
-        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("Fs3"), 0))
-        self.chord2.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
-        
-        #G
-        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("G3"), 0))
-        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("B3"), 0))
-        self.chord3.append(sndobj.Pluck(toneLibrary.getToneToFreq("D3"), 0))
-        
-        #am
-        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("A3"), 0))
-        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("C3"), 0))
-        self.chord4.append(sndobj.Pluck(toneLibrary.getToneToFreq("E3"), 0))
-        
-        #out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
-        #mixer = sndobj.Mixer()
-        
-        for x in self.chord1:
-            mixer.AddObj(x)
-        
-        for x in self.chord2:
-            mixer.AddObj(x)
-        
-        for x in self.chord3:
-            mixer.AddObj(x)
-        
-        for x in self.chord4:
-            mixer.AddObj(x)
-        
-        pan = sndobj.Pan(0, mixer)
-        '''#thread = sndobj.SndThread()
-        out.SetOutput(1, pan.left)
-        out.SetOutput(2, pan.right)'''
-        
-        for x in self.chord1:
-            thread.AddObj(x)
-            
-        for x in self.chord2:
-            thread.AddObj(x)
-            
-        for x in self.chord3:
-            thread.AddObj(x)
-            
-        for x in self.chord4:
-            thread.AddObj(x)
-        
-        thread.AddObj(pan)
+        #thread.AddObj(pan)
         
         #thread.ProcOn()'''
         
         #print("Finished creating pressureThing object")
 
-    def step(self):
+    def step(self, chord1, chord2, chord3, chord4):
         
         print("Beginning pressureThing step")
     
@@ -199,15 +141,15 @@ class pressureThing:
         
         #set chord type
         if (self.pressureValue[self.CHORD_SENSOR] < self.chord1Cutoff):
-            self.chord = 1
+            chord = 1
         elif (self.pressureValue[self.CHORD_SENSOR] < self.chord2Cutoff):
-            self.chord = 2
+            chord = 2
         elif (self.pressureValue[self.CHORD_SENSOR] < self.chord3Cutoff):
-            self.chord = 3
+            chord = 3
         else: #(pressureValue[CHORD_SENSOR] < chord4Cutoff):
-            self.chord = 4
+            chord = 4
             
-        print("Chord: " + str(self.chord))
+        print("Chord: " + str(chord))
         
         #check to see if a strum should happen
         if (self.pressureValue[self.STRUM_SENSOR] > self.strumCutoff):
@@ -232,16 +174,16 @@ class pressureThing:
         
         #do a strum maybe
         if (((time.time() - self.pluckTime) > self.pluckWait) and strumming == True):
-            if self.chord == 1:
-                self.chord1[self.pluckIndex].SetAmp(amp) #setting the amplitude also plucks it, which is dumb but whattayagonnado
+            if chord == 1:
+                chord1[self.pluckIndex].SetAmp(amp) #setting the amplitude also plucks it, which is dumb but whattayagonnado
             elif chord == 2:
-                self.chord2[self.pluckIndex].SetAmp(amp)
+                chord2[self.pluckIndex].SetAmp(amp)
             elif chord == 3:
-                self.chord3[self.pluckIndex].SetAmp(amp)
+                chord3[self.pluckIndex].SetAmp(amp)
             else: #chord == 4
-                self.chord4[self.pluckIndex].SetAmp(amp)
+                chord4[self.pluckIndex].SetAmp(amp)
                 
-            if self.pluckIndex < len(self.chord1) - 1: #all chord arrays should be the same length
+            if self.pluckIndex < len(chord1) - 1: #all chord arrays should be the same length
                 self.pluckIndex += 1
             else:
                 self.pluckIndex = 0

@@ -94,7 +94,7 @@ for x in chord4:
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
-osc1 = sndobj.Oscili(harmTable, 440, 1000)
+osc1 = sndobj.Oscili(harmTable, 440, 1200)
 osc2 = sndobj.Oscili(harmTable, 440, 1000)
 
 # Add things to mixer

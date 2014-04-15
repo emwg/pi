@@ -162,8 +162,8 @@ class microphones:
             self.toneTableIndex = 0
             
         if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):
-            print("Running")
-            print("Status: [" + micStatus + "]")
+            #print("Running")
+            #print("Status: [" + micStatus + "]")
             self.deltaT = time.time()
             if(self.currentToneTable != 'null'):
                 currentTone = self.toneLib.getToneToFreq(self.twelveToneTable[self.currentToneTable][self.toneTableIndex])

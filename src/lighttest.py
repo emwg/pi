@@ -133,7 +133,7 @@ class lightThing:
         else: #(self.lightValue[self.CHORD_SENSOR] < self.augCutoff):
             chord = "aug"
             
-        print("Chord: " + self.chord)
+        print("Chord: " + chord)
         
         #set wave type
         if (self.lightValue[self.WAVE_SENSOR] < self.sineCutoff):

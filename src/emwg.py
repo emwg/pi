@@ -45,4 +45,3 @@ while True:
     accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)
     pressureObj.step()
-    

@@ -66,6 +66,8 @@ class accel:
 		self.accelYValue = self.accelY.getAccelValue()
 		self.accelZValue = self.accelZ.getAccelValue()
 		
+		print("AccelX: " + str(self.accelXValue) + " AccelY: " + str(self.accelYValue))
+		
 		# Set highest tone based on AccelY value
 		if(self.accelYValue < 550):
 			if(self.toneLib.getToneToIndex('As3') > self.toneLib.getToneToIndex(self.currentTone)):
@@ -105,8 +107,6 @@ class accel:
 				self.silencerCount += 1
 		else:
 			self.silencerCount = 0
-			
-		print(self.silencerCount)
 		
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):

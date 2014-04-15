@@ -53,7 +53,7 @@ class lightThing:
         self.sawCutoff = 450
         self.squareCutoff = 750
     
-        self.ampCutoff = 375
+        self.ampCutoff = 365
     
         self.alreadySine = True
         self.alreadySaw = False

@@ -57,7 +57,7 @@ class accel:
 		self.stepTime = 0.3
 		self.deltaT = time.time()
 		self.scaleDirection = 'up'
-		self.silencerCount = 1000
+		self.silencerCount = 0
 	
 	#while True:
 	def runAccel(self, osc):

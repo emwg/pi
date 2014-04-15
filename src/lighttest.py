@@ -82,7 +82,7 @@ class lightThing:
     def step(self, osc1, osc2, osc3, osc4, sine, saw, square, buzz, comb1, comb2, comb3, comb4, mod, pan):
     
         #print system info
-       ''' ram = psutil.virtual_memory().percent
+        ram = psutil.virtual_memory().percent
         cpu = psutil.cpu_percent(interval=0)
         
         if (self.samples < self.avgSamples):
@@ -96,8 +96,8 @@ class lightThing:
             self.ramSum = 0
             self.cpuSum = 0
         
-        print("RAM usage: " + str(self.avgRam) + "%")
-        print("CPU usage: " + str(self.avgCpu) + "%")'''
+        #print("RAM usage: " + str(self.avgRam) + "%")
+        #print("CPU usage: " + str(self.avgCpu) + "%")
         
         ###
         # Light sensor

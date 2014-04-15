@@ -157,4 +157,4 @@ while True:
     microphonesObj.runMicrophones(osc1)
     pressureObj.step(chord1, chord2, chord3, chord4)
     lightObj.step(losc1, losc2, losc3, losc4, lsine, lsaw, lsquare, lbuzz, lcomb1, lcomb2, lcomb3, lcomb4, lmod, pan)
-    time.sleep(0.02)
+    time.sleep(0.05)

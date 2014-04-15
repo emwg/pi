@@ -170,6 +170,7 @@ class pressureThing:
             print("in loop " + str(x))
             if (self.sensorSamples[x] < self.avgSensorSamples):
                 self.pressureSums[x] += self.sensors[x].getPressureValue() * self.pressureAdjust
+                print("preesureSum: " + str(self.pressureSums))
                 self.sensorSamples[x] += 1
             else:
                 self.pressure[x] = self.pressureSums[x] / self.avgSensorSamples

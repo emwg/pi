@@ -99,7 +99,7 @@ class accel:
 			self.stepTime = stepTimeCandidate
 		else:
 			if(self.stepTime < 0.3):
-				self.stepTime += 0.0003
+				self.stepTime += 0.0009
 		
 		# Increment silencer if needed
 		if(self.stepTime >= 0.3):
@@ -109,7 +109,7 @@ class accel:
 			self.silencerCount = 0
 			
 		print(self.silencerCount)
-		#print(self.stepTime)
+		print(self.stepTime)
 		
 		# Calculate next tone at the next time step
 		if(self.stepTime > 0 and time.time() > self.deltaT + self.stepTime):

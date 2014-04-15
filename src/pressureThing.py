@@ -141,10 +141,10 @@ class pressureThing:
     def step(self):
         
         print("Beginning pressureThing step")
-        print(str(self.ramsum))
-        print(str(self.ramsum + 1))
-        self.ramsum += 1
-        print(str(self.ramsum))
+        print(str(self.ramSum))
+        print(str(self.ramSum + 1))
+        self.ramSum += 1
+        print(str(self.ramSum))
     
         #print system info
         ram = psutil.virtual_memory().percent

@@ -140,7 +140,9 @@ class pressureThing:
     
         #print system info
         ram = psutil.virtual_memory().percent
+        print("Got ram")
         cpu = psutil.cpu_percent(interval=0)
+        print("Got cpu")
         
         if (sysInfoSamples < avgSysInfoSamples):
             ramSum += ram

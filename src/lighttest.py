@@ -262,4 +262,4 @@ class lightThing:
         #print("")
     
         #wait before doing another iteration
-        time.sleep(0.05)
+        #time.sleep(0.05)

@@ -10,9 +10,9 @@ class lightThing:
         self.NUM_SENSORS = 6
     
         self.CHORD_SENSOR = 0
-        self.AMP_SENSOR = 1
+        self.AMP_SENSOR = 3
         self.PAN_SENSOR = 2
-        self.COMB_SENSOR = 3
+        self.COMB_SENSOR = 1
         self.FREQ_SENSOR = 4
         self.WAVE_SENSOR = 5
     

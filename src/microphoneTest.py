@@ -171,7 +171,7 @@ class microphones:
                     self.toneTableIndex = 0
                 else:
                     self.toneTableIndex += 1
-                print(currentTone)
+                #print(currentTone)
                 osc.SetFreq(currentTone)
             else:
                 osc.SetFreq(0)

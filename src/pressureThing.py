@@ -8,6 +8,8 @@ class pressureThing:
 
     def __init__(self, sleepTime, mixer, thread):
         
+        print("Creating pressureThing object")
+        
         NUM_SENSORS = 3
         
         CHORD_SENSOR = 2
@@ -129,8 +131,12 @@ class pressureThing:
         #avgSensorLoopIterations = avgSensorSamples * NUM_SENSORS
         sensorSamples = [0] * NUM_SENSORS
         pressureSums = [0] * NUM_SENSORS
+        
+        print("Finished creating pressureThing object")
 
     def step():
+        
+        print("Beginning pressureThing step")
     
         #print system info
         ram = psutil.virtual_memory().percent

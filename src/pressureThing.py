@@ -188,6 +188,7 @@ class pressureThing:
                 if (self.pressureValue[x] - self.pressureStep > self.pressure[x]): self.pressureValue[x] -= self.pressureStep
                 else: self.pressureValue[x] = self.pressure[x]
         
+        print("out of loop")
         print("Sensors: " + str(self.pressure))
             
         #osc1amp = pressureValue - osc1subtract

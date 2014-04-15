@@ -42,7 +42,7 @@ thread.ProcOn()
 osc2.SetFreq(0)
 
 while True:
-    #accelObj.runAccel(osc2)
+    accelObj.runAccel(osc2)
     microphonesObj.runMicrophones(osc1)
     #pressureObj.step()
     

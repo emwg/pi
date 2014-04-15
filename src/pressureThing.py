@@ -8,7 +8,7 @@ class pressureThing:
 
     def __init__(self, sleepTime):
         
-        print("Creating pressureThing object")
+        #print("Creating pressureThing object")
         
         #Constants
         self.NUM_SENSORS = 3
@@ -81,7 +81,7 @@ class pressureThing:
 
     def step(self, chord1, chord2, chord3, chord4):
         
-        print("Beginning pressureThing step")
+        #print("Beginning pressureThing step")
     
         #print system info
         '''ram = psutil.virtual_memory().percent
@@ -107,12 +107,12 @@ class pressureThing:
         # Pressure sensors
         ###
         #get pressure sensor values
-        print("got past cpu")
+        #print("got past cpu")
         for x in range(self.NUM_SENSORS):
-            print("in loop " + str(x))
+            #print("in loop " + str(x))
             if (self.sensorSamples[x] < self.avgSensorSamples):
                 self.pressureSums[x] += self.sensors[x].getPressureValue() * self.pressureAdjust
-                print("preesureSum: " + str(self.pressureSums))
+                #print("preesureSum: " + str(self.pressureSums))
                 self.sensorSamples[x] += 1
             else:
                 self.pressure[x] = self.pressureSums[x] / self.avgSensorSamples
@@ -131,8 +131,8 @@ class pressureThing:
                 if (self.pressureValue[x] - self.pressureStep > self.pressure[x]): self.pressureValue[x] -= self.pressureStep
                 else: self.pressureValue[x] = self.pressure[x]
         
-        print("out of loop")
-        print("Sensors: " + str(self.pressure))
+        #print("out of loop")
+        #print("Sensors: " + str(self.pressure))
             
         #osc1amp = pressureValue - osc1subtract
         #osc2amp = pressureValue - osc2subtract
@@ -149,7 +149,7 @@ class pressureThing:
         else: #(pressureValue[CHORD_SENSOR] < chord4Cutoff):
             chord = 4
             
-        print("Chord: " + str(chord))
+        #print("Chord: " + str(chord))
         
         #check to see if a strum should happen
         if (self.pressureValue[self.STRUM_SENSOR] > self.strumCutoff):
@@ -160,7 +160,7 @@ class pressureThing:
             strumming = False
             amp = 0
             
-        print("Amplitude: " + str(amp))
+        #print("Amplitude: " + str(amp))
             
         #set strum speed
         if (self.pressureValue[self.SPEED_SENSOR] < self.pluckWaitCutoff1):
@@ -170,7 +170,7 @@ class pressureThing:
         else:
             self.pluckWait = self.pluckWait3
         
-        print ("Pluck wait: " + str(self.pluckWait))
+        #print ("Pluck wait: " + str(self.pluckWait))
         
         #do a strum maybe
         if (((time.time() - self.pluckTime) > self.pluckWait) and strumming == True):

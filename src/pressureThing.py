@@ -166,6 +166,7 @@ class pressureThing:
         ###
         #get pressure sensor values
         for x in range(self.NUM_SENSORS):
+            print("in loop " + str(x))
             if (self.sensorSamples[x] < self.avgSensorSamples):
                 self.pressureSums[x] += self.sensors[x].getPressureValue() * self.pressureAdjust
                 self.sensorSamples[x] += 1

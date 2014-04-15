@@ -6,7 +6,8 @@ from toneLibrary import *
 
 class pressureThing:
 
-    def __init__(self, sleepTime):
+    def __init__(self, sleepTime, mixer, thread):
+        
         NUM_SENSORS = 3
         
         CHORD_SENSOR = 2
@@ -50,7 +51,7 @@ class pressureThing:
         chord3amp = 0
         chord4amp = 0
         out = sndobj.SndRTIO(2, sndobj.SND_OUTPUT)
-        mixer = sndobj.Mixer()
+        #mixer = sndobj.Mixer()
         
         for x in chord1:
             mixer.AddObj(x)
@@ -65,7 +66,7 @@ class pressureThing:
             mixer.AddObj(x)
         
         pan = sndobj.Pan(0, mixer)
-        thread = sndobj.SndThread()
+        #thread = sndobj.SndThread()
         out.SetOutput(1, pan.left)
         out.SetOutput(2, pan.right)
         
@@ -85,7 +86,7 @@ class pressureThing:
         thread.AddObj(pan)
         thread.AddObj(out, sndobj.SNDIO_OUT)
         
-        thread.ProcOn()
+        #thread.ProcOn()
         
         #amounts the frequency and amplitude of the oscillators will change by during each loop iteration
         freqStep = 10
@@ -238,6 +239,3 @@ class pressureThing:
     
         #wait before doing another iteration
         time.sleep(SLEEP_TIME)
-        
-    def stop():
-        thread.ProcOff()

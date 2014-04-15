@@ -195,4 +195,4 @@ class pressureThing:
         #print("")
     
         #wait before doing another iteration
-        time.sleep(SLEEP_TIME)
+        time.sleep(self.SLEEP_TIME)

@@ -66,7 +66,7 @@ class accel:
 		self.accelYValue = self.accelY.getAccelValue()
 		self.accelZValue = self.accelZ.getAccelValue()
 		
-		print("AccelX: " + str(self.accelXValue) + " AccelY: " + str(self.accelYValue))
+		print("AccelX: " + str(self.accelXValue) + " AccelY: " + str(self.accelYValue) + " AccelZ: " + str(self.accelZValue))
 		
 		# Set highest tone based on AccelY value
 		if(self.accelYValue < 550):

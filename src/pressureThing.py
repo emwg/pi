@@ -32,7 +32,7 @@ class pressureThing:
                 
         #values by which to multiply the raw sensor values
         self.pressureAdjust = 1
-        self.ampAdjust = 4
+        self.ampAdjust = 2.5
         self.freqAdjust = 1
                 
         #chord cutoffs

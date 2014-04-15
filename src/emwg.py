@@ -42,6 +42,9 @@ thread.ProcOn()
 osc2.SetFreq(0)
 
 while True:
+    print("Accel step")
     accelObj.runAccel(osc2)
+    print("Mic step")
     microphonesObj.runMicrophones(osc1)
+    print("Press step")
     pressureObj.step()

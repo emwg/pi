@@ -93,16 +93,16 @@ ampAdjust = 10
 freqAdjust = 1
 
 #chord cutoffs
-dimCutoff = 200
-minCutoff = 500
-majCutoff = 700
+dimCutoff = 350
+minCutoff = 650
+majCutoff = 750
 
 #wave cutoffs
-sineCutoff = 200
-sawCutoff = 500
-squareCutoff = 700
+sineCutoff = 350
+sawCutoff = 450
+squareCutoff = 750
 
-ampCutoff = 200
+ampCutoff = 350
 
 alreadySine = True
 alreadySaw = False

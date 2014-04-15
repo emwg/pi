@@ -82,7 +82,7 @@ class lightThing:
     def step(self, osc1, osc2, osc3, osc4, sine, saw, square, buzz, comb1, comb2, comb3, comb4, mod, pan):
     
         #print system info
-        ram = psutil.virtual_memory().percent
+       ''' ram = psutil.virtual_memory().percent
         cpu = psutil.cpu_percent(interval=0)
         
         if (self.samples < self.avgSamples):
@@ -97,7 +97,7 @@ class lightThing:
             self.cpuSum = 0
         
         print("RAM usage: " + str(self.avgRam) + "%")
-        print("CPU usage: " + str(self.avgCpu) + "%")
+        print("CPU usage: " + str(self.avgCpu) + "%")'''
         
         ###
         # Light sensor
@@ -116,7 +116,7 @@ class lightThing:
                 if (self.lightValue[x] - self.lightStep > self.light[x]): self.lightValue[x] -= self.lightStep
                 else: self.lightValue[x] = self.light[x]
         
-        print("Sensors: " + str(self.light))
+       # print("Sensors: " + str(self.light))
             
         #osc1amp = lightValue - osc1subtract
         #osc2amp = lightValue - osc2subtract
@@ -133,7 +133,7 @@ class lightThing:
         else: #(self.lightValue[self.CHORD_SENSOR] < self.augCutoff):
             chord = "aug"
             
-        print("Chord: " + chord)
+        #print("Chord: " + chord)
         
         #set wave type
         if (self.lightValue[self.WAVE_SENSOR] < self.sineCutoff):
@@ -145,7 +145,7 @@ class lightThing:
         else: #(self.lightValue[self.WAVE_SENSOR] < self.buzzCutoff):
             wave = "buzz"
             
-        print ("Wave: " + wave)
+        #print ("Wave: " + wave)
         
         if (wave == "sine" and self.alreadySine == False):
             osc1.SetTable(sine)
@@ -197,7 +197,7 @@ class lightThing:
             amp = 0
         else:
             amp = self.lightValue[self.AMP_SENSOR] * self.ampAdjust
-        print("Amplitude: " + str(amp))
+        #print("Amplitude: " + str(amp))
         
         osc1.SetAmp(amp)
         osc2.SetAmp(amp)
@@ -213,7 +213,7 @@ class lightThing:
             #pluckTime = time.time()
         
         freq = self.lightValue[self.FREQ_SENSOR] * self.freqAdjust
-        print("Frequency: " + str(freq))
+        #print("Frequency: " + str(freq))
         
         if (freq != 0):
             # root
@@ -259,7 +259,7 @@ class lightThing:
         #panning
         pan.SetPan((self.lightValue[self.PAN_SENSOR] / 512.0) - 1)
         
-        print("")
+        #print("")
     
         #wait before doing another iteration
         time.sleep(0.05)

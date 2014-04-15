@@ -5,17 +5,19 @@ from pressureThing import *
 
 SLEEP_TIME = 0.05
 
+mixer = sndobj.Mixer()
+thread = sndobj.SndThread()
+
 accelObj = accel()
 microphonesObj = microphones()
-pressureObj = pressureThing(SLEEP_TIME)
+pressureObj = pressureThing(SLEEP_TIME, mixer, thread)
 
 harmTable = sndobj.HarmTable()
 harmTable.SetHarm(100, sndobj.SINE)
 osc1 = sndobj.Oscili(harmTable, 440, 600)
 osc2 = sndobj.Oscili(harmTable, 440, 900)
 
-# Create a mixer
-mixer = sndobj.Mixer()
+# Add things to mixer
 mixer.AddObj(osc1)
 mixer.AddObj(osc2)
 #mixer.AddObj(sound2)
@@ -26,8 +28,6 @@ out.SetOutput(1, mixer)
 
 #mod = sndobj.Oscili(harmTable, 2, 150)
 #osc1.SetFreq(440, mod)
-
-thread = sndobj.SndThread()
 
 # Attach sound objects to the sound thread
 thread.AddObj(osc1)

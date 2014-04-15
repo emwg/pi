@@ -165,6 +165,7 @@ class pressureThing:
         # Pressure sensors
         ###
         #get pressure sensor values
+        print("got past cpu")
         for x in range(self.NUM_SENSORS):
             print("in loop " + str(x))
             if (self.sensorSamples[x] < self.avgSensorSamples):

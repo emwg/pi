@@ -46,5 +46,5 @@ while True:
     #accelObj.runAccel(osc2)
     #print("Mic step")
     #microphonesObj.runMicrophones(osc1)
-    print("Pressure step")
-    pressureObj.step("hi")
+    print("Press step")
+    pressureObj.step()
